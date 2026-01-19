@@ -57,7 +57,7 @@ function isDesktop(minWidth) {
     return window.matchMedia?.(`(min-width:${minWidth}px)`).matches ?? false;
 }
 
-export default function ProjectReveal({ className, style, children }) {
+function ProjectReveal({ className, style, children }) {
     const rootRef = useRef(null);
 
     const desktop = useMemo(() => isDesktop(CFG.minDesktop), []);
@@ -324,3 +324,6 @@ export default function ProjectReveal({ className, style, children }) {
         </div>
     );
 }
+
+export { ProjectReveal };
+export default ProjectReveal;

@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\components",
+    "\\src\\components\\plasmic",
     "\\src\\hooks"
   ],
-  "SelectedNode": "\\src\\Plasmic-host.jsx",
+  "SelectedNode": "\\src\\components\\plasmic",
   "PreviewInSolutionExplorer": false
 }
