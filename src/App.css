@@ -1,50 +1,72 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
 
+/* =========================
+   THEME / DESIGN TOKENS
+   ========================= */
 @theme {
-  --font-display: "Outfit", sans-serif;
+    --font-display: "Outfit", sans-serif;
+    /* base dark */
+    --bg-main: #050507;
+    --bg-soft: #0b0d12;
+    --bg-panel: rgba(255, 255, 255, 0.04);
+    /* text */
+    --text-main: rgba(255, 255, 255, 0.92);
+    --text-soft: rgba(255, 255, 255, 0.65);
+    --text-muted: rgba(255, 255, 255, 0.4);
+    /* accents */
+    --accent-cyan: #22d3ee;
+    --accent-amber: #fbbf24;
+    --accent-violet: #a78bfa;
+    /* ui */
+    --border-soft: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================
+   GLOBAL RESET / BASE
+   ========================= */
+html,
+body {
+    background: radial-gradient( circle at 20% 10%, rgba(255, 255, 255, 0.04), transparent 40% ), var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-display);
+    overscroll-behavior: none;
 }
 
 #root {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-  --font-display: "Outfit", sans-serif;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* =========================
+   HUD / GAME FEEL HELPERS
+   ========================= */
+.hud-text {
+    font-size: 0.75rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hud-line {
+    width: 1px;
+    background: linear-gradient( to bottom, transparent, rgba(255, 255, 255, 0.5), transparent );
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* soft glow */
+.glow {
+    box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.08), 0 0 2rem rgba(255, 255, 255, 0.05);
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* grain overlay (cinematic, leggero) */
+.grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("/grain.png"); /* opzionale */
+    opacity: 0.04;
+    mix-blend-mode: overlay;
 }

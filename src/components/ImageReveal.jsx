@@ -147,7 +147,8 @@ const ImageReveal = () => {
 
       {/* Background Image with Dissolve Effect */}
       {activeProject && imagesLoaded && (
-        <div className="fixed inset-0 pointer-events-none z-0">
+        // Lowered to z-[-10] so it won't cover hero/video sections
+        <div className="fixed inset-0 pointer-events-none z-[-10]">
           <div
             className="absolute inset-0 bg-cover bg-center transition-opacity duration-500 ease-in-out"
             style={{

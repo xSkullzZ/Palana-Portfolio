@@ -1,225 +1,296 @@
-﻿// src/components/ParticleHero.jsx
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useMemo, useRef, useState } from "react";
 
-// 🎯 CONFIGURAZIONE - Modifica questi testi
-const TEXTS = [
-  'I CRAFT HUMAN-AI INTERFACES',
-  'UI DESIGNER',
-  'AUDIO ENGINEER',
-  'CREATIVE DEVELOPER'
+/**
+ * ParticleHero — HEADER ONLY (Plasmic-friendly)
+ * - accepts className/style so Plasmic can size & style it
+ * - canvas fits the component's box (ResizeObserver)
+ */
+
+// =======================
+// CONFIG (edit here)
+// =======================
+const DEFAULT_TEXTS = [
+    "I CRAFT HUMAN-AI INTERFACES",
+    "I DESIGN COMPLEX TOOLS THAT FEEL EFFORTLESS",
+    "I SHAPE SYSTEMS PEOPLE CAN TRUST",
+    "WHERE AI, INTERFACES, AND SOUND MEET",
 ];
 
-const CONFIG = {
-  particleSize: 1.7,         // Dimensione particella
-  particleColor: '#06b6d4',  // Colore particelle (cyan)
-  spacing: 5,                // Spazio tra particelle
-  mouseRadius: 80,           // Raggio interazione mouse
-  changeInterval: 6000,      // Millisecondi tra cambi testo
-  transitionSpeed: 0.10      // Velocità transizione (0.01-0.1)
+const DEFAULTS = {
+    background: "transparent", // set "#000" if you want the component to paint background
+    particleColor: "#06b6d4",
+    particleSize: 1.7,
+    spacing: 5,
+    alphaThreshold: 128,
+
+    mouseRadius: 80,
+    densityMin: 1,
+    densityMax: 31,
+    transitionSpeed: 0.10,
+
+    fontFamily:
+        "Outfit, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
+    fontWeight: 800,
+    baseFontSize: 84,
+    minFontSize: 28,
+
+    changeInterval: 6000,
+    dprMax: 2,
 };
 
-const ParticleHero = () => {
-  const canvasRef = useRef(null);
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const particlesRef = useRef([]);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef(null);
+export default function ParticleHero({
+    // Plasmic styling hooks:
+    className,
+    style,
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    // Optional props (you can ignore for now):
+    texts = DEFAULT_TEXTS,
+    background = DEFAULTS.background,
+    particleColor = DEFAULTS.particleColor,
+    particleSize = DEFAULTS.particleSize,
+    spacing = DEFAULTS.spacing,
+    alphaThreshold = DEFAULTS.alphaThreshold,
 
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    mouseRadius = DEFAULTS.mouseRadius,
+    densityMin = DEFAULTS.densityMin,
+    densityMax = DEFAULTS.densityMax,
+    transitionSpeed = DEFAULTS.transitionSpeed,
 
-    canvas.width = width;
-    canvas.height = height;
+    fontFamily = DEFAULTS.fontFamily,
+    fontWeight = DEFAULTS.fontWeight,
+    baseFontSize = DEFAULTS.baseFontSize,
+    minFontSize = DEFAULTS.minFontSize,
 
-    // Particle class
-    class Particle {
-      constructor(x, y, targetX, targetY) {
-        this.x = x;
-        this.y = y;
-        this.targetX = targetX;
-        this.targetY = targetY;
-        this.baseX = targetX;
-        this.baseY = targetY;
-        this.size = CONFIG.particleSize;
-        this.density = (Math.random() * 30) + 1;
-      }
+    changeInterval = DEFAULTS.changeInterval,
+    dprMax = DEFAULTS.dprMax,
+}) {
+    const canvasRef = useRef(null);
+    const wrapRef = useRef(null);
+    const rafRef = useRef(null);
 
-      update() {
-        // Mouse interaction
-        const dx = mouseRef.current.x - this.x;
-        const dy = mouseRef.current.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const forceDirectionX = dx / distance;
-        const forceDirectionY = dy / distance;
-        const maxDistance = CONFIG.mouseRadius;
-        const force = (maxDistance - distance) / maxDistance;
+    const [index, setIndex] = useState(0);
+    const particlesRef = useRef([]);
+    const mouseRef = useRef({ x: -9999, y: -9999 });
 
-        if (distance < maxDistance) {
-          const directionX = forceDirectionX * force * this.density;
-          const directionY = forceDirectionY * force * this.density;
-          this.x -= directionX;
-          this.y -= directionY;
-        } else {
-          // Return to base position
-          if (this.x !== this.baseX) {
-            const dx = this.x - this.baseX;
-            this.x -= dx * CONFIG.transitionSpeed;
-          }
-          if (this.y !== this.baseY) {
-            const dy = this.y - this.baseY;
-            this.y -= dy * CONFIG.transitionSpeed;
-          }
+    const safeTexts = useMemo(
+        () => (Array.isArray(texts) && texts.length ? texts : DEFAULT_TEXTS),
+        [texts]
+    );
+
+    useEffect(() => {
+        const el = wrapRef.current;
+        const canvas = canvasRef.current;
+        if (!el || !canvas) return;
+
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) return;
+
+        let width = 1;
+        let height = 1;
+
+        const getDpr = () => Math.min(window.devicePixelRatio || 1, dprMax);
+
+        function resizeToParent() {
+            const rect = el.getBoundingClientRect();
+            width = Math.max(1, Math.floor(rect.width));
+            height = Math.max(1, Math.floor(rect.height));
+
+            const dpr = getDpr();
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
 
-        // Smooth transition to target position
-        const targetDx = this.targetX - this.baseX;
-        const targetDy = this.targetY - this.baseY;
-        this.baseX += targetDx * CONFIG.transitionSpeed;
-        this.baseY += targetDy * CONFIG.transitionSpeed;
-      }
-
-      draw() {
-        ctx.fillStyle = CONFIG.particleColor;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.fill();
-      }
-    }
-
-    // Create text particles
-    const createParticles = (text) => {
-      ctx.font = 'bold 80px Arial';
-      ctx.fillStyle = 'white';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      
-      const textWidth = ctx.measureText(text).width;
-      const x = (width - textWidth) / 2;
-      const y = height / 2;
-      
-      ctx.fillText(text, width / 2, y);
-      
-      const imageData = ctx.getImageData(0, 0, width, height);
-      const pixels = imageData.data;
-      const newParticles = [];
-
-      for (let y = 0; y < height; y += CONFIG.spacing) {
-        for (let x = 0; x < width; x += CONFIG.spacing) {
-          const index = (y * width + x) * 4;
-          const alpha = pixels[index + 3];
-          
-          if (alpha > 128) {
-            const posX = x;
-            const posY = y;
-            
-            // Reuse existing particle or create new
-            const existingParticle = particlesRef.current.find(p => !p.used);
-            if (existingParticle) {
-              existingParticle.targetX = posX;
-              existingParticle.targetY = posY;
-              existingParticle.used = true;
-              newParticles.push(existingParticle);
-            } else {
-              newParticles.push(new Particle(
-                Math.random() * width,
-                Math.random() * height,
-                posX,
-                posY
-              ));
+        class Particle {
+            constructor(x, y, tx, ty) {
+                this.x = x;
+                this.y = y;
+                this.targetX = tx;
+                this.targetY = ty;
+                this.baseX = tx;
+                this.baseY = ty;
+                this.size = particleSize;
+                this.density = Math.random() * (densityMax - densityMin) + densityMin;
+                this.used = false;
             }
-          }
+
+            update() {
+                const dx = mouseRef.current.x - this.x;
+                const dy = mouseRef.current.y - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
+
+                if (dist < mouseRadius) {
+                    const force = (mouseRadius - dist) / mouseRadius;
+                    const dirX = (dx / dist) * force * this.density;
+                    const dirY = (dy / dist) * force * this.density;
+                    this.x -= dirX;
+                    this.y -= dirY;
+                } else {
+                    this.x -= (this.x - this.baseX) * transitionSpeed;
+                    this.y -= (this.y - this.baseY) * transitionSpeed;
+                }
+
+                this.baseX += (this.targetX - this.baseX) * transitionSpeed;
+                this.baseY += (this.targetY - this.baseY) * transitionSpeed;
+            }
+
+            draw() {
+                ctx.fillStyle = particleColor;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
-      }
 
-      ctx.clearRect(0, 0, width, height);
-      
-      // Mark unused particles
-      particlesRef.current.forEach(p => p.used = false);
-      particlesRef.current = newParticles;
-    };
+        function drawTextToBuffer(text) {
+            // background (optional)
+            ctx.clearRect(0, 0, width, height);
+            if (background && background !== "transparent") {
+                ctx.fillStyle = background;
+                ctx.fillRect(0, 0, width, height);
+            }
 
-    // Animation loop
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-      
-      particlesRef.current.forEach(particle => {
-        particle.update();
-        particle.draw();
-      });
+            let fontSize = baseFontSize;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = "#ffffff";
 
-      rafRef.current = requestAnimationFrame(animate);
-    };
+            while (fontSize > minFontSize) {
+                ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+                const w = ctx.measureText(text).width;
+                if (w <= width * 0.92) break;
+                fontSize -= 4;
+            }
 
-    // 🔥 FIX: Crea particelle quando cambia il testo
-    createParticles(TEXTS[currentTextIndex]);
-    animate();
+            ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+            ctx.fillText(text, width / 2, height / 2);
+        }
 
-    // Mouse move handler
-    const handleMouseMove = (e) => {
-      mouseRef.current = {
-        x: e.clientX,
-        y: e.clientY
-      };
-    };
+        function createParticlesFromText(text) {
+            drawTextToBuffer(text);
 
-    // Resize handler
-    const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      createParticles(TEXTS[currentTextIndex]);
-    };
+            const img = ctx.getImageData(0, 0, width, height);
+            const data = img.data;
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', handleResize);
+            particlesRef.current.forEach((p) => (p.used = false));
+            const next = [];
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-    };
-  }, [currentTextIndex]); // 🔥 FIX: Aggiungi currentTextIndex come dipendenza
+            for (let y = 0; y < height; y += spacing) {
+                for (let x = 0; x < width; x += spacing) {
+                    const i = (y * width + x) * 4;
+                    const alpha = data[i + 3];
+                    if (alpha > alphaThreshold) {
+                        const existing = particlesRef.current.find((p) => !p.used);
+                        if (existing) {
+                            existing.targetX = x;
+                            existing.targetY = y;
+                            existing.used = true;
+                            next.push(existing);
+                        } else {
+                            next.push(
+                                new Particle(Math.random() * width, Math.random() * height, x, y)
+                            );
+                        }
+                    }
+                }
+            }
 
-  // Text rotation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTextIndex((prev) => (prev + 1) % TEXTS.length);
-    }, CONFIG.changeInterval);
+            ctx.clearRect(0, 0, width, height);
+            particlesRef.current = next;
+        }
 
-    return () => clearInterval(interval);
-  }, []);
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
 
-  return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
-      {/* Canvas per particelle */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0"
-      />
+            if (background && background !== "transparent") {
+                ctx.fillStyle = background;
+                ctx.fillRect(0, 0, width, height);
+            }
 
-      {/* Subtitle */}
-      <div className="absolute bottom-20 left-0 right-0 text-center z-10">
-        <p className="text-gray-400 text-lg mb-8">
-          Designer • Engineer • Creator
-        </p>
-        <button className="px-8 py-3 border border-cyan-400 text-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition-all duration-300 uppercase text-sm tracking-widest">
-          Explore my work →
-        </button>
-      </div>
+            const arr = particlesRef.current;
+            for (let i = 0; i < arr.length; i++) {
+                arr[i].update();
+                arr[i].draw();
+            }
 
-      {/* Gradient overlay per depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
-    </div>
-  );
-};
+            rafRef.current = requestAnimationFrame(animate);
+        }
 
-export default ParticleHero;
+        function onMouseMove(e) {
+            const rect = el.getBoundingClientRect();
+            mouseRef.current = {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top,
+            };
+        }
+
+        function onMouseLeave() {
+            mouseRef.current = { x: -9999, y: -9999 };
+        }
+
+        const ro = new ResizeObserver(() => {
+            resizeToParent();
+            createParticlesFromText(safeTexts[index]);
+        });
+
+        // init
+        resizeToParent();
+        createParticlesFromText(safeTexts[index]);
+        animate();
+
+        ro.observe(el);
+        el.addEventListener("mousemove", onMouseMove, { passive: true });
+        el.addEventListener("mouseleave", onMouseLeave, { passive: true });
+
+        return () => {
+            ro.disconnect();
+            el.removeEventListener("mousemove", onMouseMove);
+            el.removeEventListener("mouseleave", onMouseLeave);
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+        index,
+        safeTexts,
+        background,
+        particleColor,
+        particleSize,
+        spacing,
+        alphaThreshold,
+        mouseRadius,
+        densityMin,
+        densityMax,
+        transitionSpeed,
+        fontFamily,
+        fontWeight,
+        baseFontSize,
+        minFontSize,
+        dprMax,
+    ]);
+
+    useEffect(() => {
+        const id = setInterval(() => {
+            setIndex((prev) => (prev + 1) % safeTexts.length);
+        }, changeInterval);
+        return () => clearInterval(id);
+    }, [changeInterval, safeTexts.length]);
+
+    return (
+        <div
+            ref={wrapRef}
+            className={className}
+            style={{
+                // ✅ default sizing if Plasmic doesn't set it yet
+                width: "100%",
+                height: "100%",
+                position: "relative",
+                overflow: "hidden",
+                ...style,
+            }}
+        >
+            <canvas ref={canvasRef} className="absolute inset-0" />
+        </div>
+    );
+}
