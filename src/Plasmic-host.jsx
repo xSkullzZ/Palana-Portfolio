@@ -2,6 +2,7 @@
 import { PlasmicCanvasHost, registerComponent } from "@plasmicapp/host";
 import ParticleHero from "./components/ParticleHero";
 import ProjectReveal from "./components/ProjectReveal";
+import HeroTopography from "./components/HeroTopography";
 
 
 registerComponent(ParticleHero, {
@@ -18,6 +19,14 @@ registerComponent(ProjectReveal, {
     props: {
         children: { type: "slot" },
     }
+});
+
+registerComponent(HeroTopography, {
+    name: "HeroTopography",
+    importPath: "./components/HeroTopography",
+    props: {
+        className: "string",
+    },
 });
 
 export default function PlasmicHost() {
