@@ -18,7 +18,7 @@ const DEFAULT_TEXTS = [
 
 const DEFAULTS = {
     background: "transparent", // set "#000" if you want the component to paint background
-    particleColor: "#06b6d4",
+    particleColor: "#FFBB33",
     particleSize: 1.7,
     spacing: 5,
     alphaThreshold: 128,
@@ -155,7 +155,7 @@ export default function ParticleHero({
             let fontSize = baseFontSize;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.fillStyle = "#ffffff";
+            ctx.fillStyle = "#FFBB33";
 
             while (fontSize > minFontSize) {
                 ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;

@@ -3,6 +3,7 @@ import { PlasmicCanvasHost, registerComponent } from "@plasmicapp/host";
 import ParticleHero from "./components/ParticleHero";
 import ProjectReveal from "./components/ProjectReveal";
 import HeroTopography from "./components/HeroTopography";
+import AboutHorizontal from "./components/AboutHorizontal";
 
 
 registerComponent(ParticleHero, {
@@ -24,6 +25,14 @@ registerComponent(ProjectReveal, {
 registerComponent(HeroTopography, {
     name: "HeroTopography",
     importPath: "./components/HeroTopography",
+    props: {
+        className: "string",
+    },
+});
+
+registerComponent(AboutHorizontal, {
+    name: "AboutHorizontal",
+    importPath: "./components/AboutHorizontal",
     props: {
         className: "string",
     },

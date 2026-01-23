@@ -6,17 +6,17 @@ const CONFIG = {
     // Parallax strength per group id (px)
     parallax: {
         "Very-Far": 2,
-        Far: 4,
-        Medium: 7,
-        Near: 10,
+        Far: 5,
+        Medium: 8,
+        Near: 12,
 
-        "Face-Far": 12,
-        "Face-Medium": 16,
-        "Face-Main": 20,
+        "Face-Far": 15,
+        "Face-Medium": 20,
+        "Face-Main": 25,
 
-        "Silhouette-far": 14,
-        "Silhouette-Medium": 18,
-        Silhouette: 24,
+        "Silhouette-far": 17,
+        "Silhouette-Medium": 23,
+        Silhouette: 30,
 
         "Details-Dotted": 6,
         Last: 0, // tienilo fermo se è una cornice/finale
@@ -24,12 +24,12 @@ const CONFIG = {
 
     // Slow continuous motion
     breathe: {
-        amp: 0.012,     // scale: 1.012
-        speed: 0.0008,  // lower = slower
+        amp: 0.025,     // scale: 1.012
+        speed: 0.0005,  // lower = slower
     },
     drift: {
-        amp: 4,         // px
-        speed: 0.00045,
+        amp: 20,         // px
+        speed: 0.00055,
     },
 
     // Optional: animate dashed/dotted lines by shifting dash offset
@@ -39,7 +39,7 @@ const CONFIG = {
     },
 
     // Smoothing for mouse parallax
-    smoothing: 0.08,
+    smoothing: 0.12,
 };
 
 function clamp(n, a, b) {
