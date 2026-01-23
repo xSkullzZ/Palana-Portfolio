@@ -6,6 +6,7 @@ import Timeline from "./components/Timeline";
 import ParticleHero from "./components/ParticleHero";
 import Skills from "./components/Skills";
 import SkillsHeroSelect from "./components/SkillsHeroSelect";
+import AboutHorizontal from "./components/AboutHorizontal";
 
 import "./plasmic-init";
 import { PlasmicHomepage } from "./components/plasmic/portfolio/PlasmicHomepage";
@@ -125,6 +126,10 @@ export default function App() {
 
             <section className="snap-start snap-always h-screen">
                 <SkillsHeroSelect />
+            </section>
+
+            <section className="snap-start snap-always h-screen">
+                <AboutHorizontal />
             </section>
 
             <section className="snap-start snap-always h-screen bg-black flex items-center justify-center">

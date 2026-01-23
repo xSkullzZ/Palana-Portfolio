@@ -3,8 +3,13 @@
 const CONFIG = {
     scrollVhDesktop: 600,
     mobileMultiplier: 0.5, // 450 * 0.5 = 225
+    deadzoneVh: 60,
 
     mobileBreakpoint: 768, // px
+    
+    // Add the actual image dimensions
+    bgWidth: 4950,
+    bgHeight: 1024,
 
     layers: {
         bg: 1.0,
@@ -22,9 +27,10 @@ const CONFIG = {
 function getScrollVh() {
     if (typeof window === "undefined") return CONFIG.scrollVhDesktop;
     const isMobile = window.innerWidth < CONFIG.mobileBreakpoint;
-    return isMobile
+    const base = isMobile
         ? Math.round(CONFIG.scrollVhDesktop * CONFIG.mobileMultiplier)
         : CONFIG.scrollVhDesktop;
+    return base + CONFIG.deadzoneVh;
 }
 
 function clamp(n, a, b) {
@@ -41,6 +47,7 @@ export default function AboutHorizontal({ className = "" }) {
 
                 // calcolo maxShift in base alla larghezza dell'immagine/track
     const [maxShift, setMaxShift] = useState(0);
+    const [bgRenderWidth, setBgRenderWidth] = useState(CONFIG.bgWidth);
 
     const [scrollVh, setScrollVh] = useState(() => getScrollVh());
 
@@ -52,13 +59,12 @@ export default function AboutHorizontal({ className = "" }) {
 
     useEffect(() => {
         const updateMaxShift = () => {
-            const track = trackRef.current;
-            const section = sectionRef.current;
-            if (!track || !section) return;
-
             const viewportW = window.innerWidth;
-            const trackW = track.scrollWidth;
-            setMaxShift(Math.max(0, trackW - viewportW));
+            const viewportH = window.innerHeight || 1;
+            const scaledWidth = (CONFIG.bgWidth / CONFIG.bgHeight) * viewportH;
+            const shift = Math.max(0, scaledWidth - viewportW);
+            setBgRenderWidth(scaledWidth);
+            setMaxShift(shift);
         };
 
         updateMaxShift();
@@ -77,8 +83,10 @@ export default function AboutHorizontal({ className = "" }) {
             // quando r.top = 0 -> inizio
             // quando r.bottom = 0 -> fine
             const total = r.height - vh;
+            const deadzonePx = (CONFIG.deadzoneVh / 100) * vh;
+            const travel = Math.max(0, total - deadzonePx);
             const scrolled = clamp(-r.top, 0, total);
-            const p = total > 0 ? scrolled / total : 0;
+            const p = travel > 0 ? scrolled / travel : 0;
 
             progRef.current.target = clamp(p, 0, 1);
         };
@@ -122,9 +130,9 @@ export default function AboutHorizontal({ className = "" }) {
                         style={{
                             transform: `translate3d(${xBg}px,0,0)`,
                             backgroundImage: `url(${CONFIG.bgSrc})`,
-                            backgroundSize: "cover",
+                            backgroundSize: "100% 100%",
                             backgroundPosition: "left center",
-                            width: "calc(100vw + 2000px)", // fallback; meglio usare immagine larga reale
+                            width: `${bgRenderWidth}px`,
                             height: "100%",
                         }}
                     />
