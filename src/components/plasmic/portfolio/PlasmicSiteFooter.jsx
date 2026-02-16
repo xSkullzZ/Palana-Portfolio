@@ -25,6 +25,10 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: vZ8YLJfMu4Bkb2
 import sty from "./PlasmicSiteFooter.module.css"; // plasmic-import: cswDm0qYBFlc/css
 import logoOnDarkSvgWQVtk1Bauie from "./images/logoOnDarkSvg.svg"; // plasmic-import: w-qVtk1bauie/picture
 
+const HOME_BASE = import.meta.env.BASE_URL;
+const HOME_HASH = (hash) => `${HOME_BASE}#${hash}`;
+const CV_PATH = `${HOME_BASE}CV/ClaudioPalana_CV_EN_2026.pdf`;
+
 createPlasmicElementProxy;
 
 export const PlasmicSiteFooter__VariantProps = new Array();
@@ -154,7 +158,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__xtWsa
               )}
-              href={"/#Projects"}
+              href={HOME_HASH("Projects")}
               platform={"react"}
             >
               {"Projects"}
@@ -166,7 +170,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link___2ALg
               )}
-              href={"/#About"}
+              href={HOME_HASH("About")}
               platform={"react"}
             >
               {"About"}
@@ -178,7 +182,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__t2Iq
               )}
-              href={"/#Skills"}
+              href={HOME_HASH("Skills")}
               platform={"react"}
             >
               {"Skills"}
@@ -190,7 +194,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__p4Ohz
               )}
-              href={"/CV/ClaudioPalana_CV _EN_2026.pdf"}
+              href={CV_PATH}
               platform={"react"}
               target={"_blank"}
             >
@@ -203,7 +207,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link___9DfXz
               )}
-              href={"/#Contact"}
+              href={HOME_HASH("Contact")}
               platform={"react"}
             >
               {"Contact"}
@@ -235,7 +239,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__eoDb8
               )}
-              href={"/#Projects"}
+              href={HOME_HASH("Projects")}
               platform={"react"}
             >
               {"MyBeppe - Mobile App"}
@@ -247,7 +251,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link___3Cnv
               )}
-              href={"/#About"}
+              href={HOME_HASH("About")}
               platform={"react"}
             >
               {"Versy - Design System"}
@@ -259,7 +263,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__d18Q
               )}
-              href={"/#Skills"}
+              href={HOME_HASH("Skills")}
               platform={"react"}
             >
               {"Skills"}
@@ -271,7 +275,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__ydxJ
               )}
-              href={"/CV/ClaudioPalana_CV _EN_2026.pdf"}
+              href={CV_PATH}
               platform={"react"}
               target={"_blank"}
             >
@@ -284,7 +288,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__sAtIa
               )}
-              href={"/#Contact"}
+              href={HOME_HASH("Contact")}
               platform={"react"}
             >
               {"Contact"}

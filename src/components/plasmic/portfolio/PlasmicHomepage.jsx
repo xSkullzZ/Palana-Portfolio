@@ -172,7 +172,7 @@ function PlasmicHomepage__RenderFunc(props) {
             data-plasmic-name={"projects"}
             data-plasmic-override={overrides.projects}
             className={classNames(projectcss.all, sty.projects)}
-            id={"projects"}
+            id={"Projects"}
           >
             <section
               data-plasmic-name={"versy"}
@@ -185,7 +185,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 const $steps = {};
                 $steps["goToMyBeppe"] = true
                   ? (() => {
-                      const actionArgs = { destination: `/projects/my-beppe` };
+                      const actionArgs = { destination: `/project/my-beppe` };
                       return (({ destination }) => {
                         if (
                           typeof destination === "string" &&
@@ -288,7 +288,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 const $steps = {};
                 $steps["goToMyBeppe"] = true
                   ? (() => {
-                      const actionArgs = { destination: `/projects/my-beppe` };
+                      const actionArgs = { destination: `/project/my-beppe` };
                       return (({ destination }) => {
                         if (
                           typeof destination === "string" &&
@@ -390,6 +390,7 @@ function PlasmicHomepage__RenderFunc(props) {
             data-plasmic-name={"skillsSection"}
             data-plasmic-override={overrides.skillsSection}
             className={classNames("__wab_instance", sty.skillsSection)}
+            id={"Skills"}
           />
 
           <AiSys

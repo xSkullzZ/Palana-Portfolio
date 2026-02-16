@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const CONFIG = {
-    src: "/Topography.svg",
+    src: `${import.meta.env.BASE_URL}Topography.svg`,
 
     // Parallax strength per group id (px)
     parallax: {
@@ -44,6 +44,64 @@ const CONFIG = {
 
 function clamp(n, a, b) {
     return Math.max(a, Math.min(b, n));
+}
+
+function parseSvgLength(value) {
+    if (!value) return null;
+    const n = Number.parseFloat(String(value));
+    return Number.isFinite(n) ? n : null;
+}
+
+function applySvgCoverSizing(svg, hostElement) {
+    if (!svg || !hostElement) return;
+
+    const rawViewBox = svg.getAttribute("viewBox");
+    let vbWidth = 0;
+    let vbHeight = 0;
+
+    if (rawViewBox) {
+        const vb = rawViewBox.trim().split(/\s+/).map(Number);
+        if (vb.length === 4 && Number.isFinite(vb[2]) && Number.isFinite(vb[3])) {
+            vbWidth = vb[2];
+            vbHeight = vb[3];
+        }
+    }
+
+    if (!vbWidth || !vbHeight) {
+        const w = parseSvgLength(svg.getAttribute("width"));
+        const h = parseSvgLength(svg.getAttribute("height"));
+        if (w && h) {
+            vbWidth = w;
+            vbHeight = h;
+            svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+        }
+    }
+
+    svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+    svg.style.position = "absolute";
+    svg.style.left = "50%";
+    svg.style.top = "50%";
+    svg.style.transform = "translate(-50%, -50%)";
+
+    if (!vbWidth || !vbHeight) {
+        svg.style.width = "100%";
+        svg.style.height = "100%";
+        return;
+    }
+
+    const hostRect = hostElement.getBoundingClientRect();
+    const hostW = Math.max(1, hostRect.width || window.innerWidth || 1);
+    const hostH = Math.max(1, hostRect.height || window.innerHeight || 1);
+    const hostRatio = hostW / hostH;
+    const svgRatio = vbWidth / vbHeight;
+
+    if (hostRatio > svgRatio) {
+        svg.style.width = `${hostW}px`;
+        svg.style.height = `${hostW / svgRatio}px`;
+    } else {
+        svg.style.height = `${hostH}px`;
+        svg.style.width = `${hostH * svgRatio}px`;
+    }
 }
 
 export function HeroTopography({ className = "", style }) {
@@ -102,6 +160,11 @@ export function HeroTopography({ className = "", style }) {
 
         const svg = wrap.querySelector("svg");
         if (!svg) return;
+
+        applySvgCoverSizing(svg, rootRef.current);
+
+        const onResize = () => applySvgCoverSizing(svg, rootRef.current);
+        window.addEventListener("resize", onResize);
 
         // Collect <g> elements by id
         const layers = new Map();
@@ -170,6 +233,7 @@ export function HeroTopography({ className = "", style }) {
 
         rafRef.current = requestAnimationFrame(tick);
         return () => {
+            window.removeEventListener("resize", onResize);
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
     }, [svgMarkup]);
@@ -177,7 +241,7 @@ export function HeroTopography({ className = "", style }) {
     return (
         <div
             ref={rootRef}
-            className={`relative overflow-hidden ${className}`}
+            className={`hero-topo relative overflow-hidden ${className}`}
             style={{
                 width: "100vw",
                 height: "100vh",
@@ -199,6 +263,7 @@ export function HeroTopography({ className = "", style }) {
                     inset: 0;
                     width: 100%;
                     height: 100%;
+                    object-fit: cover;
                 }
                 /* Cover behavior */
                 .hero-topo svg {

@@ -32,19 +32,26 @@ export default function ContactFormCard({ className = "" }) {
       <p className="text-white/65 mt-2">Send a short brief and I will get back to you.</p>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <label htmlFor="contact-name" className="sr-only">Name</label>
         <input
+          id="contact-name"
           className="w-full rounded-xl bg-white/5 border border-white/15 px-4 py-3 text-white placeholder:text-white/45 focus:outline-none focus:ring-2 focus:ring-amber-300/60"
           placeholder="Name"
           value={name}
           onChange={(event) => setName(event.target.value)}
+          autoComplete="name"
         />
+        <label htmlFor="contact-subject" className="sr-only">Object</label>
         <input
+          id="contact-subject"
           className="w-full rounded-xl bg-white/5 border border-white/15 px-4 py-3 text-white placeholder:text-white/45 focus:outline-none focus:ring-2 focus:ring-amber-300/60"
           placeholder="Object"
           value={subject}
           onChange={(event) => setSubject(event.target.value)}
         />
+        <label htmlFor="contact-message" className="sr-only">Message</label>
         <textarea
+          id="contact-message"
           className="w-full min-h-36 rounded-xl bg-white/5 border border-white/15 px-4 py-3 text-white placeholder:text-white/45 focus:outline-none focus:ring-2 focus:ring-amber-300/60 resize-y"
           placeholder="Message"
           value={message}
@@ -63,7 +70,7 @@ export default function ContactFormCard({ className = "" }) {
       </form>
 
       {submitted ? (
-        <p className="text-sm text-white/70 mt-3">
+        <p className="text-sm text-white/70 mt-3" role="status" aria-live="polite">
           Your email app should be open now. If not, send manually to <span className="text-white">{CONTACT_EMAIL}</span>.
         </p>
       ) : null}

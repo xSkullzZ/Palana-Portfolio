@@ -4,6 +4,8 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from '../hooks/use-media-query';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const DEFAULTS = {
   logoWidth: 33,
   revealingTime: 220,
@@ -19,13 +21,13 @@ const projects = [
   {
     id: 1,
     title: "MyBeppe",
-    headerImage: "/MyBeppe/typography.svg",
+    headerImage: `${BASE_URL}MyBeppe/typography.svg`,
     subheader: "Case Study · UI Design · UX Research · Visual Identity",
     summary: `A fresh-food delivery app redesigned to recreate the trust and warmth of a local market.
 Based on team research, I crafted a new interface system that blends emotional storytelling with functional clarity.`,
-    logoImage: "/MyBeppe/logo.png",
-    cursorImage: "/MyBeppe/BeppeHomepage.png",
-    backgroundImage: "/MyBeppe/bg.webp",
+    logoImage: `${BASE_URL}MyBeppe/logo.png`,
+    cursorImage: `${BASE_URL}MyBeppe/BeppeHomepage.png`,
+    backgroundImage: `${BASE_URL}MyBeppe/bg.webp`,
     link: "/project/my-beppe",
     animationType: "zoom",
     overlayColor: "rgba(74, 222, 128, 0.16)",
@@ -33,42 +35,18 @@ Based on team research, I crafted a new interface system that blends emotional s
   {
     id: 2,
     title: "Versy",
-    headerImage: "/Versy/Versylogo.webp",
+    headerImage: `${BASE_URL}Versy/Versylogo.webp`,
       subheader: "Brand Identity · Design System · UI Foundations · Product Thinking",
       summary: `A brand built for the future of digital experiences.
 I created the entire visual identity and design system, laying the foundation for a product that evolved across trends into a mature, enterprise-ready solution.`,
-    logoImage: "/Versy/VersyTriangleWhite.svg",
+    logoImage: `${BASE_URL}Versy/VersyTriangleWhite.svg`,
     cursorImage: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
-    backgroundVideo: "/Versy/versydemo.mp4",
+    backgroundVideo: `${BASE_URL}Versy/versydemo.mp4`,
     backgroundImage: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=2000&auto=format&fit=crop",
     link: "/project/versy",
     animationType: "fade-left",
     overlayColor: "rgba(129, 140, 248, 0.18)",
   },
-  // {
-  //   id: 3,
-  //   headerImage: "/projects/portfolio-title.svg",
-  //   subheader: "Brand Systems · Visual Direction",
-  //   summary:
-  //     "A modular identity that scales across web, product, and motion with a consistent tone.",
-  //   logoImage: "/projects/portfolio-logo.png",
-  //   cursorImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
-  //   backgroundImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2000&auto=format&fit=crop",
-  //   link: "/projects/project-3",
-  //   animationType: "fade-up",
-  // },
-  // {
-  //   id: 4,
-  //   headerImage: "/projects/sound-title.svg",
-  //   subheader: "Sound Design · Motion · Craft",
-  //   summary:
-  //     "A sonic identity system crafted to guide attention and deepen narrative.",
-  //   logoImage: "/projects/sound-logo.png",
-  //   cursorImage: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop",
-  //   backgroundImage: "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=2000&auto=format&fit=crop",
-  //   link: "/projects/project-4",
-  //   animationType: "rocket-left",
-  // },
 ];
 
 export function ImageReveal({
@@ -85,6 +63,7 @@ export function ImageReveal({
   items = projects,
 }) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
+  const isMobile = !isDesktop;
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
@@ -176,6 +155,8 @@ export function ImageReveal({
   }, []);
 
   useEffect(() => {
+    if (!isDesktop) return undefined;
+
     const updateCursorPosition = (e) => {
       if (requestRef.current) return;
       requestRef.current = requestAnimationFrame(() => {
@@ -189,7 +170,7 @@ export function ImageReveal({
       window.removeEventListener('mousemove', updateCursorPosition);
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [handleMouseMove]);
+  }, [handleMouseMove, isDesktop]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -248,7 +229,7 @@ export function ImageReveal({
   return (
     <section
       ref={sectionRef}
-      className={`relative w-full h-screen flex items-end overflow-hidden ${className}`}
+      className={`relative w-full h-screen flex ${isDesktop ? "items-end" : "items-stretch"} overflow-hidden ${className}`}
       style={style}
     >
       {/* Loading State */}
@@ -258,8 +239,8 @@ export function ImageReveal({
         </div>
       )}
 
-      {/* Background Image with Dissolve Effect */}
-      {activeProject && imagesLoaded && (
+      {/* Background Image with Dissolve Effect (Desktop) */}
+      {isDesktop && activeProject && imagesLoaded && (
         <div className="absolute inset-0 pointer-events-none z-0">
           {activeProject.backgroundVideo ? (
             <video
@@ -322,31 +303,72 @@ export function ImageReveal({
           {items.map((project, index) => (
             <div
               key={project.id}
-              className="cursor-pointer relative flex items-center justify-between group overflow-hidden"
+              className={`cursor-pointer relative flex group overflow-hidden ${isDesktop ? "items-center justify-between" : "items-stretch justify-start"}`}
               style={{ 
-                height: `${100 / items.length}vh`,
+                height: isDesktop ? `${100 / items.length}vh` : "auto",
+                minHeight: isDesktop ? "auto" : "50vh",
                 borderBottom: index < items.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
               }}
-              onMouseEnter={() => handleProjectHover(project, index)}
-              onMouseLeave={handleMouseLeaveProject}
+              role="link"
+              tabIndex={0}
+              aria-label={`Open project ${project.title}`}
+              onMouseEnter={isDesktop ? () => handleProjectHover(project, index) : undefined}
+              onMouseLeave={isDesktop ? handleMouseLeaveProject : undefined}
+              onTouchStart={isMobile ? () => setCurrentIndex(index) : undefined}
+              onFocus={isDesktop ? () => handleProjectHover(project, index) : undefined}
+              onBlur={isDesktop ? handleMouseLeaveProject : undefined}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleProjectClick(project.link);
+                }
+              }}
               onClick={() => handleProjectClick(project.link)}
             >
-              <div className="flex items-center w-full gap-8">
+              {isMobile && imagesLoaded && (
+                <div className="absolute inset-0 pointer-events-none z-0">
+                  {project.backgroundVideo ? (
+                    <video
+                      className="absolute inset-0 w-full h-full object-cover"
+                      src={project.backgroundVideo}
+                      poster={project.backgroundPoster || project.backgroundImage}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <div
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${project.backgroundImage})` }}
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-black/55" />
+                  <div
+                    className="absolute inset-0"
+                    style={{ backgroundColor: project.overlayColor || "rgba(37, 99, 235, 0.15)" }}
+                  />
+                </div>
+              )}
+
+              <div className={`relative z-10 flex w-full ${isDesktop ? "items-center gap-8" : "flex-col items-center justify-center gap-6 px-[5%] py-5"}`}>
                 <div
-                  className="flex items-center justify-center shrink-0 pl-10 pr-2"
-                  style={{ width: `${safeLogoWidth}%` }}
+                  className={`flex items-center justify-center shrink-0 ${isDesktop ? "pl-10 pr-2" : "w-full px-0"}`}
+                  style={{ width: isDesktop ? `${safeLogoWidth}%` : "100%" }}
                 >
                   <img
                     src={project.logoImage}
                     alt=""
-                    className={`w-full max-w-[240px] h-auto object-contain transition-all duration-500 ${
-                      currentIndex === index
-                        ? "opacity-100"
-                        : isHovering
-                          ? "opacity-40 blur-[0px]"
-                          : "opacity-60"
+                    className={`w-full ${isDesktop ? "max-w-[240px]" : "max-w-[256px] max-h-[128px]"} h-auto object-contain transition-all duration-500 ${
+                      isDesktop
+                        ? currentIndex === index
+                          ? "opacity-100"
+                          : isHovering
+                            ? "opacity-40 blur-[0px]"
+                            : "opacity-60"
+                        : "opacity-100"
                     } ${
-                      currentIndex === index
+                      currentIndex === index && isDesktop
                         ? `ir-anim-${project.animationType || animationType}`
                         : ""
                     }`}
@@ -358,23 +380,25 @@ export function ImageReveal({
                 </div>
 
                 <div
-                  className={`flex-1 pr-6 transition-all duration-500 ${
-                    currentIndex === index
-                      ? "opacity-100"
-                      : isHovering
-                        ? "opacity-80 blur-[2px]"
-                        : "opacity-90"
+                  className={`${isDesktop ? "flex-1 pr-6" : "w-full px-0 text-center"} transition-all duration-500 ${
+                    isDesktop
+                      ? currentIndex === index
+                        ? "opacity-100"
+                        : isHovering
+                          ? "opacity-80 blur-[2px]"
+                          : "opacity-90"
+                      : "opacity-100"
                   }`}
                 >
-                  <div className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/50">
+                  <div className={`text-[10px] md:text-xs uppercase tracking-[0.28em] md:tracking-[0.35em] text-white/50 ${isDesktop ? "" : "text-center"}`}>
                     {project.subheader}
                   </div>
-                  <div className="mt-2">
+                  <div className={`mt-2 ${isDesktop ? "" : "flex justify-center"}`}>
                     {project.headerImage && !headerErrors[project.id] ? (
                       <img
                         src={project.headerImage}
                         alt={project.title || ""}
-                        className="h-10 md:h-12 lg:h-14 w-auto object-contain"
+                        className={`${isDesktop ? "h-10 md:h-12 lg:h-14" : "h-8"} w-auto object-contain`}
                         draggable="false"
                         onError={() => handleHeaderError(project.id)}
                       />
@@ -384,11 +408,12 @@ export function ImageReveal({
                       </div>
                     )}
                   </div>
-                  <p className="mt-3 text-sm md:text-base text-white/70 max-w-2xl whitespace-pre-line">
+                  <p className={`mt-3 text-sm md:text-base text-white/70 whitespace-pre-line ${isDesktop ? "max-w-2xl" : "max-w-full text-center"}`}>
                     {project.summary}
                   </p>
                 </div>
 
+                {isDesktop && (
                 <div
                   className={`transition-all duration-500 z-20 pr-10 ${
                     currentIndex === index
@@ -400,12 +425,13 @@ export function ImageReveal({
                 >
                   <ArrowUpRight className="w-10 h-10 md:w-12 md:h-12" />
                 </div>
+                )}
               </div>
 
               {/* Active Project Highlight */}
               <div
                 className={`absolute inset-0 transition-all ease-out ${
-                  currentIndex === index ? "opacity-100" : "opacity-0"
+                  isDesktop && currentIndex === index ? "opacity-100" : "opacity-0"
                 } ${
                   hoveredProject?.id === project.id ? "backdrop-blur-0" : "backdrop-blur-[1px]"
                 }`}
@@ -420,7 +446,7 @@ export function ImageReveal({
       </div>
 
       {/* Scroll Hint */}
-        <div className="absolute bottom-8 right-8 z-20 text-gray-500 text-xs uppercase tracking-widest">
+      <div className={`absolute bottom-8 right-8 z-20 text-gray-500 text-xs uppercase tracking-widest ${isDesktop ? "" : "hidden"}`}>
           Scroll to explore
         </div>
 

@@ -1,14 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 
+const BASE_URL = import.meta.env.BASE_URL;
+const withBase = (path) => `${BASE_URL}${path.replace(/^\//, "")}`;
+
 const BACKGROUND_IMAGES = [
-    "/about/bg1.webp",
-    "/about/bg2.webp",
-    "/about/bg3.webp",
-    "/about/bg4.webp",
-    "/about/bg5.webp",
-    "/about/bg6.webp",
-    "/about/bg7.webp",
-    "/about/bg8.webp",
+    withBase("/about/bg1.webp"),
+    withBase("/about/bg2.webp"),
+    withBase("/about/bg3.webp"),
+    withBase("/about/bg4.webp"),
+    withBase("/about/bg5.webp"),
+    withBase("/about/bg6.webp"),
+    withBase("/about/bg7.webp"),
+    withBase("/about/bg8.webp"),
 ];
 
 const BG_IMAGE_WIDTH = 2048;
@@ -28,13 +31,13 @@ const OVERLAY_CONFIG = {
 
 const TEXT_SHADOW_CONFIG = {
     color: "#000000",
-    opacity: 0.9,
-    sizePx: 40,
+    opacity: 0.74,
+    sizeRem: 1.8,
 };
 
 const HEADER_LAYOUT = {
     rightMarginVw: 16,
-    maxWidthVw: 34,
+    maxWidthVw: 66,
     textAlign: "right",
     enterOffsetPx: 28,
     enterDurationMs: 700,
@@ -135,15 +138,15 @@ const BACKGROUND_HEADERS = [
 const CONFIG = {
     sectionHeightVh: 800,
     scrollVhDesktop: 800,
-    mobileMultiplier: 0.5,
+    mobileMultiplier: 1,
     deadzoneVh: 10,
 
-    mobileBreakpoint: 768,
+    mobileBreakpoint: 800,
 
     bgWidth: BG_IMAGE_WIDTH,
     bgHeight: BG_IMAGE_HEIGHT,
 
-    smoothing: 0.3,
+    smoothing: 0.28,
     bgImages: BACKGROUND_IMAGES,
 
     entranceOffsetPx: -40,
@@ -152,7 +155,8 @@ const CONFIG = {
 
     characters: [
         {
-            path: "/about/me1.webp",
+            path: withBase("/about/me1.webp"),
+            aspectRatio: 1.25,
             position: 90,
             offsetY: -40,
             scale: 0.87,
@@ -160,15 +164,17 @@ const CONFIG = {
             skipAnimation: false,
         },
         {
-            path: "/about/me2.webp",
-            position: 2280,
-            offsetY: -200,
+            path: withBase("/about/me2.webp"),
+            aspectRatio: 1.5,
+            position: 2285,
+            offsetY: -230,
             scale: 1.12,
             delayMs: 1000,
             skipAnimation: false,
         },
         {
-            path: "/about/me3.webp",
+            path: withBase("/about/me3.webp"),
+            aspectRatio: 1.5,
             position: 3150,
             offsetY: 0,
             scale: 1.05,
@@ -176,7 +182,8 @@ const CONFIG = {
             skipAnimation: false,
         },
         {
-            path: "/about/me4.webp",
+            path: withBase("/about/me4.webp"),
+            aspectRatio: 0.7285,
             position: 4750,
             offsetY: 0,
             scale: 1,
@@ -184,23 +191,26 @@ const CONFIG = {
             skipAnimation: false,
         },
         {
-            path: "/about/me5.webp",
-            position: 6400,
-            offsetY: 300,
+            path: withBase("/about/me5.webp"),
+            aspectRatio: 0.6356,
+            position: 6405,
+            offsetY: 345,
             scale: 0.42,
             delayMs: 3700,
             skipAnimation: false,
         },
         {
-            path: "/about/me6.webp",
+            path: withBase("/about/me6.webp"),
+            aspectRatio: 0.6113,
             position: 8800,
             offsetY: 0,
             scale: 1,
-            delayMs: 5200,
+            delayMs: 5100,
             skipAnimation: false,
         },
         {
-            path: "/about/me7.webp",
+            path: withBase("/about/me7.webp"),
+            aspectRatio: 0.6113,
             position: 10700,
             offsetY: 0,
             scale: 1,
@@ -208,7 +218,8 @@ const CONFIG = {
             skipAnimation: false,
         },
         {
-            path: "/about/me8.webp",
+            path: withBase("/about/me8.webp"),
+            aspectRatio: 1.5,
             position: 12700,
             offsetY: 0,
             scale: 1,
@@ -216,7 +227,8 @@ const CONFIG = {
             skipAnimation: false,
         },
         {
-            path: "/about/me9.webp",
+            path: withBase("/about/me9.webp"),
+            aspectRatio: 1.5,
             position: 14600,
             offsetY: 0,
             scale: 1,
@@ -227,6 +239,10 @@ const CONFIG = {
     characterHeightVh: 70,
     characterBottomVh: 0,
     characterBufferPx: 220,
+    referenceViewportHeight: 1440,
+    referenceViewportWidth: 2560,
+    delayScaleMin: 0.72,
+    delayScaleMax: 1,
 };
 
 function getScrollVh() {
@@ -281,6 +297,10 @@ export function AboutHorizontal2({ className = "" }) {
     const [maxShift, setMaxShift] = useState(0);
     const [bgRenderWidth, setBgRenderWidth] = useState(CONFIG.bgWidth);
     const [bgScale, setBgScale] = useState(1);
+    const [offsetScale, setOffsetScale] = useState(1);
+    const [viewportHeight, setViewportHeight] = useState(
+        typeof window === "undefined" ? 1080 : window.innerHeight || 1080
+    );
     const [scrollVh, setScrollVh] = useState(() => getScrollVh());
     const [sectionEntered, setSectionEntered] = useState(false);
 
@@ -303,9 +323,24 @@ export function AboutHorizontal2({ className = "" }) {
             const imageCount = Math.max(1, CONFIG.bgImages.length);
             const trackWidth = scaledWidth * imageCount;
             const shift = Math.max(0, trackWidth - viewportW);
+
+            const hScale = clamp(
+                viewportH / CONFIG.referenceViewportHeight,
+                0.72,
+                1.18
+            );
+            const wScale = clamp(
+                viewportW / CONFIG.referenceViewportWidth,
+                0.78,
+                1.12
+            );
+            const composedScale = hScale * 0.75 + wScale * 0.25;
+
             setBgScale(scale);
             setBgRenderWidth(scaledWidth);
             setMaxShift(shift);
+            setOffsetScale(composedScale);
+            setViewportHeight(viewportH);
         };
 
         updateMaxShift();
@@ -360,7 +395,12 @@ export function AboutHorizontal2({ className = "" }) {
 
         const tick = () => {
             const s = progRef.current;
-            s.current += (s.target - s.current) * CONFIG.smoothing;
+            const delta = s.target - s.current;
+            if (Math.abs(delta) < 0.0002 || s.target <= 0.0005 || s.target >= 0.9995) {
+                s.current = s.target;
+            } else {
+                s.current += delta * CONFIG.smoothing;
+            }
             setProgress(s.current);
             rafRef.current = requestAnimationFrame(tick);
         };
@@ -375,6 +415,11 @@ export function AboutHorizontal2({ className = "" }) {
 
     const xBg = -progress * maxShift;
     const xCharacters = -progress * maxShift;
+    const delayScale = clamp(
+        viewportHeight / CONFIG.referenceViewportHeight,
+        CONFIG.delayScaleMin,
+        CONFIG.delayScaleMax
+    );
 
     const totalBgImages = CONFIG.bgImages.length;
     const trackWidth = bgRenderWidth * Math.max(1, totalBgImages);
@@ -389,10 +434,9 @@ export function AboutHorizontal2({ className = "" }) {
     const overlaySolid = toRgba(OVERLAY_CONFIG.color, overlaySolidOpacity);
     const textShadowOpacity = clamp(TEXT_SHADOW_CONFIG.opacity, 0, 1);
     const shadowColor = toRgba(TEXT_SHADOW_CONFIG.color, textShadowOpacity);
-    const textShadow = `0 10px ${TEXT_SHADOW_CONFIG.sizePx}px ${shadowColor}, 0 2px ${Math.max(
-        12,
-        Math.round(TEXT_SHADOW_CONFIG.sizePx * 0.45)
-    )}px ${shadowColor}`;
+    const shadowBlurRem = Math.max(0.8, TEXT_SHADOW_CONFIG.sizeRem || 1.8);
+    const shadowBlurRemSecondary = Math.max(0.6, shadowBlurRem * 0.55);
+    const textShadow = `0 0.45rem ${shadowBlurRem}rem ${shadowColor}, 0 0.15rem ${shadowBlurRemSecondary}rem ${shadowColor}`;
     const headerCount = BACKGROUND_HEADERS.length;
     const headerTrackCount = Math.max(1, totalBgImages || headerCount);
     const timingScale = Math.max(0.1, HEADER_LAYOUT.timingScale || 1);
@@ -536,7 +580,8 @@ export function AboutHorizontal2({ className = "" }) {
                     >
                         {CONFIG.characters.map((item, index) => {
                             const timelineMax = Math.max(1, FOREGROUND_REVEAL.timelineMax);
-                            const scheduledProgress = (item.delayMs || 0) / timelineMax;
+                            const delayMsScaled = (item.delayMs || 0) * delayScale;
+                            const scheduledProgress = delayMsScaled / timelineMax;
                             const enterStart = scheduledProgress - FOREGROUND_REVEAL.leadIn;
                             const enterEnd = scheduledProgress + FOREGROUND_REVEAL.leadOut;
                             const revealStrength = clamp(
@@ -546,6 +591,10 @@ export function AboutHorizontal2({ className = "" }) {
                             );
                             const entered = item.skipAnimation ? 1 : easeInOutCubic(revealStrength);
                             const revealOpacity = item.skipAnimation ? 1 : entered;
+                            const baseCharacterHeightPx = (viewportHeight * CONFIG.characterHeightVh) / 100;
+                            const characterHeightPx = baseCharacterHeightPx * (item.scale || 1);
+                            const characterAspectRatio = item.aspectRatio || 1;
+                            const characterWidthPx = characterHeightPx * characterAspectRatio;
                             return (
                                 <img
                                     key={`${item.path}-${index}`}
@@ -555,8 +604,13 @@ export function AboutHorizontal2({ className = "" }) {
                                     className="absolute"
                                     style={{
                                         left: item.position * bgScale,
-                                        bottom: `calc(${CONFIG.characterBottomVh}vh + ${item.offsetY || 0}px)`,
-                                        height: `${CONFIG.characterHeightVh * (item.scale || 1)}vh`,
+                                        bottom: `calc(${CONFIG.characterBottomVh}vh + ${(item.offsetY || 0) * offsetScale}px)`,
+                                        height: `${characterHeightPx}px`,
+                                        width: `${characterWidthPx}px`,
+                                        minWidth: `${characterWidthPx}px`,
+                                        maxWidth: `${characterWidthPx}px`,
+                                        objectFit: "contain",
+                                        display: "block",
                                         opacity: revealOpacity,
                                         transform: item.skipAnimation
                                             ? "translate3d(0,0,0)"
@@ -587,7 +641,7 @@ export function AboutHorizontal2({ className = "" }) {
                         >
                             <div
                                 style={{
-                                    fontSize: `${activeHeader.sizeRem || 2.8}rem`,
+                                    fontSize: `clamp(1rem, 0.9vw + 0.65rem, ${activeHeader.sizeRem || 2}rem)`,
                                     color: activeHeader.color || "#ffffff",
                                     textShadow,
                                     lineHeight: HEADER_LAYOUT.lineHeight,

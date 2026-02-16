@@ -23,6 +23,10 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: vZ8YLJfMu4Bkb2
 import sty from "./PlasmicSiteHeader.module.css"; // plasmic-import: N2EmXWwtxdPX/css
 import logoOnDarkSvgWQVtk1Bauie from "./images/logoOnDarkSvg.svg"; // plasmic-import: w-qVtk1bauie/picture
 
+const HOME_BASE = import.meta.env.BASE_URL;
+const HOME_HASH = (hash) => `${HOME_BASE}#${hash}`;
+const CV_PATH = `${HOME_BASE}CV/ClaudioPalana_CV_EN_2026.pdf`;
+
 createPlasmicElementProxy;
 
 export const PlasmicSiteHeader__VariantProps = new Array();
@@ -102,7 +106,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link__lzZiw
             )}
-            href={"./#Projects"}
+            href={HOME_HASH("Projects")}
             platform={"react"}
           >
             {"Projects"}
@@ -114,7 +118,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link__hKvHf
             )}
-            href={"./#About"}
+            href={HOME_HASH("About")}
             platform={"react"}
           >
             {"About"}
@@ -126,7 +130,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link__gBktF
             )}
-            href={"./#Skills"}
+            href={HOME_HASH("Skills")}
             platform={"react"}
           >
             {"Skills"}
@@ -138,7 +142,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link___9XW1F
             )}
-            href={"/CV/ClaudioPalana_CV _EN_2026.pdf"}
+            href={CV_PATH}
             platform={"react"}
             target={"_blank"}
           >
@@ -151,7 +155,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link___0HvZq
             )}
-            href={"./#Contact"}
+            href={HOME_HASH("Contact")}
             platform={"react"}
           >
             {"Contact"}

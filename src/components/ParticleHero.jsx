@@ -157,45 +157,43 @@ export function ParticleHero({
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
 
-        class Particle {
-            constructor(x, y, tx, ty, size) {
-                this.x = x;
-                this.y = y;
-                this.targetX = tx;
-                this.targetY = ty;
-                this.baseX = tx;
-                this.baseY = ty;
-                this.size = size;
-                this.density = Math.random() * (densityMax - densityMin) + densityMin;
-                this.used = false;
-            }
+        function createParticle(x, y, tx, ty, size) {
+            return {
+                x,
+                y,
+                targetX: tx,
+                targetY: ty,
+                baseX: tx,
+                baseY: ty,
+                size,
+                density: Math.random() * (densityMax - densityMin) + densityMin,
+                used: false,
+                update() {
+                    const dx = mouseRef.current.x - this.x;
+                    const dy = mouseRef.current.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
 
-            update() {
-                const dx = mouseRef.current.x - this.x;
-                const dy = mouseRef.current.y - this.y;
-                const dist = Math.sqrt(dx * dx + dy * dy) || 0.0001;
+                    if (dist < mouseRadius) {
+                        const force = (mouseRadius - dist) / mouseRadius;
+                        const dirX = (dx / dist) * force * this.density;
+                        const dirY = (dy / dist) * force * this.density;
+                        this.x -= dirX;
+                        this.y -= dirY;
+                    } else {
+                        this.x -= (this.x - this.baseX) * transitionSpeed;
+                        this.y -= (this.y - this.baseY) * transitionSpeed;
+                    }
 
-                if (dist < mouseRadius) {
-                    const force = (mouseRadius - dist) / mouseRadius;
-                    const dirX = (dx / dist) * force * this.density;
-                    const dirY = (dy / dist) * force * this.density;
-                    this.x -= dirX;
-                    this.y -= dirY;
-                } else {
-                    this.x -= (this.x - this.baseX) * transitionSpeed;
-                    this.y -= (this.y - this.baseY) * transitionSpeed;
-                }
-
-                this.baseX += (this.targetX - this.baseX) * transitionSpeed;
-                this.baseY += (this.targetY - this.baseY) * transitionSpeed;
-            }
-
-            draw() {
-                ctx.fillStyle = particleColor;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+                    this.baseX += (this.targetX - this.baseX) * transitionSpeed;
+                    this.baseY += (this.targetY - this.baseY) * transitionSpeed;
+                },
+                draw() {
+                    ctx.fillStyle = particleColor;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                },
+            };
         }
 
         function wrapLines(ctx2d, text, maxWidth) {
@@ -285,7 +283,7 @@ export function ParticleHero({
                             next.push(existing);
                         } else {
                             next.push(
-                                new Particle(
+                                createParticle(
                                     Math.random() * width,
                                     Math.random() * height,
                                     x,
