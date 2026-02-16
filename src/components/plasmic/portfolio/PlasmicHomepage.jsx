@@ -11,22 +11,57 @@
 import * as React from "react";
 import {
   PlasmicImg as PlasmicImg__,
-  PlasmicLink as PlasmicLink__,
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
   hasVariant
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import SiteHeader from "../../SiteHeader"; // plasmic-import: N2EmXWwtxdPX/component
+import HeroTopography from "../../HeroTopography"; // plasmic-import: jiWrq2otqjSL/codeComponent
+import ParticleHero from "../../ParticleHero"; // plasmic-import: DaOFkwlQNp2H/codeComponent
+import ImageReveal from "../../ImageReveal"; // plasmic-import: y9GA8gOL7hbN/codeComponent
+import AboutHorizontal2 from "../../AboutHorizontal2"; // plasmic-import: ly7oXzZR4mDW/codeComponent
+import SkillsSection from "../../SkillsSection"; // plasmic-import: fwQPOdwx7HmF/component
+import AiSys from "../../AiSys"; // plasmic-import: XaX9xed_u-2k/component
 import { CookieConsent } from "@plasmicpkgs/vanilla-cookieconsent";
-import { ParticleHero } from "../../ParticleHero"; // plasmic-import: DaOFkwlQNp2H/codeComponent
-import { ProjectReveal } from "../../ProjectReveal"; // plasmic-import: yo-IR6Vu8bTV/codeComponent
+import SiteFooter from "../../SiteFooter"; // plasmic-import: cswDm0qYBFlc/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/styleTokensProvider
 import "@plasmicapp/react-web/lib/plasmic.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/projectcss
 import sty from "./PlasmicHomepage.module.css"; // plasmic-import: uE-nokRAoK9M/css
-import ChevronDownIcon from "../library_tabler_3_2_icons/icons/PlasmicIcon__ChevronDown"; // plasmic-import: vbBhCWCOvgol/icon
+import versyTriangle7HCvmehTD3Y from "./images/versyTriangle.svg"; // plasmic-import: 7hCVMEH-tD3y/picture
+import versylogoWebpAnUVLpSztBa from "./images/versylogoWebp.webp"; // plasmic-import: anU_vLpSztBA/picture
+import myBeppeWgjwaozifOlk from "./images/myBeppe.png"; // plasmic-import: wgjwaozifOlk/picture
+
+const emptyProxy = new Proxy(() => "", {
+  get(_, prop) {
+    return prop === Symbol.toPrimitive ? () => "" : emptyProxy;
+  }
+});
+
+function wrapQueriesWithLoadingProxy($q) {
+  return new Proxy($q, {
+    get(target, queryName) {
+      const query = target[queryName];
+      return !query || query.isLoading || !query.data ? emptyProxy : query;
+    }
+  });
+}
+
+export function generateDynamicMetadata($q, $ctx) {
+  return {
+    title: "Claudio Palana - Home",
+    openGraph: {
+      title: "Claudio Palana - Home"
+    },
+    twitter: {
+      card: "summary",
+      title: "Claudio Palana - Home"
+    }
+  };
+}
 
 createPlasmicElementProxy;
 
@@ -61,8 +96,8 @@ function PlasmicHomepage__RenderFunc(props) {
     <React.Fragment>
       <div className={projectcss.plasmic_page_wrapper}>
         <div
-          data-plasmic-name={"root"}
-          data-plasmic-override={overrides.root}
+          data-plasmic-name={"homepage"}
+          data-plasmic-override={overrides.homepage}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
@@ -71,93 +106,314 @@ function PlasmicHomepage__RenderFunc(props) {
             projectcss.plasmic_default_styles,
             projectcss.plasmic_mixins,
             styleTokensClassNames,
-            sty.root
+            sty.homepage
           )}
         >
-          <div
-            data-plasmic-name={"header"}
-            data-plasmic-override={overrides.header}
-            className={classNames(projectcss.all, sty.header)}
+          <SiteHeader
+            data-plasmic-name={"siteHeader"}
+            data-plasmic-override={overrides.siteHeader}
+            className={classNames("__wab_instance", sty.siteHeader)}
+          />
+
+          <section
+            data-plasmic-name={"hero"}
+            data-plasmic-override={overrides.hero}
+            className={classNames(projectcss.all, sty.hero)}
           >
+            <HeroTopography
+              data-plasmic-name={"heroTopography"}
+              data-plasmic-override={overrides.heroTopography}
+              className={classNames("__wab_instance", sty.heroTopography)}
+            />
+
+            <div className={classNames(projectcss.all, sty.freeBox__napsj)}>
+              <ParticleHero
+                data-plasmic-name={"particleHero"}
+                data-plasmic-override={overrides.particleHero}
+                className={classNames("__wab_instance", sty.particleHero)}
+              />
+
+              <h1
+                className={classNames(
+                  projectcss.all,
+                  projectcss.h1,
+                  projectcss.__wab_text,
+                  sty.h1__gIwWd
+                )}
+              >
+                {hasVariant(globalVariants, "screen", "mobileOnly")
+                  ? "Architect of Experience\nProduct Shaper\nSignal Crafter"
+                  : "Architect of Experience \u00b7 Product Shaper \u00b7 Signal Crafter"}
+              </h1>
+              <h1
+                className={classNames(
+                  projectcss.all,
+                  projectcss.h1,
+                  projectcss.__wab_text,
+                  sty.h1__q6WJc
+                )}
+              >
+                {hasVariant(globalVariants, "screen", "mobileOnly")
+                  ? "Designing complex systems that teams can trust, use, and evolve. Turning complexity into tools people can actually lead with."
+                  : "Designing complex systems that teams can trust, use, and evolve. Turning complexity into tools people can actually lead with."}
+              </h1>
+            </div>
             <div
-              data-plasmic-name={"wrapper"}
-              data-plasmic-override={overrides.wrapper}
-              className={classNames(projectcss.all, sty.wrapper)}
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___7XvAn
+              )}
+            >
+              {"SCROLL TO EXPLORE \u2193"}
+            </div>
+          </section>
+          <section
+            data-plasmic-name={"projects"}
+            data-plasmic-override={overrides.projects}
+            className={classNames(projectcss.all, sty.projects)}
+            id={"projects"}
+          >
+            <section
+              data-plasmic-name={"versy"}
+              data-plasmic-override={overrides.versy}
+              className={classNames(projectcss.all, sty.versy)}
+              data-bg-src={"/projects/beppe-bg.jpg"}
+              data-mockup-src={"/projects/beppe-mock.png"}
+              data-project-id={"my-beppe-1"}
+              onClick={async event => {
+                const $steps = {};
+                $steps["goToMyBeppe"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/projects/my-beppe` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          location.assign(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToMyBeppe"] != null &&
+                  typeof $steps["goToMyBeppe"] === "object" &&
+                  typeof $steps["goToMyBeppe"].then === "function"
+                ) {
+                  $steps["goToMyBeppe"] = await $steps["goToMyBeppe"];
+                }
+              }}
+              title={"Testo"}
             >
               <PlasmicImg__
-                data-plasmic-name={"img"}
-                data-plasmic-override={overrides.img}
                 alt={""}
-                className={classNames(sty.img)}
-                displayHeight={"64px"}
+                className={classNames(sty.img___2IQgt)}
+                displayHeight={"235px"}
                 displayMaxHeight={"none"}
-                displayMaxWidth={"none"}
+                displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
                 displayMinWidth={"0"}
-                displayWidth={"64px"}
+                displayWidth={"33%"}
+                loading={"lazy"}
                 src={{
-                  src: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMzIwIDI0MSI+CiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj4KICAgIDxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0xOTEuNjk0IDE2Ny4xMDFjLTYuOTYzIDEwLjMyOS0xNi4yMTMgMTkuMDI2LTI3LjAxIDI1LjQwN3Y0MS4yMzZjMzEuNDE2LTExLjc0NiA1Ni42Ni0zNS45ODcgNjkuNDkzLTY2LjY0M3oiLz4KICAgIDxwYXRoIGZpbGw9InVybCgjYykiIGQ9Ik0xMTAuOTY3IDIwMy40ODhjLTQxLjM1Ni01LjIzMi03My4zMjgtNDAuMjAzLTczLjMyOC04Mi42MDUgMC00NiAzNy42NTYtODMuMzA0IDg0LjA5MS04My4zMDQgNy41MzUgMCAxNC44MzQgMSAyMS43OCAyLjgzMkwxMDQuNTQyIDEuNTA4QzQ1LjQ2IDkuODA1IDAgNjAuMDcgMCAxMjAuODgzczQ4Ljc5IDExNC42OTQgMTEwLjk2NyAxMjAuMDkyeiIvPgogICAgPHBhdGggZmlsbD0idXJsKCNkKSIgZD0iTTMyMCA4MS4wM2MwIDIxLjg5My03LjU2OCA0MS4wODYtMjMuNjEzIDU2LjY4MS0xNS43NDIgMTUuNTk0LTM0LjgxMyAyMy4zOTItNTYuOTEzIDIzLjM5MmgtODAuODI4djc1LjM1N3MtLjExOC4wMzMtLjE4NS4wNjdjLTkuNTg2IDIuOTk4LTE5LjYxIDQuMzQ4LTI5LjY1IDQuMzQ4aC0xMC40MjhWMTIwLjkxN2gxMjEuMDkxcTE2LjM0OCAwIDI4LjE1NC0xMS42OTZjNy44NzEtNy43OTggMTIuMTA5LTE3LjA5NCAxMi4xMDktMjguMTlzLTMuOTM1LTIwLjM5My0xMi4xMDktMjguMTkxcS0xMS44MDYtMTEuNjk2LTI4LjE1NC0xMS42OTZoLTgwLjgyOEwxMTguMzgzLjk3NGgxMjEuMDkxYzIyLjEgMCA0MS4xNzEgNy43OTggNTYuOTEzIDIzLjM5M0MzMTIuMTI5IDQwLjI0NSAzMjAgNTkuMTM3IDMyMCA4MS4wMyIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYiIgeDE9IjE5OS40MyIgeDI9IjE5OS40MyIgeTE9IjE2Ny4xMDEiIHkyPSIyMzMuNzQ0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNGQjMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkY5NTAwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJjIiB4MT0iNzEuNzU1IiB4Mj0iNzEuNzU1IiB5MT0iMS41MDgiIHkyPSIyNDAuOTc1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNGQjMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRkY5NTAwIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJkIiB4MT0iMTE3LjcyNyIgeDI9IjMxNy4zMTEiIHkxPSIyNDAuODkyIiB5Mj0iLS44NzEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iI0E3QTdBNyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8Y2xpcFBhdGggaWQ9ImEiPgogICAgICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwaDMyMHYyNDFIMHoiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgo8L3N2Zz4K",
-                  fullWidth: 320,
-                  fullHeight: 241
+                  src: versyTriangle7HCvmehTD3Y,
+                  fullWidth: 167,
+                  fullHeight: 146,
+                  aspectRatio: undefined
                 }}
               />
 
-              <div
-                data-plasmic-name={"links"}
-                data-plasmic-override={overrides.links}
-                className={classNames(projectcss.all, sty.links)}
-              >
-                <PlasmicLink__
+              <div className={classNames(projectcss.all, sty.freeBox__gf9Gk)}>
+                <div
+                  className={classNames(projectcss.all, sty.freeBox___3INsk)}
+                >
+                  <PlasmicImg__
+                    alt={""}
+                    className={classNames(sty.img__dFmP0)}
+                    displayHeight={"100px"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"auto"}
+                    loading={"lazy"}
+                    src={{
+                      src: versylogoWebpAnUVLpSztBa,
+                      fullWidth: 1134,
+                      fullHeight: 454,
+                      aspectRatio: undefined
+                    }}
+                  />
+                </div>
+                <div
                   className={classNames(
                     projectcss.all,
-                    projectcss.a,
                     projectcss.__wab_text,
-                    sty.link__vqlpd
+                    sty.text__y3ZxS
                   )}
-                  href={"https://www.plasmic.app/"}
-                  platform={"react"}
                 >
-                  {"Proejcts"}
-                </PlasmicLink__>
-                <PlasmicLink__
+                  {
+                    "Branding \u00b7 Design System \u00b7 Visual Direction \u00b7 Product Support"
+                  }
+                </div>
+                <div
+                  data-plasmic-name={"details16"}
+                  data-plasmic-override={overrides.details16}
                   className={classNames(
                     projectcss.all,
-                    projectcss.a,
                     projectcss.__wab_text,
-                    sty.link__i5A3
+                    sty.details16
                   )}
-                  href={"https://www.plasmic.app/"}
-                  platform={"react"}
+                  data-project-details={"1"}
                 >
-                  {"About"}
-                </PlasmicLink__>
-                <PlasmicLink__
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.a,
-                    projectcss.__wab_text,
-                    sty.link__wLYgZ
-                  )}
-                  href={"https://www.plasmic.app/"}
-                  platform={"react"}
-                >
-                  {"CV"}
-                </PlasmicLink__>
-                <PlasmicLink__
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.a,
-                    projectcss.__wab_text,
-                    sty.link__ll6G8
-                  )}
-                  href={"https://www.plasmic.app/"}
-                  platform={"react"}
-                >
-                  {"Contact"}
-                </PlasmicLink__>
+                  {
+                    "MyBeppe is not just a food delivery app.\nIt\u2019s a digital translation of a local market experience.\n\nA product where UX, branding, and storytelling work together to build trust \u2014 one interaction at a time."
+                  }
+                </div>
               </div>
+            </section>
+            <section
+              data-plasmic-name={"myBeppe"}
+              data-plasmic-override={overrides.myBeppe}
+              className={classNames(projectcss.all, sty.myBeppe)}
+              data-bg-src={"/projects/beppe-bg.jpg"}
+              data-mockup-src={"/projects/beppe-mock.png"}
+              data-project-id={"my-beppe-1"}
+              onClick={async event => {
+                const $steps = {};
+                $steps["goToMyBeppe"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/projects/my-beppe` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          location.assign(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToMyBeppe"] != null &&
+                  typeof $steps["goToMyBeppe"] === "object" &&
+                  typeof $steps["goToMyBeppe"].then === "function"
+                ) {
+                  $steps["goToMyBeppe"] = await $steps["goToMyBeppe"];
+                }
+              }}
+              title={"Testo"}
+            >
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__wqkHe)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"33%"}
+                loading={"lazy"}
+                src={{
+                  src: myBeppeWgjwaozifOlk,
+                  fullWidth: 1536,
+                  fullHeight: 1024,
+                  aspectRatio: undefined
+                }}
+              />
+
+              <div className={classNames(projectcss.all, sty.freeBox__fL3T4)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__e2TtT
+                  )}
+                >
+                  {"MyBeppe"}
+                </div>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__l8YYd
+                  )}
+                >
+                  {
+                    "Case Study \u00b7 UI Design \u00b7 UX Research \u00b7 Visual Identity"
+                  }
+                </div>
+                <div
+                  data-plasmic-name={"details17"}
+                  data-plasmic-override={overrides.details17}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.details17
+                  )}
+                  data-project-details={"1"}
+                >
+                  {
+                    "MyBeppe is not just a food delivery app.\nIt\u2019s a digital translation of a local market experience.\n\nA product where UX, branding, and storytelling work together to build trust \u2014 one interaction at a time."
+                  }
+                </div>
+              </div>
+            </section>
+            <ImageReveal
+              data-plasmic-name={"imageReveal"}
+              data-plasmic-override={overrides.imageReveal}
+              className={classNames("__wab_instance", sty.imageReveal)}
+            />
+          </section>
+          <section
+            data-plasmic-name={"about"}
+            data-plasmic-override={overrides.about}
+            className={classNames(projectcss.all, sty.about)}
+            id={"About"}
+          >
+            <AboutHorizontal2
+              data-plasmic-name={"aboutHorizontal2"}
+              data-plasmic-override={overrides.aboutHorizontal2}
+              className={classNames("__wab_instance", sty.aboutHorizontal2)}
+            />
+          </section>
+          <SkillsSection
+            data-plasmic-name={"skillsSection"}
+            data-plasmic-override={overrides.skillsSection}
+            className={classNames("__wab_instance", sty.skillsSection)}
+          />
+
+          <AiSys
+            data-plasmic-name={"aiSys"}
+            data-plasmic-override={overrides.aiSys}
+            className={classNames("__wab_instance", sty.aiSys)}
+          />
+
+          <section
+            data-plasmic-name={"contact"}
+            data-plasmic-override={overrides.contact}
+            className={classNames(projectcss.all, sty.contact)}
+            id={"Contact"}
+          >
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__kEoi8
+              )}
+            >
+              {"CONTACT"}
             </div>
-          </div>
+          </section>
           <CookieConsent
             data-plasmic-name={"cookieConsent"}
             data-plasmic-override={overrides.cookieConsent}
@@ -260,137 +516,11 @@ function PlasmicHomepage__RenderFunc(props) {
             ]}
           />
 
-          <section
-            data-plasmic-name={"hero"}
-            data-plasmic-override={overrides.hero}
-            className={classNames(projectcss.all, sty.hero)}
-          >
-            <ParticleHero
-              data-plasmic-name={"particleHero"}
-              data-plasmic-override={overrides.particleHero}
-              className={classNames("__wab_instance", sty.particleHero)}
-            />
-
-            <h1
-              className={classNames(
-                projectcss.all,
-                projectcss.h1,
-                projectcss.__wab_text,
-                sty.h1__gIwWd
-              )}
-            >
-              {hasVariant(globalVariants, "screen", "mobileOnly")
-                ? "Architect of Experience\nProduct Shaper\nSignal Crafter"
-                : "Architect of Experience \u00b7 Product Shaper \u00b7 Signal Crafter"}
-            </h1>
-            <h1
-              className={classNames(
-                projectcss.all,
-                projectcss.h1,
-                projectcss.__wab_text,
-                sty.h1__q6WJc
-              )}
-            >
-              {hasVariant(globalVariants, "screen", "mobileOnly")
-                ? "Designing complex systems that teams can trust, use, and evolve. Turning complexity into tools people can actually lead with."
-                : "Designing complex systems that teams can trust, use, and evolve. Turning complexity into tools people can actually lead with."}
-            </h1>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text___7XvAn
-              )}
-            >
-              {"SCROLL TO EXPLORE \u2193"}
-            </div>
-          </section>
-          <section
-            data-plasmic-name={"projects"}
-            data-plasmic-override={overrides.projects}
-            className={classNames(projectcss.all, sty.projects)}
-          >
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__zVWtI
-              )}
-            >
-              {"PROJECTS"}
-            </div>
-            <section
-              data-plasmic-name={"project"}
-              data-plasmic-override={overrides.project}
-              className={classNames(projectcss.all, sty.project)}
-              data-bg-src={"/projects/beppe-bg.jpg"}
-              data-mockup-src={"/projects/beppe-mock.png"}
-              data-project-id={"my-beppe-1"}
-              title={"Testo"}
-            >
-              <div
-                data-plasmic-name={"freeBox"}
-                data-plasmic-override={overrides.freeBox}
-                className={classNames(projectcss.all, sty.freeBox)}
-              >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__jyDyS
-                  )}
-                >
-                  {"My Beppe"}
-                </div>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__y3ZxS
-                  )}
-                >
-                  {"UX Design CASE STUDY"}
-                </div>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__sfKf
-                  )}
-                >
-                  {
-                    "This is the Description of a project. Leaving this one liner as a placeholder for the moment."
-                  }
-                </div>
-                <div
-                  data-plasmic-name={"details"}
-                  data-plasmic-override={overrides.details}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.details
-                  )}
-                  data-project-details={"1"}
-                >
-                  {
-                    "This is the Description of a project. Leaving this one liner as a placeholder for the moment."
-                  }
-                </div>
-                <ProjectReveal
-                  data-plasmic-name={"projectReveal"}
-                  data-plasmic-override={overrides.projectReveal}
-                  className={classNames("__wab_instance", sty.projectReveal)}
-                />
-              </div>
-              <ChevronDownIcon
-                data-plasmic-name={"svg"}
-                data-plasmic-override={overrides.svg}
-                className={classNames(projectcss.all, sty.svg)}
-                data-project-chevron={"1"}
-                role={"img"}
-              />
-            </section>
-          </section>
+          <SiteFooter
+            data-plasmic-name={"siteFooter"}
+            data-plasmic-override={overrides.siteFooter}
+            className={classNames("__wab_instance", sty.siteFooter)}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -398,44 +528,52 @@ function PlasmicHomepage__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: [
-    "root",
-    "header",
-    "wrapper",
-    "img",
-    "links",
-    "cookieConsent",
+  homepage: [
+    "homepage",
+    "siteHeader",
     "hero",
+    "heroTopography",
     "particleHero",
     "projects",
-    "project",
-    "freeBox",
-    "details",
-    "projectReveal",
-    "svg"
+    "versy",
+    "details16",
+    "myBeppe",
+    "details17",
+    "imageReveal",
+    "about",
+    "aboutHorizontal2",
+    "skillsSection",
+    "aiSys",
+    "contact",
+    "cookieConsent",
+    "siteFooter"
   ],
 
-  header: ["header", "wrapper", "img", "links"],
-  wrapper: ["wrapper", "img", "links"],
-  img: ["img"],
-  links: ["links"],
-  cookieConsent: ["cookieConsent"],
-  hero: ["hero", "particleHero"],
+  siteHeader: ["siteHeader"],
+  hero: ["hero", "heroTopography", "particleHero"],
+  heroTopography: ["heroTopography"],
   particleHero: ["particleHero"],
   projects: [
     "projects",
-    "project",
-    "freeBox",
-    "details",
-    "projectReveal",
-    "svg"
+    "versy",
+    "details16",
+    "myBeppe",
+    "details17",
+    "imageReveal"
   ],
 
-  project: ["project", "freeBox", "details", "projectReveal", "svg"],
-  freeBox: ["freeBox", "details", "projectReveal"],
-  details: ["details"],
-  projectReveal: ["projectReveal"],
-  svg: ["svg"]
+  versy: ["versy", "details16"],
+  details16: ["details16"],
+  myBeppe: ["myBeppe", "details17"],
+  details17: ["details17"],
+  imageReveal: ["imageReveal"],
+  about: ["about", "aboutHorizontal2"],
+  aboutHorizontal2: ["aboutHorizontal2"],
+  skillsSection: ["skillsSection"],
+  aiSys: ["aiSys"],
+  contact: ["contact"],
+  cookieConsent: ["cookieConsent"],
+  siteFooter: ["siteFooter"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -457,7 +595,7 @@ function makeNodeComponent(nodeName) {
       forNode: nodeName
     });
   };
-  if (nodeName === "root") {
+  if (nodeName === "homepage") {
     func.displayName = "PlasmicHomepage";
   } else {
     func.displayName = `PlasmicHomepage.${nodeName}`;
@@ -467,32 +605,34 @@ function makeNodeComponent(nodeName) {
 
 export const PlasmicHomepage = Object.assign(
   // Top-level PlasmicHomepage renders the root element
-  makeNodeComponent("root"),
+  makeNodeComponent("homepage"),
   {
     // Helper components rendering sub-elements
-    header: makeNodeComponent("header"),
-    wrapper: makeNodeComponent("wrapper"),
-    img: makeNodeComponent("img"),
-    links: makeNodeComponent("links"),
-    cookieConsent: makeNodeComponent("cookieConsent"),
+    siteHeader: makeNodeComponent("siteHeader"),
     hero: makeNodeComponent("hero"),
+    heroTopography: makeNodeComponent("heroTopography"),
     particleHero: makeNodeComponent("particleHero"),
     projects: makeNodeComponent("projects"),
-    project: makeNodeComponent("project"),
-    freeBox: makeNodeComponent("freeBox"),
-    details: makeNodeComponent("details"),
-    projectReveal: makeNodeComponent("projectReveal"),
-    svg: makeNodeComponent("svg"),
+    versy: makeNodeComponent("versy"),
+    details16: makeNodeComponent("details16"),
+    myBeppe: makeNodeComponent("myBeppe"),
+    details17: makeNodeComponent("details17"),
+    imageReveal: makeNodeComponent("imageReveal"),
+    about: makeNodeComponent("about"),
+    aboutHorizontal2: makeNodeComponent("aboutHorizontal2"),
+    skillsSection: makeNodeComponent("skillsSection"),
+    aiSys: makeNodeComponent("aiSys"),
+    contact: makeNodeComponent("contact"),
+    cookieConsent: makeNodeComponent("cookieConsent"),
+    siteFooter: makeNodeComponent("siteFooter"),
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,
     internalArgProps: PlasmicHomepage__ArgProps,
-    // Page metadata
-    pageMetadata: {
-      title: "Homepage",
-      description: "",
-      ogImageSrc: "",
-      canonical: ""
-    }
+    pageMetadata: generateDynamicMetadata(wrapQueriesWithLoadingProxy({}), {
+      pagePath: "/",
+      searchParams: {},
+      params: {}
+    })
   }
 );
 

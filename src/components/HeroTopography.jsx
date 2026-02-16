@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const CONFIG = {
     src: "/Topography.svg",
@@ -19,7 +19,7 @@ const CONFIG = {
         Silhouette: 30,
 
         "Details-Dotted": 6,
-        Last: 0, // tienilo fermo se è una cornice/finale
+        Last: 0, // tienilo fermo se ï¿½ una cornice/finale
     },
 
     // Slow continuous motion
@@ -46,7 +46,7 @@ function clamp(n, a, b) {
     return Math.max(a, Math.min(b, n));
 }
 
-export default function HeroTopography({ className = "", style }) {
+export function HeroTopography({ className = "", style }) {
     const rootRef = useRef(null);
     const svgWrapRef = useRef(null);
     const rafRef = useRef(null);
@@ -211,3 +211,5 @@ export default function HeroTopography({ className = "", style }) {
         </div>
     );
 }
+
+export default HeroTopography;

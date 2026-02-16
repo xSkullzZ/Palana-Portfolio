@@ -85,6 +85,7 @@ function PlasmicSwitch2__RenderFunc(props) {
     $props,
     $ctx,
     $queries: {},
+    $q: {},
     $refs
   });
   const styleTokensClassNames = _useStyleTokens();

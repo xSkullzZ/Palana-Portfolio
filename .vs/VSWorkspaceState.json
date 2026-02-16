@@ -3,8 +3,8 @@
     "",
     "\\src",
     "\\src\\components",
+    "\\src\\components\\plasmic",
     "\\src\\hooks"
   ],
-  "SelectedNode": "\\src\\components\\AboutHorizontal.jsx",
   "PreviewInSolutionExplorer": false
 }

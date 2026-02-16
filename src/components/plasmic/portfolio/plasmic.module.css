@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Inconsolata%3Aital%2Cwght%400%2C200%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Lexend+Giga%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Inter%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Inconsolata%3Aital%2Cwght%400%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Mr+Dafoe%3Aital%2Cwght%400%2C400&family=Inter%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Lexend+Giga%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Lexend+Exa%3Aital%2Cwght%400%2C100%3B0%2C200%3B0%2C300%3B0%2C400%3B0%2C500%3B0%2C600%3B0%2C700&display=swap");
 
 .plasmic_tokens {
   --token-NjJ8MH5aK_k2: var(--token-OJSN3W0Myvht);
@@ -119,8 +119,13 @@
   --plasmic-token-basic-input-background: var(--token-oCOu-insqasu);
   --token-QbRh7THi0_v5: #0a0a0a80;
   --plasmic-token-basic-overlay-background: var(--token-QbRh7THi0_v5);
-  --token-bDvfb8QXlDbd: var(--token-c-y4Lbl8pLuG);
+  --token-bDvfb8QXlDbd: #1717175c;
   --plasmic-token-basic-container-background-dark: var(--token-bDvfb8QXlDbd);
+}
+
+.plasmic_tokens_override.plasmic_tokens_override {
+  --token-C9piUAW509aW: #00000080;
+  --cc-btn-primary-hover-bg: var(--token-C9piUAW509aW);
 }
 
 .plasmic_tokens {

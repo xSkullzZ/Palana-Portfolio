@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const CONFIG = {
     scrollVhDesktop: 600,
@@ -22,6 +22,29 @@ const CONFIG = {
     bgSrc: "/about/about-bg.webp",
     midSrc: null,
     frontSrc: null,
+    characters: [
+        {
+            path: "/about/me1.webp",
+            position: 600,
+            delayMs: 0,
+            skipAnimation: false,
+        },
+        {
+            path: "/about/step-2.png",
+            position: 1800,
+            delayMs: 100,
+            skipAnimation: false,
+        },
+        {
+            path: "/about/step-3.png",
+            position: 3200,
+            delayMs: 200,
+            skipAnimation: false,
+        },
+    ],
+    characterHeightVh: 70,
+    characterBottomVh: 0,
+    characterBufferPx: 220,
 };
 
 function getScrollVh() {
@@ -37,7 +60,7 @@ function clamp(n, a, b) {
     return Math.max(a, Math.min(b, n));
 }
 
-export default function AboutHorizontal({ className = "" }) {
+export function AboutHorizontal({ className = "" }) {
     const sectionRef = useRef(null);
     const trackRef = useRef(null);
     const rafRef = useRef(null);
@@ -113,6 +136,11 @@ export default function AboutHorizontal({ className = "" }) {
     const xMid = -progress * maxShift * CONFIG.layers.mid;
     const xFront = -progress * maxShift * CONFIG.layers.front;
     const xPeople = -progress * maxShift * CONFIG.layers.people;
+    const xCharacters = -progress * maxShift * CONFIG.layers.people;
+
+    const viewportW = typeof window !== "undefined" ? window.innerWidth : 0;
+    const windowLeft = progress * maxShift;
+    const windowRight = windowLeft + viewportW;
 
     return (
         <section
@@ -158,6 +186,43 @@ export default function AboutHorizontal({ className = "" }) {
                         {/* <img src="/about/me-1.png" className="absolute bottom-0 left-[20vw] h-[70vh]" /> */}
                     </div>
 
+                    {/* CHARACTERS */}
+                    <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{ transform: `translate3d(${xCharacters}px,0,0)` }}
+                    >
+                        {CONFIG.characters.map((item, index) => {
+                            const isVisible =
+                                item.skipAnimation ||
+                                (item.position >= windowLeft - CONFIG.characterBufferPx &&
+                                    item.position <= windowRight + CONFIG.characterBufferPx);
+                            return (
+                                <img
+                                    key={`${item.path}-${index}`}
+                                    src={item.path}
+                                    alt=""
+                                    draggable={false}
+                                    className="absolute"
+                                    style={{
+                                        left: item.position,
+                                        bottom: `${CONFIG.characterBottomVh}vh`,
+                                        height: `${CONFIG.characterHeightVh}vh`,
+                                        opacity: isVisible ? 1 : 0,
+                                        transform: item.skipAnimation
+                                            ? "translate3d(0,0,0)"
+                                            : isVisible
+                                                ? "translate3d(0,0,0)"
+                                                : "translate3d(0,24px,0)",
+                                        transition: item.skipAnimation
+                                            ? "none"
+                                            : `opacity 360ms ease ${item.delayMs || 0}ms, transform 420ms ease ${item.delayMs || 0}ms`,
+                                        willChange: item.skipAnimation ? "auto" : "opacity, transform",
+                                    }}
+                                />
+                            );
+                        })}
+                    </div>
+
                     {/* FRONT (maschera tagli / transizioni) */}
                     {CONFIG.frontSrc && (
                         <img
@@ -195,3 +260,5 @@ export default function AboutHorizontal({ className = "" }) {
         </section>
     );
 }
+
+export default AboutHorizontal;

@@ -85,14 +85,14 @@ function PlasmicModal__RenderFunc(props) {
         path: "ariaModal.isOpen",
         type: "private",
         variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => true,
+        initFunc: ({ $props, $state, $queries, $q, $ctx }) => true,
         refName: "ariaModal"
       },
       {
         path: "noTrigger",
         type: "private",
         variableType: "variant",
-        initFunc: ({ $props, $state, $queries, $ctx }) => $props.noTrigger
+        initFunc: ({ $props, $state, $queries, $q, $ctx }) => $props.noTrigger
       }
     ],
 
@@ -102,6 +102,7 @@ function PlasmicModal__RenderFunc(props) {
     $props,
     $ctx,
     $queries: {},
+    $q: {},
     $refs
   });
   const styleTokensClassNames = _useStyleTokens();

@@ -19,14 +19,14 @@ const DEFAULT_TEXTS = [
 const DEFAULTS = {
     background: "transparent", // set "#000" if you want the component to paint background
     particleColor: "#FFBB33",
-    particleSize: 1.7,
-    spacing: 5,
+    particleSize: 1.2,
+    spacing: 6,
     alphaThreshold: 128,
 
     mouseRadius: 80,
     densityMin: 1,
-    densityMax: 31,
-    transitionSpeed: 0.10,
+    densityMax: 32,
+    transitionSpeed: 0.20,
 
     fontFamily:
         "Outfit, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
@@ -38,7 +38,35 @@ const DEFAULTS = {
     dprMax: 2,
 };
 
-export default function ParticleHero({
+const PARTICLE_SIZE_SCALE = {
+    baseWidth: 1200,
+    minScale: 0.75,
+    maxScale: 1.25,
+};
+
+const RESPONSIVE_CONFIG = {
+    mobileBreakpoint: 768,
+    desktop: {
+        textMaxWidthRatio: 0.92,
+        textMaxHeightRatio: 0.6,
+        lineHeight: 1.1,
+    },
+    mobile: {
+        particleSize: 1.1,
+        spacing: 3,
+        baseFontSize: 46,
+        minFontSize: 18,
+        textMaxWidthRatio: 0.9,
+        textMaxHeightRatio: 0.75,
+        lineHeight: 1.2,
+    },
+};
+
+function clampValue(n, min, max) {
+    return Math.max(min, Math.min(max, n));
+}
+
+export function ParticleHero({
     // Plasmic styling hooks:
     className,
     style,
@@ -71,6 +99,7 @@ export default function ParticleHero({
     const [index, setIndex] = useState(0);
     const particlesRef = useRef([]);
     const mouseRef = useRef({ x: -9999, y: -9999 });
+    const responsiveRef = useRef(null);
 
     const safeTexts = useMemo(
         () => (Array.isArray(texts) && texts.length ? texts : DEFAULT_TEXTS),
@@ -90,10 +119,35 @@ export default function ParticleHero({
 
         const getDpr = () => Math.min(window.devicePixelRatio || 1, dprMax);
 
+        const getResponsiveConfig = (isMobile, currentWidth) => {
+            const baseConfig = {
+                particleSize,
+                spacing,
+                baseFontSize,
+                minFontSize,
+            };
+            const responsive = isMobile
+                ? RESPONSIVE_CONFIG.mobile
+                : RESPONSIVE_CONFIG.desktop;
+            const baseSize =
+                typeof responsive.particleSize === "number"
+                    ? responsive.particleSize
+                    : baseConfig.particleSize;
+            const scale = clampValue(
+                (currentWidth || 1) / PARTICLE_SIZE_SCALE.baseWidth,
+                PARTICLE_SIZE_SCALE.minScale,
+                PARTICLE_SIZE_SCALE.maxScale
+            );
+            return { ...baseConfig, ...responsive, particleSize: baseSize * scale };
+        };
+
         function resizeToParent() {
             const rect = el.getBoundingClientRect();
             width = Math.max(1, Math.floor(rect.width));
             height = Math.max(1, Math.floor(rect.height));
+
+            const isMobile = width < RESPONSIVE_CONFIG.mobileBreakpoint;
+            responsiveRef.current = getResponsiveConfig(isMobile, width);
 
             const dpr = getDpr();
             canvas.width = Math.floor(width * dpr);
@@ -104,14 +158,14 @@ export default function ParticleHero({
         }
 
         class Particle {
-            constructor(x, y, tx, ty) {
+            constructor(x, y, tx, ty, size) {
                 this.x = x;
                 this.y = y;
                 this.targetX = tx;
                 this.targetY = ty;
                 this.baseX = tx;
                 this.baseY = ty;
-                this.size = particleSize;
+                this.size = size;
                 this.density = Math.random() * (densityMax - densityMin) + densityMin;
                 this.used = false;
             }
@@ -144,6 +198,26 @@ export default function ParticleHero({
             }
         }
 
+        function wrapLines(ctx2d, text, maxWidth) {
+            const words = text.split(" ");
+            const lines = [];
+            let line = "";
+
+            for (let i = 0; i < words.length; i++) {
+                const word = words[i];
+                const test = line ? `${line} ${word}` : word;
+                const metrics = ctx2d.measureText(test);
+                if (metrics.width > maxWidth && line) {
+                    lines.push(line);
+                    line = word;
+                } else {
+                    line = test;
+                }
+            }
+            if (line) lines.push(line);
+            return lines;
+        }
+
         function drawTextToBuffer(text) {
             // background (optional)
             ctx.clearRect(0, 0, width, height);
@@ -152,20 +226,37 @@ export default function ParticleHero({
                 ctx.fillRect(0, 0, width, height);
             }
 
-            let fontSize = baseFontSize;
+            const cfg = responsiveRef.current || getResponsiveConfig(false);
+            let fontSize = cfg.baseFontSize;
+            const maxWidth = width * cfg.textMaxWidthRatio;
+            const maxHeight = height * cfg.textMaxHeightRatio;
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillStyle = "#FFBB33";
 
-            while (fontSize > minFontSize) {
+            while (fontSize > cfg.minFontSize) {
                 ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
-                const w = ctx.measureText(text).width;
-                if (w <= width * 0.92) break;
-                fontSize -= 4;
+                const lines = wrapLines(ctx, text, maxWidth);
+                if (!lines.length) break;
+                const lineHeight = fontSize * cfg.lineHeight;
+                const totalHeight = lines.length * lineHeight;
+                const widest = lines.reduce(
+                    (max, line) => Math.max(max, ctx.measureText(line).width),
+                    0
+                );
+                if (widest <= maxWidth && totalHeight <= maxHeight) break;
+                fontSize -= 2;
             }
 
             ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
-            ctx.fillText(text, width / 2, height / 2);
+            const lines = wrapLines(ctx, text, maxWidth);
+            if (!lines.length) return;
+            const lineHeight = fontSize * cfg.lineHeight;
+            const totalHeight = lines.length * lineHeight;
+            const startY = height / 2 - totalHeight / 2 + lineHeight / 2;
+            for (let i = 0; i < lines.length; i++) {
+                ctx.fillText(lines[i], width / 2, startY + i * lineHeight);
+            }
         }
 
         function createParticlesFromText(text) {
@@ -173,12 +264,15 @@ export default function ParticleHero({
 
             const img = ctx.getImageData(0, 0, width, height);
             const data = img.data;
+            const cfg = responsiveRef.current || getResponsiveConfig(false);
+            const step = Math.max(1, cfg.spacing);
+            const pSize = cfg.particleSize;
 
             particlesRef.current.forEach((p) => (p.used = false));
             const next = [];
 
-            for (let y = 0; y < height; y += spacing) {
-                for (let x = 0; x < width; x += spacing) {
+            for (let y = 0; y < height; y += step) {
+                for (let x = 0; x < width; x += step) {
                     const i = (y * width + x) * 4;
                     const alpha = data[i + 3];
                     if (alpha > alphaThreshold) {
@@ -186,11 +280,18 @@ export default function ParticleHero({
                         if (existing) {
                             existing.targetX = x;
                             existing.targetY = y;
+                            existing.size = pSize;
                             existing.used = true;
                             next.push(existing);
                         } else {
                             next.push(
-                                new Particle(Math.random() * width, Math.random() * height, x, y)
+                                new Particle(
+                                    Math.random() * width,
+                                    Math.random() * height,
+                                    x,
+                                    y,
+                                    pSize
+                                )
                             );
                         }
                     }
@@ -250,7 +351,6 @@ export default function ParticleHero({
             el.removeEventListener("mouseleave", onMouseLeave);
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         index,
         safeTexts,
@@ -294,3 +394,5 @@ export default function ParticleHero({
         </div>
     );
 }
+
+export default ParticleHero;

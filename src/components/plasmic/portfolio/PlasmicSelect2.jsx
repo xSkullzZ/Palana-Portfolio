@@ -98,7 +98,7 @@ function PlasmicSelect2__RenderFunc(props) {
         path: "type",
         type: "private",
         variableType: "variant",
-        initFunc: ({ $props, $state, $queries, $ctx }) => $props.type
+        initFunc: ({ $props, $state, $queries, $q, $ctx }) => $props.type
       }
     ],
 
@@ -108,6 +108,7 @@ function PlasmicSelect2__RenderFunc(props) {
     $props,
     $ctx,
     $queries: {},
+    $q: {},
     $refs
   });
   const styleTokensClassNames = _useStyleTokens();

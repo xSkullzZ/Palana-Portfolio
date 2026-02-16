@@ -7,14 +7,20 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist --no-history"
   },
   "dependencies": {
-    "@plasmicapp/host": "^1.0.234",
+    "@plasmicapp/host": "1.0.237",
     "@plasmicapp/loader-react": "^1.0.409",
-    "@plasmicapp/react-web": "^0.2.413",
+    "@plasmicapp/react-web": "^0.2.421",
     "@plasmicpkgs/plasmic-basic-components": "^0.0.264",
     "@plasmicpkgs/react-aria": "^0.0.163",
+    "@plasmicpkgs/react-awesome-reveal": "^3.8.238",
+    "@plasmicpkgs/react-parallax-tilt": "^0.0.236",
+    "@plasmicpkgs/react-scroll-parallax": "^0.0.244",
+    "@plasmicpkgs/react-youtube": "^7.13.243",
     "@plasmicpkgs/vanilla-cookieconsent": "^0.0.12",
     "@tailwindcss/vite": "^4.1.18",
     "clsx": "^2.1.1",
@@ -24,11 +30,12 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
+    "react-router-dom": "^7.13.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@plasmicapp/cli": "^0.1.352",
+    "@plasmicapp/cli": "^0.1.356",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.2",
@@ -36,9 +43,13 @@
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
+    "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "vite": "^7.2.4"
+  },
+  "overrides": {
+    "@plasmicapp/host": "1.0.237"
   }
 }

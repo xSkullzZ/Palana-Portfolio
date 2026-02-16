@@ -1,47 +1,101 @@
 ﻿// src/components/ImageReveal.jsx
 import { ArrowUpRight } from 'lucide-react';
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from '../hooks/use-media-query';
+
+const DEFAULTS = {
+  logoWidth: 33,
+  revealingTime: 220,
+  animationTime: 600,
+  animationType: "zoom",
+  wipeEnabled: true,
+  wipeDuration: 1200,
+  wipeAngle: -12,
+  wipeColor: "rgba(0, 0, 0, 0.9)",
+};
 
 const projects = [
   {
     id: 1,
-    title: 'Project 1',
-    cursorImage: 'https://images.unsplash.com/photo-1682806816936-c3ac11f65112?q=80&w=1274&auto=format&fit=crop',
-    backgroundImage: 'https://images.unsplash.com/photo-1682806816936-c3ac11f65112?q=80&w=2000&auto=format&fit=crop',
-    link: '/projects/project-1',
+    title: "MyBeppe",
+    headerImage: "/MyBeppe/typography.svg",
+    subheader: "Case Study · UI Design · UX Research · Visual Identity",
+    summary: `A fresh-food delivery app redesigned to recreate the trust and warmth of a local market.
+Based on team research, I crafted a new interface system that blends emotional storytelling with functional clarity.`,
+    logoImage: "/MyBeppe/logo.png",
+    cursorImage: "/MyBeppe/BeppeHomepage.png",
+    backgroundImage: "/MyBeppe/bg.webp",
+    link: "/project/my-beppe",
+    animationType: "zoom",
+    overlayColor: "rgba(74, 222, 128, 0.16)",
   },
   {
     id: 2,
-    title: 'Project 2',
-    cursorImage: 'https://images.unsplash.com/photo-1681063762354-d542c03bbfc5?q=80&w=1274&auto=format&fit=crop',
-    backgroundImage: 'https://images.unsplash.com/photo-1681063762354-d542c03bbfc5?q=80&w=2000&auto=format&fit=crop',
-    link: '/projects/project-2',
+    title: "Versy",
+    headerImage: "/Versy/Versylogo.webp",
+      subheader: "Brand Identity · Design System · UI Foundations · Product Thinking",
+      summary: `A brand built for the future of digital experiences.
+I created the entire visual identity and design system, laying the foundation for a product that evolved across trends into a mature, enterprise-ready solution.`,
+    logoImage: "/Versy/VersyTriangleWhite.svg",
+    cursorImage: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+    backgroundVideo: "/Versy/versydemo.mp4",
+    backgroundImage: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=2000&auto=format&fit=crop",
+    link: "/project/versy",
+    animationType: "fade-left",
+    overlayColor: "rgba(129, 140, 248, 0.18)",
   },
-  {
-    id: 3,
-    title: 'Project 3',
-    cursorImage: 'https://images.unsplash.com/photo-1679640034489-a6db1f096b70?q=80&w=1274&auto=format&fit=crop',
-    backgroundImage: 'https://images.unsplash.com/photo-1679640034489-a6db1f096b70?q=80&w=2000&auto=format&fit=crop',
-    link: '/projects/project-3',
-  },
-  {
-    id: 4,
-    title: 'Project 4',
-    cursorImage: 'https://images.unsplash.com/photo-1679482451632-b2e126da7142?q=80&w=1274&auto=format&fit=crop',
-    backgroundImage: 'https://images.unsplash.com/photo-1679482451632-b2e126da7142?q=80&w=2000&auto=format&fit=crop',
-    link: '/projects/project-4',
-  },
+  // {
+  //   id: 3,
+  //   headerImage: "/projects/portfolio-title.svg",
+  //   subheader: "Brand Systems · Visual Direction",
+  //   summary:
+  //     "A modular identity that scales across web, product, and motion with a consistent tone.",
+  //   logoImage: "/projects/portfolio-logo.png",
+  //   cursorImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
+  //   backgroundImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2000&auto=format&fit=crop",
+  //   link: "/projects/project-3",
+  //   animationType: "fade-up",
+  // },
+  // {
+  //   id: 4,
+  //   headerImage: "/projects/sound-title.svg",
+  //   subheader: "Sound Design · Motion · Craft",
+  //   summary:
+  //     "A sonic identity system crafted to guide attention and deepen narrative.",
+  //   logoImage: "/projects/sound-logo.png",
+  //   cursorImage: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1200&auto=format&fit=crop",
+  //   backgroundImage: "https://images.unsplash.com/photo-1485579149621-3123dd979885?q=80&w=2000&auto=format&fit=crop",
+  //   link: "/projects/project-4",
+  //   animationType: "rocket-left",
+  // },
 ];
 
-const ImageReveal = () => {
+export function ImageReveal({
+  className = "",
+  style,
+  logoWidth = DEFAULTS.logoWidth,
+  revealingTime = DEFAULTS.revealingTime,
+  animationTime = DEFAULTS.animationTime,
+  animationType = DEFAULTS.animationType,
+  wipeEnabled = DEFAULTS.wipeEnabled,
+  wipeDuration = DEFAULTS.wipeDuration,
+  wipeAngle = DEFAULTS.wipeAngle,
+  wipeColor = DEFAULTS.wipeColor,
+  items = projects,
+}) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredProject, setHoveredProject] = useState(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [cursorOpacity, setCursorOpacity] = useState(0);
   const [cursorScale, setCursorScale] = useState(0.5);
+  const [cursorTilt, setCursorTilt] = useState({ x: 0, y: 0 });
+  const [bgOffset, setBgOffset] = useState({ x: 0, y: 0 });
+  const [headerErrors, setHeaderErrors] = useState({});
+  const [sectionEntered, setSectionEntered] = useState(false);
   const [backgroundOpacity, setBackgroundOpacity] = useState(1);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   
@@ -52,25 +106,53 @@ const ImageReveal = () => {
   // Preload images
   useEffect(() => {
     let loadedCount = 0;
-    const totalImages = projects.length * 2;
+    const totalImages = items.reduce((sum, project) => {
+      const base = 0
+        + (project.backgroundImage ? 1 : 0)
+        + (project.cursorImage ? 1 : 0)
+        + (project.logoImage ? 1 : 0);
+      const video = project.backgroundVideo ? 1 : 0;
+      return sum + base + video;
+    }, 0);
 
-    projects.forEach(project => {
-      const bgImg = new Image();
-      const cursorImg = new Image();
+    if (totalImages === 0) {
+      setImagesLoaded(true);
+      return;
+    }
+
+    items.forEach(project => {
+      const bgImg = project.backgroundImage ? new Image() : null;
+      const cursorImg = project.cursorImage ? new Image() : null;
+      const logoImg = project.logoImage ? new Image() : null;
+      const bgVideo = project.backgroundVideo ? document.createElement("video") : null;
       
-      bgImg.onload = () => {
+      const handleLoaded = () => {
         loadedCount++;
-        if (loadedCount === totalImages) setImagesLoaded(true);
+        if (loadedCount >= totalImages) setImagesLoaded(true);
       };
-      cursorImg.onload = () => {
-        loadedCount++;
-        if (loadedCount === totalImages) setImagesLoaded(true);
-      };
-      
-      bgImg.src = project.backgroundImage;
-      cursorImg.src = project.cursorImage;
+
+      if (bgImg) {
+        bgImg.onload = handleLoaded;
+        bgImg.onerror = handleLoaded;
+        bgImg.src = project.backgroundImage;
+      }
+      if (cursorImg) {
+        cursorImg.onload = handleLoaded;
+        cursorImg.onerror = handleLoaded;
+        cursorImg.src = project.cursorImage;
+      }
+      if (logoImg) {
+        logoImg.onload = handleLoaded;
+        logoImg.onerror = handleLoaded;
+        logoImg.src = project.logoImage;
+      }
+      if (bgVideo) {
+        bgVideo.onloadeddata = handleLoaded;
+        bgVideo.onerror = handleLoaded;
+        bgVideo.src = project.backgroundVideo;
+      }
     });
-  }, []);
+  }, [items]);
 
   // Mouse move handling
   const handleMouseMove = useCallback((e) => {
@@ -84,6 +166,13 @@ const ImageReveal = () => {
 
     setCursorPosition({ x: newX, y: newY });
     prevCursorPosition.current = { x: newX, y: newY };
+
+    const vw = window.innerWidth || 1;
+    const vh = window.innerHeight || 1;
+    const nx = (clientX / vw - 0.5) * 2;
+    const ny = (clientY / vh - 0.5) * 2;
+    setCursorTilt({ x: ny * 14, y: nx * 22 });
+    setBgOffset({ x: -nx * 16, y: -ny * 12 });
   }, []);
 
   useEffect(() => {
@@ -102,6 +191,23 @@ const ImageReveal = () => {
     };
   }, [handleMouseMove]);
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSectionEntered(true);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   // REMOVED: All scroll hijacking logic for snap-scroll compatibility
 
   const handleProjectHover = useCallback((project, index) => {
@@ -113,12 +219,12 @@ const ImageReveal = () => {
       setTimeout(() => {
         setCurrentIndex(index);
         setBackgroundOpacity(1);
-      }, 200);
+      }, revealingTime);
     }
 
     setCursorOpacity(1);
     setCursorScale(1);
-  }, [currentIndex]);
+  }, [currentIndex, revealingTime]);
 
   const handleMouseLeaveProject = useCallback(() => {
     setIsHovering(false);
@@ -128,15 +234,22 @@ const ImageReveal = () => {
   }, []);
 
   const handleProjectClick = useCallback((link) => {
-    window.location.href = link;
+    if (!link) return;
+    navigate(link);
+  }, [navigate]);
+
+  const activeProject = hoveredProject || items[currentIndex];
+  const safeLogoWidth = Math.min(60, Math.max(18, logoWidth));
+
+  const handleHeaderError = useCallback((id) => {
+    setHeaderErrors((prev) => ({ ...prev, [id]: true }));
   }, []);
 
-  const activeProject = hoveredProject || projects[currentIndex];
-
   return (
-    <section 
+    <section
       ref={sectionRef}
-      className='relative w-full h-screen flex items-end overflow-hidden'
+      className={`relative w-full h-screen flex items-end overflow-hidden ${className}`}
+      style={style}
     >
       {/* Loading State */}
       {!imagesLoaded && (
@@ -147,67 +260,159 @@ const ImageReveal = () => {
 
       {/* Background Image with Dissolve Effect */}
       {activeProject && imagesLoaded && (
-        // Lowered to z-[-10] so it won't cover hero/video sections
-        <div className="fixed inset-0 pointer-events-none z-[-10]">
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-500 ease-in-out"
-            style={{
-              backgroundImage: `url(${activeProject.backgroundImage})`,
-              opacity: backgroundOpacity * 0.4,
-            }}
-          />
+        <div className="absolute inset-0 pointer-events-none z-0">
+          {activeProject.backgroundVideo ? (
+            <video
+              className="absolute inset-0 w-full h-full object-cover transition-opacity ease-in-out"
+              style={{
+                opacity: backgroundOpacity * 0.4,
+                transitionDuration: `${animationTime}ms`,
+                transform: `translate3d(${bgOffset.x}px, ${bgOffset.y}px, 0) scale(1.04)`,
+              }}
+              src={activeProject.backgroundVideo}
+              poster={activeProject.backgroundPoster || activeProject.backgroundImage}
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-opacity ease-in-out"
+              style={{
+                backgroundImage: `url(${activeProject.backgroundImage})`,
+                opacity: backgroundOpacity * 0.4,
+                transitionDuration: `${animationTime}ms`,
+                transform: `translate3d(${bgOffset.x}px, ${bgOffset.y}px, 0) scale(1.04)`,
+              }}
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black to-transparent" />
+          {wipeEnabled && (
+            <div
+              className={`ir-wipe-layer ${sectionEntered ? "ir-wipe-play" : ""}`}
+              style={{
+                "--ir-wipe-duration": `${wipeDuration}ms`,
+                "--ir-wipe-angle": `${wipeAngle}deg`,
+                "--ir-wipe-color": wipeColor,
+              }}
+            />
+          )}
         </div>
       )}
 
       {/* Section Header */}
       <div className="absolute top-8 left-8 z-20">
-        <h3 className="text-xs uppercase tracking-widest text-gray-500">
-          Selected Works
-        </h3>
+        <h3 className="text-xs uppercase tracking-widest text-gray-500">Selected Works</h3>
       </div>
 
       {/* Project Index Indicator */}
       <div className="absolute top-8 right-8 z-20 text-white/50 text-sm font-light">
-        {String(currentIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+        {String(currentIndex + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
       </div>
 
       {/* Project List - Full Width */}
-      <div className="relative z-10 w-full pb-0 flex justify-start">
+      <div
+        className={`relative z-10 w-full pb-0 flex justify-start transition-all duration-700 ease-out ${
+          sectionEntered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+        }`}
+      >
         <div className="flex flex-col w-full">
-          {projects.map((project, index) => (
+          {items.map((project, index) => (
             <div
               key={project.id}
               className="cursor-pointer relative flex items-center justify-between group overflow-hidden"
               style={{ 
-                height: `${100 / projects.length}vh`,
-                borderBottom: index < projects.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none'
+                height: `${100 / items.length}vh`,
+                borderBottom: index < items.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
               }}
               onMouseEnter={() => handleProjectHover(project, index)}
               onMouseLeave={handleMouseLeaveProject}
               onClick={() => handleProjectClick(project.link)}
             >
-              <h2
-                className={`uppercase text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold transition-all duration-500 relative z-20 px-12 ${
-                  currentIndex === index 
-                    ? 'text-white' 
-                    : 'text-gray-600'
-                }`}
-              >
-                {project.title}
-              </h2>
-              
-              <div className={`transition-all duration-500 z-20 px-12 ${
-                  currentIndex === index ? 'text-white scale-100 opacity-100' : 'scale-75 opacity-0'
-                }`}>
-                <ArrowUpRight className='w-12 h-12' />
+              <div className="flex items-center w-full gap-8">
+                <div
+                  className="flex items-center justify-center shrink-0 pl-10 pr-2"
+                  style={{ width: `${safeLogoWidth}%` }}
+                >
+                  <img
+                    src={project.logoImage}
+                    alt=""
+                    className={`w-full max-w-[240px] h-auto object-contain transition-all duration-500 ${
+                      currentIndex === index
+                        ? "opacity-100"
+                        : isHovering
+                          ? "opacity-40 blur-[0px]"
+                          : "opacity-60"
+                    } ${
+                      currentIndex === index
+                        ? `ir-anim-${project.animationType || animationType}`
+                        : ""
+                    }`}
+                    style={{
+                      animationDuration: `${animationTime}ms`,
+                    }}
+                    draggable="false"
+                  />
+                </div>
+
+                <div
+                  className={`flex-1 pr-6 transition-all duration-500 ${
+                    currentIndex === index
+                      ? "opacity-100"
+                      : isHovering
+                        ? "opacity-80 blur-[2px]"
+                        : "opacity-90"
+                  }`}
+                >
+                  <div className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/50">
+                    {project.subheader}
+                  </div>
+                  <div className="mt-2">
+                    {project.headerImage && !headerErrors[project.id] ? (
+                      <img
+                        src={project.headerImage}
+                        alt={project.title || ""}
+                        className="h-10 md:h-12 lg:h-14 w-auto object-contain"
+                        draggable="false"
+                        onError={() => handleHeaderError(project.id)}
+                      />
+                    ) : (
+                      <div className="text-3xl md:text-4xl font-semibold text-white">
+                        {project.title}
+                      </div>
+                    )}
+                  </div>
+                  <p className="mt-3 text-sm md:text-base text-white/70 max-w-2xl whitespace-pre-line">
+                    {project.summary}
+                  </p>
+                </div>
+
+                <div
+                  className={`transition-all duration-500 z-20 pr-10 ${
+                    currentIndex === index
+                      ? "text-white scale-100 opacity-100"
+                      : isHovering
+                        ? "text-white/60 scale-90 opacity-40 blur-[1px]"
+                        : "scale-75 opacity-0"
+                  }`}
+                >
+                  <ArrowUpRight className="w-10 h-10 md:w-12 md:h-12" />
+                </div>
               </div>
 
               {/* Active Project Highlight */}
               <div
-                className={`absolute inset-0 bg-blue-600/15 backdrop-blur-[1px] transition-all duration-500 ease-out ${
-                  currentIndex === index ? 'opacity-100' : 'opacity-0'
+                className={`absolute inset-0 transition-all ease-out ${
+                  currentIndex === index ? "opacity-100" : "opacity-0"
+                } ${
+                  hoveredProject?.id === project.id ? "backdrop-blur-0" : "backdrop-blur-[1px]"
                 }`}
+                style={{
+                  transitionDuration: `${animationTime}ms`,
+                  backgroundColor: project.overlayColor || "rgba(37, 99, 235, 0.15)",
+                }}
               />
             </div>
           ))}
@@ -215,26 +420,101 @@ const ImageReveal = () => {
       </div>
 
       {/* Scroll Hint */}
-      <div className="absolute bottom-8 right-8 z-20 text-gray-500 text-xs uppercase tracking-widest">
-        Scroll to explore
-      </div>
+        <div className="absolute bottom-8 right-8 z-20 text-gray-500 text-xs uppercase tracking-widest">
+          Scroll to explore
+        </div>
 
       {/* Floating Cursor Image (Desktop Only) */}
       {isDesktop && hoveredProject && (
-        <img
-          src={hoveredProject.cursorImage}
-          alt={hoveredProject.title}
-          className="fixed pointer-events-none z-50 w-[280px] h-[380px] rounded-lg object-cover shadow-2xl transition-opacity duration-300"
+        <div
+          className="fixed pointer-events-none z-50 transition-opacity duration-300"
           style={{
             left: `${cursorPosition.x}px`,
             top: `${cursorPosition.y}px`,
-            transform: `translate(-50%, -50%) scale(${cursorScale}) rotate(3deg)`,
+            transform: `translate(-50%, -50%) scale(${cursorScale}) rotate(2deg)`
+              + ` perspective(900px) translateZ(40px) rotateX(${cursorTilt.x}deg) rotateY(${cursorTilt.y}deg)`,
             opacity: cursorOpacity,
+            transitionDuration: `${animationTime}ms`,
+            transformStyle: "preserve-3d",
           }}
-        />
+        >
+          <div className="relative w-[280px] h-[560px] rounded-[38px] bg-[#0b0f1a] border border-white/10 shadow-[0_35px_80px_rgba(0,0,0,0.55)]">
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-2 rounded-full bg-white/10" />
+            <div className="absolute inset-3 rounded-[28px] overflow-hidden bg-black">
+              <img
+                src={hoveredProject.cursorImage}
+                alt={hoveredProject.title}
+                className="w-full h-full object-cover"
+                style={{
+                  transform: `translate3d(${cursorTilt.y * -0.45}px, ${cursorTilt.x * -0.45}px, 0) scale(1.03)`,
+                }}
+                draggable="false"
+              />
+            </div>
+            <div className="absolute inset-0 rounded-[36px] pointer-events-none [background:linear-gradient(130deg,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0)_45%)]" />
+          </div>
+        </div>
       )}
+
+      <style>{`
+        .ir-wipe-layer {
+          position: absolute;
+          inset: -50%;
+          width: 200%;
+          height: 200%;
+          background: var(--ir-wipe-color, rgba(0, 0, 0, 0.9));
+          transform: rotate(var(--ir-wipe-angle, -12deg)) translateX(0%);
+          transform-origin: 50% 50%;
+          opacity: 1;
+        }
+        .ir-wipe-play {
+          animation: ir-diagonal-wipe var(--ir-wipe-duration, 1200ms)
+            cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes ir-diagonal-wipe {
+          0% { transform: rotate(var(--ir-wipe-angle, -12deg)) translateX(0%); opacity: 1; }
+          100% { transform: rotate(var(--ir-wipe-angle, -12deg)) translateX(120%); opacity: 0; }
+        }
+        @keyframes ir-zoom {
+          from { transform: scale(0.92); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes ir-fade-left {
+          from { transform: translateX(-32px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes ir-fade-right {
+          from { transform: translateX(32px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes ir-fade-up {
+          from { transform: translateY(28px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes ir-fade-down {
+          from { transform: translateY(-28px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes ir-rocket-left {
+          0% { transform: translateX(-140px) translateY(40px) rotate(-6deg); opacity: 0; }
+          60% { opacity: 1; }
+          100% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 1; }
+        }
+        @keyframes ir-rocket-right {
+          0% { transform: translateX(140px) translateY(40px) rotate(6deg); opacity: 0; }
+          60% { opacity: 1; }
+          100% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 1; }
+        }
+        .ir-anim-zoom { animation-name: ir-zoom; animation-fill-mode: both; }
+        .ir-anim-fade-left { animation-name: ir-fade-left; animation-fill-mode: both; }
+        .ir-anim-fade-right { animation-name: ir-fade-right; animation-fill-mode: both; }
+        .ir-anim-fade-up { animation-name: ir-fade-up; animation-fill-mode: both; }
+        .ir-anim-fade-down { animation-name: ir-fade-down; animation-fill-mode: both; }
+        .ir-anim-rocket-left { animation-name: ir-rocket-left; animation-fill-mode: both; }
+        .ir-anim-rocket-right { animation-name: ir-rocket-right; animation-fill-mode: both; }
+      `}</style>
     </section>
   );
-};
+}
 
 export default ImageReveal;
