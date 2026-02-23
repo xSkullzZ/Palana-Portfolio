@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const CONTACT_EMAIL = "claudio.palana@gmail.com";
 
-export default function ContactFormCard({ className = "" }) {
+function ContactFormCard({ className = "" }) {
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
@@ -77,3 +77,6 @@ export default function ContactFormCard({ className = "" }) {
     </div>
   );
 }
+
+export default ContactFormCard;
+export { ContactFormCard };

@@ -11,22 +11,26 @@
 import * as React from "react";
 import {
   PlasmicImg as PlasmicImg__,
+  PlasmicLink as PlasmicLink__,
   classNames,
   createPlasmicElementProxy,
-  deriveRenderOpts,
-  hasVariant
+  deriveRenderOpts
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
 import { Reveal } from "@plasmicpkgs/react-awesome-reveal";
-import Tilt from "@plasmicpkgs/react-parallax-tilt";
-import { _useGlobalVariants } from "./plasmic"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/projectModule
+import SiteHeader from "../../SiteHeader"; // plasmic-import: N2EmXWwtxdPX/component
+import SiteFooter from "../../SiteFooter"; // plasmic-import: cswDm0qYBFlc/component
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/styleTokensProvider
 import "@plasmicapp/react-web/lib/plasmic.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/projectcss
 import sty from "./PlasmicVersy.module.css"; // plasmic-import: PqL7dHD3dAqR/css
 import versyTriangle7HCvmehTD3Y from "./images/versyTriangle.svg"; // plasmic-import: 7hCVMEH-tD3y/picture
 import versylogoWebpAnUVLpSztBa from "./images/versylogoWebp.webp"; // plasmic-import: anU_vLpSztBA/picture
-import image7NqEyIfaO9Sg1 from "./images/image7.png"; // plasmic-import: NQEyIfaO9SG1/picture
+import image134JH85Mesa6R from "./images/image13.png"; // plasmic-import: 4j-h85MESA6R/picture
+import image15DGyvz3V0Y9B from "./images/image15.png"; // plasmic-import: DGyvz3V0y9B-/picture
+import image17NcvdC4S7Il from "./images/image17.svg"; // plasmic-import: Ncvd-C4s_7Il/picture
+import image16YjOimtVJnkgq from "./images/image16.svg"; // plasmic-import: YJOimtVJnkgq/picture
+import image18OlKtNglWbKob from "./images/image18.svg"; // plasmic-import: OLKtNglWbKOB/picture
 
 const emptyProxy = new Proxy(() => "", {
   get(_, prop) {
@@ -79,7 +83,6 @@ function PlasmicVersy__RenderFunc(props) {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
-  const globalVariants = _useGlobalVariants();
   const styleTokensClassNames = _useStyleTokens();
   return (
     <React.Fragment>
@@ -103,292 +106,402 @@ function PlasmicVersy__RenderFunc(props) {
             data-plasmic-override={overrides.hero}
             className={classNames(projectcss.all, sty.hero)}
           >
-            <div className={classNames(projectcss.all, sty.freeBox__cu6O)}>
-              <PlasmicImg__
-                data-plasmic-name={"versyTriangle"}
-                data-plasmic-override={overrides.versyTriangle}
-                alt={""}
-                className={classNames(sty.versyTriangle)}
-                displayHeight={"auto"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"40%"}
-                loading={"lazy"}
-                src={{
-                  src: versyTriangle7HCvmehTD3Y,
-                  fullWidth: 167,
-                  fullHeight: 146,
-                  aspectRatio: undefined
-                }}
-              />
-
-              <div className={classNames(projectcss.all, sty.freeBox__fsxlK)}>
+            <div className={classNames(projectcss.all, sty.freeBox__fH8Lu)}>
+              <div className={classNames(projectcss.all, sty.freeBox__cu6O)}>
                 <PlasmicImg__
-                  data-plasmic-name={"versyLogo"}
-                  data-plasmic-override={overrides.versyLogo}
+                  data-plasmic-name={"versyTriangle"}
+                  data-plasmic-override={overrides.versyTriangle}
                   alt={""}
-                  className={classNames(sty.versyLogo)}
+                  className={classNames(sty.versyTriangle)}
                   displayHeight={"auto"}
                   displayMaxHeight={"none"}
                   displayMaxWidth={"100%"}
                   displayMinHeight={"0"}
                   displayMinWidth={"0"}
-                  displayWidth={"auto"}
+                  displayWidth={"33%"}
                   loading={"lazy"}
                   src={{
-                    src: versylogoWebpAnUVLpSztBa,
-                    fullWidth: 1134,
-                    fullHeight: 454,
+                    src: versyTriangle7HCvmehTD3Y,
+                    fullWidth: 167,
+                    fullHeight: 146,
                     aspectRatio: undefined
                   }}
                 />
 
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text___8FtpQ
-                  )}
-                >
-                  {
-                    "Designing the Foundation of a No\u2011Code Virtual Experience Platform"
-                  }
-                </div>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__eNdUf
-                  )}
-                >
-                  {
-                    "A branding & design system case study on building the visual language of an AI\u2011powered virtual experience ecosystem."
-                  }
-                </div>
-                <div
-                  data-plasmic-name={"details2"}
-                  data-plasmic-override={overrides.details2}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.details2
-                  )}
-                  data-project-details={"1"}
-                >
-                  {
-                    "The most important details of this monumental challenge are the incredible results of redesigning the entire brand identity from scratch to create something truly exceptional. The design system sets a standard of excellence that will carry the brand forward for years to come, creating consistency and a visual language that captures the essence of the brand. The new design system is a testament to the power of creativity and strategic thinking and will elevate the brand to new heights."
-                  }
+                <div className={classNames(projectcss.all, sty.freeBox__fsxlK)}>
+                  <PlasmicImg__
+                    data-plasmic-name={"versyLogo"}
+                    data-plasmic-override={overrides.versyLogo}
+                    alt={""}
+                    className={classNames(sty.versyLogo)}
+                    displayHeight={"auto"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"auto"}
+                    loading={"lazy"}
+                    src={{
+                      src: versylogoWebpAnUVLpSztBa,
+                      fullWidth: 1134,
+                      fullHeight: 454,
+                      aspectRatio: undefined
+                    }}
+                  />
+
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___8FtpQ
+                    )}
+                  >
+                    {
+                      "Designing the Foundation of a No\u2011Code Virtual Experience Platform"
+                    }
+                  </div>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__eNdUf
+                    )}
+                  >
+                    {
+                      "A branding & design system case study on building the visual language of an AI\u2011powered virtual experience ecosystem."
+                    }
+                  </div>
+                  <div
+                    data-plasmic-name={"details2"}
+                    data-plasmic-override={overrides.details2}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.details2
+                    )}
+                    data-project-details={"1"}
+                  >
+                    {
+                      "The most important details of this monumental challenge are the incredible results of redesigning the entire brand identity from scratch to create something truly exceptional. The design system sets a standard of excellence that will carry the brand forward for years to come, creating consistency and a visual language that captures the essence of the brand. The new design system is a testament to the power of creativity and strategic thinking and will elevate the brand to new heights."
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={classNames(projectcss.all, sty.freeBox__wyFz5)}>
-              <Reveal
-                data-plasmic-name={"reveal"}
-                data-plasmic-override={overrides.reveal}
-                cascade={true}
-                className={classNames("__wab_instance", sty.reveal)}
-                damping={0.5}
-                direction={"up"}
-                effect={"fade"}
-                triggerOnce={true}
+              <div className={classNames(projectcss.all, sty.freeBox__wyFz5)}>
+                <Reveal
+                  data-plasmic-name={"reveal"}
+                  data-plasmic-override={overrides.reveal}
+                  cascade={true}
+                  className={classNames("__wab_instance", sty.reveal)}
+                  damping={0.5}
+                  direction={"up"}
+                  effect={"fade"}
+                  triggerOnce={true}
+                >
+                  <div
+                    data-plasmic-name={"summary"}
+                    data-plasmic-override={overrides.summary}
+                    className={classNames(projectcss.all, sty.summary)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__uFq2B
+                      )}
+                    >
+                      {"YEAR"}
+                    </div>
+                    <div
+                      data-plasmic-name={"details8"}
+                      data-plasmic-override={overrides.details8}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.details8
+                      )}
+                      data-project-details={"1"}
+                    >
+                      {"2023"}
+                    </div>
+                  </div>
+                  <div
+                    data-plasmic-name={"summary5"}
+                    data-plasmic-override={overrides.summary5}
+                    className={classNames(projectcss.all, sty.summary5)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__eN9V
+                      )}
+                    >
+                      {"Timeline"}
+                    </div>
+                    <div
+                      data-plasmic-name={"details9"}
+                      data-plasmic-override={overrides.details9}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.details9
+                      )}
+                      data-project-details={"1"}
+                    >
+                      {"1 Year"}
+                    </div>
+                  </div>
+                  <div
+                    data-plasmic-name={"summary6"}
+                    data-plasmic-override={overrides.summary6}
+                    className={classNames(projectcss.all, sty.summary6)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__lYcs3
+                      )}
+                    >
+                      {"TEAM"}
+                    </div>
+                    <div
+                      data-plasmic-name={"details29"}
+                      data-plasmic-override={overrides.details29}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.details29
+                      )}
+                      data-project-details={"1"}
+                    >
+                      {"Worked directly with CEO, CTO & Core Development Team"}
+                    </div>
+                  </div>
+                  <div
+                    data-plasmic-name={"summary2"}
+                    data-plasmic-override={overrides.summary2}
+                    className={classNames(projectcss.all, sty.summary2)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___8FKuu
+                      )}
+                    >
+                      {"ROLE"}
+                    </div>
+                    <div
+                      data-plasmic-name={"details10"}
+                      data-plasmic-override={overrides.details10}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.details10
+                      )}
+                      data-project-details={"1"}
+                    >
+                      {
+                        "Design System\nUI Foundation\nBrand Identity\nProduct Thinking"
+                      }
+                    </div>
+                  </div>
+                  <div
+                    data-plasmic-name={"summary3"}
+                    data-plasmic-override={overrides.summary3}
+                    className={classNames(projectcss.all, sty.summary3)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__pew6I
+                      )}
+                    >
+                      {"TOOLS"}
+                    </div>
+                    <div
+                      data-plasmic-name={"details11"}
+                      data-plasmic-override={overrides.details11}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.details11
+                      )}
+                      data-project-details={"1"}
+                    >
+                      {
+                        "Figma\nAdobe Illustrator\nAdobe Photoshop\nMiro\nFigjam Boards\nComfyUI"
+                      }
+                    </div>
+                  </div>
+                  <div
+                    data-plasmic-name={"summary4"}
+                    data-plasmic-override={overrides.summary4}
+                    className={classNames(projectcss.all, sty.summary4)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__xihhi
+                      )}
+                    >
+                      {"Achievements"}
+                    </div>
+                    <div
+                      data-plasmic-name={"details12"}
+                      data-plasmic-override={overrides.details12}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.details12
+                      )}
+                      data-project-details={"1"}
+                    >
+                      {
+                        "Product Design\nVisual Identity\nUser Personas\nUser Journeys\nWireframe Design"
+                      }
+                    </div>
+                  </div>
+                </Reveal>
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__dQw4N
+                )}
               >
-                <div
-                  data-plasmic-name={"summary"}
-                  data-plasmic-override={overrides.summary}
-                  className={classNames(projectcss.all, sty.summary)}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__uFq2B
-                    )}
-                  >
-                    {"YEAR"}
-                  </div>
-                  <div
-                    data-plasmic-name={"details8"}
-                    data-plasmic-override={overrides.details8}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.details8
-                    )}
-                    data-project-details={"1"}
-                  >
-                    {"2023"}
-                  </div>
-                </div>
-                <div
-                  data-plasmic-name={"summary5"}
-                  data-plasmic-override={overrides.summary5}
-                  className={classNames(projectcss.all, sty.summary5)}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__eN9V
-                    )}
-                  >
-                    {"Timeline"}
-                  </div>
-                  <div
-                    data-plasmic-name={"details9"}
-                    data-plasmic-override={overrides.details9}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.details9
-                    )}
-                    data-project-details={"1"}
-                  >
-                    {"1 Year"}
-                  </div>
-                </div>
-                <div
-                  data-plasmic-name={"summary6"}
-                  data-plasmic-override={overrides.summary6}
-                  className={classNames(projectcss.all, sty.summary6)}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__lYcs3
-                    )}
-                  >
-                    {"TEAM"}
-                  </div>
-                  <div
-                    data-plasmic-name={"details29"}
-                    data-plasmic-override={overrides.details29}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.details29
-                    )}
-                    data-project-details={"1"}
-                  >
-                    {"Worked directly with CEO, CTO & Core Development Team"}
-                  </div>
-                </div>
-                <div
-                  data-plasmic-name={"summary2"}
-                  data-plasmic-override={overrides.summary2}
-                  className={classNames(projectcss.all, sty.summary2)}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___8FKuu
-                    )}
-                  >
-                    {"ROLE"}
-                  </div>
-                  <div
-                    data-plasmic-name={"details10"}
-                    data-plasmic-override={overrides.details10}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.details10
-                    )}
-                    data-project-details={"1"}
-                  >
-                    {
-                      "Design System\nUI Foundation\nBrand Identity\nProduct Thinking"
-                    }
-                  </div>
-                </div>
-                <div
-                  data-plasmic-name={"summary3"}
-                  data-plasmic-override={overrides.summary3}
-                  className={classNames(projectcss.all, sty.summary3)}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__pew6I
-                    )}
-                  >
-                    {"TOOLS"}
-                  </div>
-                  <div
-                    data-plasmic-name={"details11"}
-                    data-plasmic-override={overrides.details11}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.details11
-                    )}
-                    data-project-details={"1"}
-                  >
-                    {
-                      "Figma\nAdobe Illustrator\nAdobe Photoshop\nMiro\nFigjam Boards\nComfyUI"
-                    }
-                  </div>
-                </div>
-                <div
-                  data-plasmic-name={"summary4"}
-                  data-plasmic-override={overrides.summary4}
-                  className={classNames(projectcss.all, sty.summary4)}
-                >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__xihhi
-                    )}
-                  >
-                    {"Achievements"}
-                  </div>
-                  <div
-                    data-plasmic-name={"details12"}
-                    data-plasmic-override={overrides.details12}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.details12
-                    )}
-                    data-project-details={"1"}
-                  >
-                    {
-                      "Product Design\nVisual Identity\nUser Personas\nUser Journeys\nWireframe Design"
-                    }
-                  </div>
-                </div>
-              </Reveal>
-            </div>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__dQw4N
-              )}
-            >
-              {"The Challenge"}
-            </div>
-            <div
-              data-plasmic-name={"details3"}
-              data-plasmic-override={overrides.details3}
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.details3
-              )}
-              data-project-details={"1"}
-            >
-              {
-                "Create a complete, scalable brand and design system for a platform that enables companies to build AI\u2011powered virtual experiences, without code, without complexity, and with measurable ROI.\r"
-              }
+                {"The Challenge"}
+              </div>
+              <div
+                data-plasmic-name={"details3"}
+                data-plasmic-override={overrides.details3}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details3
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "Create a complete, scalable brand and design system for a platform that enables companies to build AI\u2011powered virtual experiences, without code, without complexity, and with measurable ROI.\r"
+                }
+              </div>
             </div>
           </section>
-          <section className={classNames(projectcss.all, sty.section__ogiAl)}>
+          <PlasmicLink__
+            className={classNames(
+              projectcss.all,
+              projectcss.a,
+              sty.link__tmT4Q
+            )}
+            onClick={async event => {
+              const $steps = {};
+            }}
+            platform={"react"}
+          >
+            <PlasmicLink__
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__sl8O2
+              )}
+              href={`/`}
+              platform={"react"}
+            >
+              {"\u2190 Back to Home"}
+            </PlasmicLink__>
+            <PlasmicLink__
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__yjR4M
+              )}
+              href={"/#context"}
+              platform={"react"}
+            >
+              {"Context"}
+            </PlasmicLink__>
+            <PlasmicLink__
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__z9U56
+              )}
+              href={"/#product"}
+              platform={"react"}
+            >
+              {"Understanding \nthe Product "}
+            </PlasmicLink__>
+            <PlasmicLink__
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__umebE
+              )}
+              href={"/#strategy"}
+              platform={"react"}
+            >
+              {"Strategy"}
+            </PlasmicLink__>
+            <PlasmicLink__
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__leYg
+              )}
+              href={"/#thinking"}
+              platform={"react"}
+            >
+              {"Critical Thinking"}
+            </PlasmicLink__>
+            <PlasmicLink__
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__sl6Ef
+              )}
+              href={"/#identity"}
+              platform={"react"}
+            >
+              {"Visual Identity "}
+            </PlasmicLink__>
+            <PlasmicLink__
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__tKSuW
+              )}
+              href={"/#thennow"}
+              platform={"react"}
+            >
+              {"Versy: Then vs. Now"}
+            </PlasmicLink__>
+            <PlasmicLink__
+              className={classNames(
+                projectcss.all,
+                projectcss.a,
+                projectcss.__wab_text,
+                sty.link__d5UfD
+              )}
+              href={"/#result"}
+              platform={"react"}
+            >
+              {"The Result"}
+            </PlasmicLink__>
+          </PlasmicLink__>
+          <section className={classNames(projectcss.all, sty.section__mys79)}>
             <nav
               data-plasmic-name={"part1Context"}
               data-plasmic-override={overrides.part1Context}
@@ -398,8 +511,9 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__sl8O2
+                  sty.text___0Ebps
                 )}
+                id={"context"}
               >
                 {"Context"}
               </div>
@@ -465,109 +579,52 @@ function PlasmicVersy__RenderFunc(props) {
                   "My work became the foundation that allowed Versy to evolve without losing coherence."
                 }
               </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__jauz
+                )}
+                id={"#product"}
+              >
+                {"Understanding the Product "}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__vSfEy
+                )}
+              >
+                {"& Its Users"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__dh76N
+                )}
+              >
+                {
+                  "Versy is essentially:\n- A WordPress for virtual experiences\r\n- A drag\u2011and\u2011drop builder for 3D environments\r\n- A data\u2011driven platform for engagement and analytics\r\n- A bridge between real\u2011world systems (CRM, IoT, robotics) and virtual spaces\r"
+                }
+              </div>
             </nav>
-          </section>
-          <section className={classNames(projectcss.all, sty.section___8OHU)}>
             <div
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.text__f2HL
-              )}
-            >
-              {"Understanding the Product "}
-            </div>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__pqzUt
-              )}
-            >
-              {"& Its Users"}
-            </div>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__o3YP
-              )}
-            >
-              {
-                "Versy is essentially:\n- A WordPress for virtual experiences\r\n- A drag\u2011and\u2011drop builder for 3D environments\r\n- A data\u2011driven platform for engagement and analytics\r\n- A bridge between real\u2011world systems (CRM, IoT, robotics) and virtual spaces\r"
-              }
-            </div>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__sj6Iu
+                sty.text__es84A
               )}
             >
               {"The Users are"}
             </div>
-            <div className={classNames(projectcss.all, sty.freeBox__vktD)}>
+            <div className={classNames(projectcss.all, sty.freeBox__xk85I)}>
               <div
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__rDxwx
-                )}
-              >
-                {"Marketing \nTeams"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__jk6Y
-                )}
-              >
-                {"Sales \nTeams"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__pIAuV
-                )}
-              >
-                {"TRaining Departments"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__kZrnQ
-                )}
-              >
-                {"Enterprise innovation units"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__tiJy2
-                )}
-              >
-                {"Creators and agencies"}
-              </div>
-            </div>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text___1Wz4A
-              )}
-            >
-              {"And they need"}
-            </div>
-            <div className={classNames(projectcss.all, sty.freeBox___61Mr)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__tR5Ww
+                  sty.text__zHf2W
                 )}
               >
                 {"Autonomy"}
@@ -576,7 +633,7 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__h1VBl
+                  sty.text__fkR2H
                 )}
               >
                 {"Speed"}
@@ -585,7 +642,7 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__pXuNy
+                  sty.text__dF2G
                 )}
               >
                 {"Clarity"}
@@ -594,7 +651,7 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__ozXd
+                  sty.text___6WLc
                 )}
               >
                 {"Scalability"}
@@ -603,7 +660,7 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__lC8Ed
+                  sty.text__hlt5Q
                 )}
               >
                 {"ROI"}
@@ -613,19 +670,78 @@ function PlasmicVersy__RenderFunc(props) {
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.text__xn2Ig
+                sty.text__kFi5V
+              )}
+            >
+              {"And they need"}
+            </div>
+            <div className={classNames(projectcss.all, sty.freeBox__w3BaG)}>
+              <div
+                data-plasmic-name={"glasscard2"}
+                data-plasmic-override={overrides.glasscard2}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.glasscard2
+                )}
+              >
+                {"Marketing \nTeams"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__uk5Ce
+                )}
+              >
+                {"Sales \nTeams"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__t8FOf
+                )}
+              >
+                {"TRaining Departments"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__xwPeE
+                )}
+              >
+                {"Enterprise innovation units"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__gBp75
+                )}
+              >
+                {"Creators and agencies"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__d7310
               )}
             >
               {"The brand had to reflect all of this"}
             </div>
           </section>
-          <section className={classNames(projectcss.all, sty.section__rx6Cz)}>
+          <section className={classNames(projectcss.all, sty.section___396Bo)}>
             <div
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.text__q8LK
+                sty.text__dcprW
               )}
+              id={"strategy"}
             >
               {"Strategy "}
             </div>
@@ -633,29 +749,29 @@ function PlasmicVersy__RenderFunc(props) {
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.text___6Ravp
+                sty.text__uZKc3
               )}
             >
               {"A Brand Built on Three Principles"}
             </div>
-            <div className={classNames(projectcss.all, sty.freeBox__pb8UJ)}>
-              <div className={classNames(projectcss.all, sty.freeBox___6USoj)}>
+            <div className={classNames(projectcss.all, sty.freeBox__ywrKx)}>
+              <div className={classNames(projectcss.all, sty.freeBox__vD4Bq)}>
                 <div
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text___6NoG
+                    sty.text__eUyXs
                   )}
                 >
                   {"1. Simplicity"}
                 </div>
                 <div
-                  data-plasmic-name={"details30"}
-                  data-plasmic-override={overrides.details30}
+                  data-plasmic-name={"details34"}
+                  data-plasmic-override={overrides.details34}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.details30
+                    sty.details34
                   )}
                   data-project-details={"1"}
                 >
@@ -667,18 +783,18 @@ function PlasmicVersy__RenderFunc(props) {
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text__rVfyp
+                    sty.text__aShIa
                   )}
                 >
                   {"2. Value\u2011Driven"}
                 </div>
                 <div
-                  data-plasmic-name={"details25"}
-                  data-plasmic-override={overrides.details25}
+                  data-plasmic-name={"details27"}
+                  data-plasmic-override={overrides.details27}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.details25
+                    sty.details27
                   )}
                   data-project-details={"1"}
                 >
@@ -688,18 +804,18 @@ function PlasmicVersy__RenderFunc(props) {
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.text___90O3C
+                    sty.text__rAtPx
                   )}
                 >
                   {"3. Freedom of Expression"}
                 </div>
                 <div
-                  data-plasmic-name={"details24"}
-                  data-plasmic-override={overrides.details24}
+                  data-plasmic-name={"details28"}
+                  data-plasmic-override={overrides.details28}
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.details24
+                    sty.details28
                   )}
                   data-project-details={"1"}
                 >
@@ -708,144 +824,31 @@ function PlasmicVersy__RenderFunc(props) {
                   }
                 </div>
               </div>
-              <Tilt
-                data-plasmic-name={"tilt"}
-                data-plasmic-override={overrides.tilt}
-                className={classNames("__wab_instance", sty.tilt)}
-                glareBorderRadius={"2"}
-                glareColor={"#FEFAE0"}
-                glareEnable={true}
-                glareMaxOpacity={0.4}
-                glarePosition={"all"}
-                glareReverse={false}
-                gyroscope={true}
-                perspective={1200}
-                reset={true}
-                tiltAngleXInitial={-90}
-                tiltAngleYInitial={-30}
-                tiltAxis={"y"}
-                tiltMaxAngleX={10}
-                tiltMaxAngleY={20}
-                tiltReverse={true}
-                trackOnWindow={true}
-                transitionSpeed={1200}
-              >
-                <PlasmicImg__
-                  data-plasmic-name={"img"}
-                  data-plasmic-override={overrides.img}
-                  alt={""}
-                  className={classNames(sty.img)}
-                  displayHeight={
-                    hasVariant(globalVariants, "screen", "mobileOnly")
-                      ? "auto"
-                      : "527px"
-                  }
-                  displayMaxHeight={"none"}
-                  displayMaxWidth={"100%"}
-                  displayMinHeight={"0"}
-                  displayMinWidth={"0"}
-                  displayWidth={
-                    hasVariant(globalVariants, "screen", "mobileOnly")
-                      ? "100%"
-                      : "259px"
-                  }
-                  loading={"lazy"}
-                  src={{
-                    src: image7NqEyIfaO9Sg1,
-                    fullWidth: 445,
-                    fullHeight: 932,
-                    aspectRatio: undefined
-                  }}
-                />
-              </Tilt>
             </div>
             <div
-              data-plasmic-name={"details22"}
-              data-plasmic-override={overrides.details22}
+              data-plasmic-name={"details35"}
+              data-plasmic-override={overrides.details35}
               className={classNames(
                 projectcss.all,
                 projectcss.__wab_text,
-                sty.details22
+                sty.details35
               )}
               data-project-details={"1"}
             >
               {"These principles guided every design decision."}
             </div>
           </section>
-          <section className={classNames(projectcss.all, sty.section__rCi4Z)}>
+          <section className={classNames(projectcss.all, sty.section__zAxw3)}>
             <nav
-              data-plasmic-name={"projectDescription5"}
-              data-plasmic-override={overrides.projectDescription5}
-              className={classNames(projectcss.all, sty.projectDescription5)}
+              data-plasmic-name={"projectDescription7"}
+              data-plasmic-override={overrides.projectDescription7}
+              className={classNames(projectcss.all, sty.projectDescription7)}
             >
               <div
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__aCdCo
-                )}
-              >
-                {"Building the Entire Design System"}
-              </div>
-              <div
-                data-plasmic-name={"details26"}
-                data-plasmic-override={overrides.details26}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.details26
-                )}
-                data-project-details={"1"}
-              >
-                {
-                  "I created the first complete design system for Versy, including:\n\nA. Logo System\r\n- Icon\r\n- Wordmark\r\n- Horizontal lockups\r\n- Whitespace rules\r\n- Contrast rules\r\n- Usage do\u2019s & don\u2019ts\r\nB. Color System\r\n- Primary & secondary palettes\r\n- Ink (neutral) system\r\n- Accent & highlight colors\r\n- Danger & warning states\r\n- Gradient identity\r\n- Contrast rules (AAA compliance)\r\nC. Typography\r\n- Red Hat (Display, Regular, Mono)\r\n- Conthrax for branding\r\n- Type scale using Major Third ratio\r\n- Line length rules\r\n- Usage guidelines\r\nD. Spacing & Grids\r\n- 4px baseline grid\r\n- Component spacing rules\r\n- Layout grids for desktop, tablet, mobile\r\n- Variable scaling system\r\nE. Voice & Tone\r\n- Friendly but professional\r\n- Clear, informative, ROI\u2011focused\r\n- Avoiding hype, focusing on value\n\n\r\nThis system became the operating manual for all future design and communication.\r"
-                }
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__oAxoj
-                )}
-              >
-                {"Evolution"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text___7Luxe
-                )}
-              >
-                {"Integrating the New Versy Identity"}
-              </div>
-              <div
-                data-plasmic-name={"details27"}
-                data-plasmic-override={overrides.details27}
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.details27
-                )}
-                data-project-details={"1"}
-              >
-                {
-                  "As Versy evolved into an AI\u2011powered platform, the narrative and visual direction were updated to align with how the technological paradigm shifted:\n\n- AI\u2011generated 3D environments\r\n- Real\u2011time analytics\r\n- Enterprise integrations\r\n- Automation\r\n- Virtual showrooms & training\r\n- Business\u2011first communication\n\r\n\n\nAnd everything should adapt seamlessly to this transition, having:\r\n- More emphasis on AI and automation\r\n- More enterprise\u2011grade tone\r\n- More modular layouts\r\n- More product\u2011centric visuals\r\n- Updated terminology (no more \u201cmetaverse\u201d)\r\n- Stronger focus on ROI and business outcomes\n\nOnly a strong foundation with a strong and clear brand identity could survive such a shift and make Versy feel mature, scalable, technically credible, and future-proof.\n\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r"
-                }
-              </div>
-            </nav>
-          </section>
-          <section className={classNames(projectcss.all, sty.section__mys79)}>
-            <nav
-              data-plasmic-name={"projectDescription6"}
-              data-plasmic-override={overrides.projectDescription6}
-              className={classNames(projectcss.all, sty.projectDescription6)}
-            >
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__vEj0
+                  sty.text__mgkIc
                 )}
               >
                 {"Critical Thinking"}
@@ -854,18 +857,18 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__ySm3
+                  sty.text__d2XhC
                 )}
               >
                 {"Designing for Longevity"}
               </div>
               <div
-                data-plasmic-name={"details33"}
-                data-plasmic-override={overrides.details33}
+                data-plasmic-name={"details42"}
+                data-plasmic-override={overrides.details42}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details33
+                  sty.details42
                 )}
                 data-project-details={"1"}
               >
@@ -874,12 +877,12 @@ function PlasmicVersy__RenderFunc(props) {
                 }
               </div>
               <div
-                data-plasmic-name={"details28"}
-                data-plasmic-override={overrides.details28}
+                data-plasmic-name={"details31"}
+                data-plasmic-override={overrides.details31}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details28
+                  sty.details31
                 )}
                 data-project-details={"1"}
               >
@@ -891,7 +894,7 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__cNjs6
+                  sty.text__feeVl
                 )}
               >
                 {"Visual Identity "}
@@ -900,178 +903,835 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__jsxZ
+                  sty.text___3XOtv
                 )}
               >
                 {"How to shout tech pioneer without overdoing it"}
               </div>
               <div
-                data-plasmic-name={"details35"}
-                data-plasmic-override={overrides.details35}
+                data-plasmic-name={"details43"}
+                data-plasmic-override={overrides.details43}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details35
+                  sty.details43
                 )}
                 data-project-details={"1"}
               >
-                {"Testo da creare"}
+                {
+                  "This chapter presents the visual and structural foundations I created for Versy.\r\nThe system was designed to be scalable, modular, and future\u2011proof, supporting a product that evolved from early virtual\u2011experience concepts into a mature, AI\u2011powered enterprise platform.\n\n\r\nThe goal was to build a design language that communicates clarity, intelligence, and emotional impact, while remaining flexible enough to support a wide range of use cases\u2014from marketing to product UI to immersive 3D environments.\r"
+                }
               </div>
-              <div className={classNames(projectcss.all, sty.freeBox__zykqu)}>
-                <div
-                  data-plasmic-name={"palette"}
-                  data-plasmic-override={overrides.palette}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#9D3C3A"}
-                </div>
-                <div
-                  data-plasmic-name={"palette2"}
-                  data-plasmic-override={overrides.palette2}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette2
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#BC4749"}
-                </div>
-                <div
-                  data-plasmic-name={"palette3"}
-                  data-plasmic-override={overrides.palette3}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette3
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#DE5753"}
-                </div>
-                <div
-                  data-plasmic-name={"palette4"}
-                  data-plasmic-override={overrides.palette4}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette4
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#D07D82"}
-                </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__klaQ5
+                )}
+              >
+                {"LOGO SYSTEM"}
               </div>
-              <div className={classNames(projectcss.all, sty.freeBox__uk55R)}>
-                <div
-                  data-plasmic-name={"palette5"}
-                  data-plasmic-override={overrides.palette5}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette5
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#3D6234"}
-                </div>
-                <div
-                  data-plasmic-name={"palette6"}
-                  data-plasmic-override={overrides.palette6}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette6
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#6A994E"}
-                </div>
-                <div
-                  data-plasmic-name={"palette7"}
-                  data-plasmic-override={overrides.palette7}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette7
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#8ABD61"}
-                </div>
-                <div
-                  data-plasmic-name={"palette8"}
-                  data-plasmic-override={overrides.palette8}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette8
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#ACD08F"}
-                </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__leySq
+                )}
+              >
+                {"WhiteSpace"}
               </div>
-              <div className={classNames(projectcss.all, sty.freeBox__lB6Kb)}>
-                <div
-                  data-plasmic-name={"palette9"}
-                  data-plasmic-override={overrides.palette9}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette9
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#4C3918"}
+              <div
+                data-plasmic-name={"details50"}
+                data-plasmic-override={overrides.details50}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details50
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "The Versy logo is built around balance and clarity.\r\nTo preserve its legibility and presence, I defined a strict whitespace rule based on the height of the \u201cV\u201d symbol.\r A minimum of A/3 spacing must surround the logo, ensuring it never feels constrained or visually crowded.\r\n"
+                }
+              </div>
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__xVkNg)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={{
+                  src: image134JH85Mesa6R,
+                  fullWidth: 509,
+                  fullHeight: 475,
+                  aspectRatio: undefined
+                }}
+              />
+
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__wDmd
+                )}
+              >
+                {"Variants"}
+              </div>
+              <div
+                data-plasmic-name={"details51"}
+                data-plasmic-override={overrides.details51}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details51
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "The system includes three primary variants:\r\n- Default Lockup: the full wordmark paired with the symbol\r\n- Icon: the standalone \u201cV\u201d for compact or square formats\r\n- Horizontal Lockup: optimised for navigation bars and tight horizontal spaces\n\r\nEach variant is designed to maintain brand recognition across different contexts and screen sizes.\r"
+                }
+              </div>
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__z8LYj)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"100%"}
+                loading={"lazy"}
+                src={{
+                  src: image15DGyvz3V0Y9B,
+                  fullWidth: 1580,
+                  fullHeight: 328,
+                  aspectRatio: undefined
+                }}
+              />
+
+              <div
+                data-plasmic-name={"details52"}
+                data-plasmic-override={overrides.details52}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details52
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "The logo supports:\r\n- Primary Magenta (Viva Magenta 500)\r\n- Secondary Purple (Cool Purple 500)\r\n- Ink Neutrals for dark or light backgrounds\r\n\r\nThese variations ensure the logo remains accessible and consistent across light, dark, and gradient surfaces.\r"
+                }
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__qrQbr)}>
+                <div className={classNames(projectcss.all, sty.freeBox__rhOsd)}>
+                  <PlasmicImg__
+                    alt={""}
+                    className={classNames(sty.img__y3QG7)}
+                    displayHeight={"auto"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"auto"}
+                    loading={"lazy"}
+                    src={{
+                      src: image17NcvdC4S7Il,
+                      fullWidth: 167,
+                      fullHeight: 146,
+                      aspectRatio: undefined
+                    }}
+                  />
+                </div>
+                <div className={classNames(projectcss.all, sty.freeBox__au5QB)}>
+                  <PlasmicImg__
+                    alt={""}
+                    className={classNames(sty.img__sVsv8)}
+                    displayHeight={"auto"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"auto"}
+                    loading={"lazy"}
+                    src={{
+                      src: image16YjOimtVJnkgq,
+                      fullWidth: 167,
+                      fullHeight: 146,
+                      aspectRatio: undefined
+                    }}
+                  />
+                </div>
+                <div className={classNames(projectcss.all, sty.freeBox___6Cxi)}>
+                  <PlasmicImg__
+                    alt={""}
+                    className={classNames(sty.img__tyBNs)}
+                    displayHeight={"auto"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"auto"}
+                    loading={"lazy"}
+                    src={{
+                      src: image16YjOimtVJnkgq,
+                      fullWidth: 167,
+                      fullHeight: 146,
+                      aspectRatio: undefined
+                    }}
+                  />
                 </div>
                 <div
-                  data-plasmic-name={"palette10"}
-                  data-plasmic-override={overrides.palette10}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette10
-                  )}
-                  data-project-details={"1"}
+                  className={classNames(projectcss.all, sty.freeBox___4K5Uq)}
                 >
-                  {"#756344"}
-                </div>
-                <div
-                  data-plasmic-name={"palette11"}
-                  data-plasmic-override={overrides.palette11}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette11
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#EBDAB8"}
-                </div>
-                <div
-                  data-plasmic-name={"palette12"}
-                  data-plasmic-override={overrides.palette12}
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.palette12
-                  )}
-                  data-project-details={"1"}
-                >
-                  {"#F4ECD8"}
+                  <PlasmicImg__
+                    alt={""}
+                    className={classNames(sty.img__y8Anw)}
+                    displayHeight={"auto"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"auto"}
+                    loading={"lazy"}
+                    src={{
+                      src: image18OlKtNglWbKob,
+                      fullWidth: 167,
+                      fullHeight: 146,
+                      aspectRatio: undefined
+                    }}
+                  />
                 </div>
               </div>
               <div
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__wWc13
+                  sty.text__nol3K
+                )}
+              >
+                {"Best Practices"}
+              </div>
+              <div
+                data-plasmic-name={"details53"}
+                data-plasmic-override={overrides.details53}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details53
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "To maintain brand integrity:\r\n- Use only approved brand colors\r\n- Ensure sufficient contrast with the background\r\n- Avoid placing the logo on visually noisy surfaces\r\n- Never pair the Versy icon with another brand name\r\n- Never alter the typography of the wordmark\n\n\r\nThese rules protect the logo\u2019s clarity and prevent misrepresentation.\r"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__gkVx
+                )}
+              >
+                {"Color System"}
+              </div>
+              <div
+                data-plasmic-name={"details54"}
+                data-plasmic-override={overrides.details54}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details54
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "Primary, Secondary, Ink, Accent\r\nThe Versy palette is built around six functional color groups:\r\n- Primary \u2014 Viva Magenta (brand identity)\r\n- Secondary \u2014 Cool Purple (supporting brand tone)\r\n- Ink \u2014 a full neutral scale for text, surfaces, and UI\r\n- Accent \u2014 Yellow for highlights and CTAs\r\n- Danger / Warning / Success \u2014 semantic colors for product UI\r\n- Highlight \u2014 subtle tones for emphasis\r\nThe palette is expressive enough for marketing, yet structured enough for enterprise interfaces.\r\n"
+                }
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox___7Ahlb)}>
+                <div
+                  data-plasmic-name={"palette26"}
+                  data-plasmic-override={overrides.palette26}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette26
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"PRIMARY\nViva Magenta\n#D92650"}
+                </div>
+                <div
+                  data-plasmic-name={"palette32"}
+                  data-plasmic-override={overrides.palette32}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette32
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"SECONDARY\nCool Purple\n#BF00FF\n"}
+                </div>
+                <div
+                  data-plasmic-name={"palette33"}
+                  data-plasmic-override={overrides.palette33}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette33
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"INK\nWhite\n#F5F5F6"}
+                </div>
+                <div
+                  data-plasmic-name={"palette34"}
+                  data-plasmic-override={overrides.palette34}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette34
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"INK\nVersy Black\n#07071B"}
+                </div>
+                <div
+                  data-plasmic-name={"palette35"}
+                  data-plasmic-override={overrides.palette35}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette35
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"ACCENT\nYellow\n#FFCC2F"}
+                </div>
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox___1B9SA)}>
+                <div
+                  data-plasmic-name={"palette27"}
+                  data-plasmic-override={overrides.palette27}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette27
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"DANGER\nBright Orange\n#FF8C2E"}
+                </div>
+                <div
+                  data-plasmic-name={"palette36"}
+                  data-plasmic-override={overrides.palette36}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette36
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"WARNING\nDanger Red\n#BF00FF\n"}
+                </div>
+                <div
+                  data-plasmic-name={"palette37"}
+                  data-plasmic-override={overrides.palette37}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette37
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"SUCCESS\nGrant Green\n#3CE51A"}
+                </div>
+                <div
+                  data-plasmic-name={"palette38"}
+                  data-plasmic-override={overrides.palette38}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette38
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"INK\nVersy Black\n#1AA1E5"}
+                </div>
+              </div>
+              <div
+                data-plasmic-name={"details55"}
+                data-plasmic-override={overrides.details55}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details55
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "\r\nThe palette is expressive enough for marketing, yet structured enough for enterprise interfaces.\r\n"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___55OUk
+                )}
+              >
+                {"Gradients"}
+              </div>
+              <div
+                data-plasmic-name={"details56"}
+                data-plasmic-override={overrides.details56}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details56
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "The signature gradient blends the main brand colours into an interesting mixture."
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___28OfF
+                )}
+              >
+                {"Viva Magenta \u2192 Cool Purple\r\n\r"}
+              </div>
+              <div
+                data-plasmic-name={"details57"}
+                data-plasmic-override={overrides.details57}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details57
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "This gradient expresses Versy\u2019s emotional and technological duality: warm, human, and expressive on one side; cool, structured, and technical on the other."
+                }
+              </div>
+              <div
+                data-plasmic-name={"palette28"}
+                data-plasmic-override={overrides.palette28}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.palette28
+                )}
+                data-project-details={"1"}
+              >
+                {"#BF00FF\nto\n#D92650"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__vskCe
+                )}
+              >
+                {"Color VariationS"}
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__tmLhH)}>
+                <div
+                  data-plasmic-name={"palette47"}
+                  data-plasmic-override={overrides.palette47}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette47
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"INK 20\nBright Surface\n#DEDEE2"}
+                </div>
+                <div
+                  data-plasmic-name={"palette40"}
+                  data-plasmic-override={overrides.palette40}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette40
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"INK 50\nLight Surface\n#C1C1C9"}
+                </div>
+                <div
+                  data-plasmic-name={"palette41"}
+                  data-plasmic-override={overrides.palette41}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette41
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"INK 600\nGrey Surface\n#313147"}
+                </div>
+                <div
+                  data-plasmic-name={"palette42"}
+                  data-plasmic-override={overrides.palette42}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette42
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"INK 700\nDark Surface\n#202037"}
+                </div>
+                <div
+                  data-plasmic-name={"palette48"}
+                  data-plasmic-override={overrides.palette48}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette48
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"INK 800\nDark Surface\n#111129"}
+                </div>
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__lysiV)}>
+                <div
+                  data-plasmic-name={"palette30"}
+                  data-plasmic-override={overrides.palette30}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette30
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"PRIMARY\n400\nLight Magenta\n#E15173"}
+                </div>
+                <div
+                  data-plasmic-name={"palette31"}
+                  data-plasmic-override={overrides.palette31}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette31
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"PRIMARY\n700\nDark Magenta\n#9A1B39"}
+                </div>
+                <div
+                  data-plasmic-name={"palette39"}
+                  data-plasmic-override={overrides.palette39}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette39
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"PRIMARY\n900\nDeep Magenta\n#5B1022"}
+                </div>
+                <div
+                  data-plasmic-name={"palette43"}
+                  data-plasmic-override={overrides.palette43}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette43
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"SECONDARY 400\nLight Purple\n#CC33FF"}
+                </div>
+                <div
+                  data-plasmic-name={"palette49"}
+                  data-plasmic-override={overrides.palette49}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.palette49
+                  )}
+                  data-project-details={"1"}
+                >
+                  {"SECONDARY\n700\nDark Purple\n#8800B5"}
+                </div>
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__corpm
+                )}
+              >
+                {"Typography"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__hrei4
+                )}
+              >
+                {"RED HAT"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__u49Ik
+                )}
+              >
+                {"Spacing & Grids"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__fpKg9
+                )}
+              >
+                {"4px Baseline"}
+              </div>
+              <div
+                data-plasmic-name={"details68"}
+                data-plasmic-override={overrides.details68}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details68
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "The entire system is built on a 4px baseline grid, ensuring:\r\n- predictable spacing\r\n- clean alignment\r\n- scalable components\n\r\nThis grid applies to all elements, including icons, cards, and layout structures.\r"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__w5NyH
+                )}
+              >
+                {"Layout Grids"}
+              </div>
+              <div
+                data-plasmic-name={"details60"}
+                data-plasmic-override={overrides.details60}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details60
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "To support responsive design:\r\n- Desktop: 8 columns, 64px margins, 24px gutter\r\n- Tablet: 6 columns, 64px margins, 24px gutter\r\n- Mobile: 4 columns, 64px margins, 24px gutter\r\nThese grids ensure consistency across marketing pages, dashboards, and immersive UI.\r"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__aAvXq
+                )}
+              >
+                {"Component Spacing Rules"}
+              </div>
+              <div
+                data-plasmic-name={"details59"}
+                data-plasmic-override={overrides.details59}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details59
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "Component spacing is tied to text.rounded.size, ensuring proportionality:\r\n- Margins: text.rounded.size / 2\r\n- Padding: text.rounded.size\r\n- Corner radius: text.rounded.size / 2\r\nThis creates a system where typography and spacing are intrinsically linked.\r"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__n1N
+                )}
+              >
+                {"Voice & Tone"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__kiJLd
+                )}
+              >
+                {"Tone Characteristics"}
+              </div>
+              <div
+                data-plasmic-name={"details61"}
+                data-plasmic-override={overrides.details61}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details61
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "Versy\u2019s tone is:\r\n- Friendly but not casual\r\n- Informative but not technical\r\n- Professional but not cold\r\n- Clear and concise\r\nThe goal is to communicate complex ideas in a way that feels accessible and human.\r\n"
+                }
+              </div>
+              <div
+                data-plasmic-name={"details62"}
+                data-plasmic-override={overrides.details62}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details62
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "Do:\r\n\u201cOur platform allows businesses to easily create and share virtual experiences that engage audiences in new ways.\u201d\r\nDon\u2019t:\r\n\u201cYo, check out our dope virtual experience platform.\u201d\r\n\n- Do: Use simple, direct language\r\n- Do: Explain technical concepts without jargon\r\n- Don\u2019t: Over\u2011promise or use hype language\r\n- Don\u2019t: Use slang or overly casual expressions\r"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__mBGzz
+                )}
+              >
+                {"Voice & Tone"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__e4RY
+                )}
+              >
+                {"Buttons"}
+              </div>
+              <div
+                data-plasmic-name={"details63"}
+                data-plasmic-override={overrides.details63}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details63
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "- Built on the 4px grid\r\n- Use Accent Yellow for primary CTAs\r\n- Use Ink neutrals for secondary actions\r\n- Maintain consistent padding based on text size\r\n"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__zoBst
+                )}
+              >
+                {"Cards"}
+              </div>
+              <div
+                data-plasmic-name={"details64"}
+                data-plasmic-override={overrides.details64}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details64
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "- Floating, soft\u2011shadowed surfaces\r\n- Rounded corners based on text.rounded.size\r\n- Designed to hold modular content blocks\r\n"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__rr4Kb
+                )}
+              >
+                {"Layouts"}
+              </div>
+              <div
+                data-plasmic-name={"details65"}
+                data-plasmic-override={overrides.details65}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details65
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "- Built on the responsive grid system\r\n- Support both marketing and product UI\r\n- Use generous whitespace to maintain clarity\r\n"
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___21Kb6
+                )}
+              >
+                {"UI Patterns"}
+              </div>
+              <div
+                data-plasmic-name={"details66"}
+                data-plasmic-override={overrides.details66}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details66
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "- Modular blocks that reflect Versy\u2019s no\u2011code philosophy\r\n- Clear hierarchy using typography and spacing\r\n- Semantic colors for system feedback\r\n"
+                }
+              </div>
+              <div
+                data-plasmic-name={"details67"}
+                data-plasmic-override={overrides.details67}
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.details67
+                )}
+                data-project-details={"1"}
+              >
+                {
+                  "These components form the building blocks of a scalable, enterprise\u2011ready interface system."
+                }
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__hVfgX
                 )}
               >
                 {"Versy: Then vs. Now"}
@@ -1080,36 +1740,27 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text___9OG
+                  sty.text__lDtc
                 )}
               >
-                {"A Strategic Evolution"}
+                {"A Strategic Evolution\nWhat I Would Improve Today?"}
               </div>
               <div
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__gtr4V
-                )}
-              >
-                {"What I Would Improve Today?"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__oehGr
+                  sty.text__eTBoQ
                 )}
               >
                 {"Introduce a More Modular, Product\u2011Centric Visual System"}
               </div>
               <div
-                data-plasmic-name={"details36"}
-                data-plasmic-override={overrides.details36}
+                data-plasmic-name={"details44"}
+                data-plasmic-override={overrides.details44}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details36
+                  sty.details44
                 )}
                 data-project-details={"1"}
               >
@@ -1121,18 +1772,18 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__uEu5X
+                  sty.text__giqKy
                 )}
               >
                 {"Strengthen Accessibility & Contrast Rules"}
               </div>
               <div
-                data-plasmic-name={"details37"}
-                data-plasmic-override={overrides.details37}
+                data-plasmic-name={"details45"}
+                data-plasmic-override={overrides.details45}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details37
+                  sty.details45
                 )}
                 data-project-details={"1"}
               >
@@ -1144,18 +1795,18 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__uKiYd
+                  sty.text__vf3Oh
                 )}
               >
                 {"Expand the Voice & Tone Guidelines"}
               </div>
               <div
-                data-plasmic-name={"details38"}
-                data-plasmic-override={overrides.details38}
+                data-plasmic-name={"details46"}
+                data-plasmic-override={overrides.details46}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details38
+                  sty.details46
                 )}
                 data-project-details={"1"}
               >
@@ -1167,18 +1818,18 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__phG7I
+                  sty.text__xkFgN
                 )}
               >
                 {"Add a Full Component Library for Product UI"}
               </div>
               <div
-                data-plasmic-name={"details40"}
-                data-plasmic-override={overrides.details40}
+                data-plasmic-name={"details47"}
+                data-plasmic-override={overrides.details47}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details40
+                  sty.details47
                 )}
                 data-project-details={"1"}
               >
@@ -1190,18 +1841,18 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__yqiCx
+                  sty.text__cnIb4
                 )}
               >
                 {"Align the Brand More Closely with Real Business Use Cases"}
               </div>
               <div
-                data-plasmic-name={"details41"}
-                data-plasmic-override={overrides.details41}
+                data-plasmic-name={"details48"}
+                data-plasmic-override={overrides.details48}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details41
+                  sty.details48
                 )}
                 data-project-details={"1"}
               >
@@ -1213,7 +1864,7 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__wHwiu
+                  sty.text__y4XfM
                 )}
               >
                 {"The result"}
@@ -1222,18 +1873,18 @@ function PlasmicVersy__RenderFunc(props) {
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.text__il7Cr
+                  sty.text___6Xrf4
                 )}
               >
                 {"An overview on growing"}
               </div>
               <div
-                data-plasmic-name={"details34"}
-                data-plasmic-override={overrides.details34}
+                data-plasmic-name={"details49"}
+                data-plasmic-override={overrides.details49}
                 className={classNames(
                   projectcss.all,
                   projectcss.__wab_text,
-                  sty.details34
+                  sty.details49
                 )}
                 data-project-details={"1"}
               >
@@ -1243,6 +1894,17 @@ function PlasmicVersy__RenderFunc(props) {
               </div>
             </nav>
           </section>
+          <SiteHeader
+            data-plasmic-name={"siteHeader"}
+            data-plasmic-override={overrides.siteHeader}
+            className={classNames("__wab_instance", sty.siteHeader)}
+          />
+
+          <SiteFooter
+            data-plasmic-name={"siteFooter"}
+            data-plasmic-override={overrides.siteFooter}
+            className={classNames("__wab_instance", sty.siteFooter)}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -1274,37 +1936,61 @@ const PlasmicDescendants = {
     "details32",
     "details39",
     "details23",
-    "details30",
-    "details25",
-    "details24",
-    "tilt",
-    "img",
-    "details22",
-    "projectDescription5",
-    "details26",
+    "glasscard2",
+    "details34",
     "details27",
-    "projectDescription6",
-    "details33",
     "details28",
     "details35",
-    "palette",
-    "palette2",
-    "palette3",
-    "palette4",
-    "palette5",
-    "palette6",
-    "palette7",
-    "palette8",
-    "palette9",
-    "palette10",
-    "palette11",
-    "palette12",
-    "details36",
-    "details37",
-    "details38",
-    "details40",
-    "details41",
-    "details34"
+    "projectDescription7",
+    "details42",
+    "details31",
+    "details43",
+    "details50",
+    "details51",
+    "details52",
+    "details53",
+    "details54",
+    "palette26",
+    "palette32",
+    "palette33",
+    "palette34",
+    "palette35",
+    "palette27",
+    "palette36",
+    "palette37",
+    "palette38",
+    "details55",
+    "details56",
+    "details57",
+    "palette28",
+    "palette47",
+    "palette40",
+    "palette41",
+    "palette42",
+    "palette48",
+    "palette30",
+    "palette31",
+    "palette39",
+    "palette43",
+    "palette49",
+    "details68",
+    "details60",
+    "details59",
+    "details61",
+    "details62",
+    "details63",
+    "details64",
+    "details65",
+    "details66",
+    "details67",
+    "details44",
+    "details45",
+    "details46",
+    "details47",
+    "details48",
+    "details49",
+    "siteHeader",
+    "siteFooter"
   ],
 
   hero: [
@@ -1364,61 +2050,111 @@ const PlasmicDescendants = {
   details32: ["details32"],
   details39: ["details39"],
   details23: ["details23"],
-  details30: ["details30"],
-  details25: ["details25"],
-  details24: ["details24"],
-  tilt: ["tilt", "img"],
-  img: ["img"],
-  details22: ["details22"],
-  projectDescription5: ["projectDescription5", "details26", "details27"],
-  details26: ["details26"],
+  glasscard2: ["glasscard2"],
+  details34: ["details34"],
   details27: ["details27"],
-  projectDescription6: [
-    "projectDescription6",
-    "details33",
-    "details28",
-    "details35",
-    "palette",
-    "palette2",
-    "palette3",
-    "palette4",
-    "palette5",
-    "palette6",
-    "palette7",
-    "palette8",
-    "palette9",
-    "palette10",
-    "palette11",
-    "palette12",
-    "details36",
-    "details37",
-    "details38",
-    "details40",
-    "details41",
-    "details34"
-  ],
-
-  details33: ["details33"],
   details28: ["details28"],
   details35: ["details35"],
-  palette: ["palette"],
-  palette2: ["palette2"],
-  palette3: ["palette3"],
-  palette4: ["palette4"],
-  palette5: ["palette5"],
-  palette6: ["palette6"],
-  palette7: ["palette7"],
-  palette8: ["palette8"],
-  palette9: ["palette9"],
-  palette10: ["palette10"],
-  palette11: ["palette11"],
-  palette12: ["palette12"],
-  details36: ["details36"],
-  details37: ["details37"],
-  details38: ["details38"],
-  details40: ["details40"],
-  details41: ["details41"],
-  details34: ["details34"]
+  projectDescription7: [
+    "projectDescription7",
+    "details42",
+    "details31",
+    "details43",
+    "details50",
+    "details51",
+    "details52",
+    "details53",
+    "details54",
+    "palette26",
+    "palette32",
+    "palette33",
+    "palette34",
+    "palette35",
+    "palette27",
+    "palette36",
+    "palette37",
+    "palette38",
+    "details55",
+    "details56",
+    "details57",
+    "palette28",
+    "palette47",
+    "palette40",
+    "palette41",
+    "palette42",
+    "palette48",
+    "palette30",
+    "palette31",
+    "palette39",
+    "palette43",
+    "palette49",
+    "details68",
+    "details60",
+    "details59",
+    "details61",
+    "details62",
+    "details63",
+    "details64",
+    "details65",
+    "details66",
+    "details67",
+    "details44",
+    "details45",
+    "details46",
+    "details47",
+    "details48",
+    "details49"
+  ],
+
+  details42: ["details42"],
+  details31: ["details31"],
+  details43: ["details43"],
+  details50: ["details50"],
+  details51: ["details51"],
+  details52: ["details52"],
+  details53: ["details53"],
+  details54: ["details54"],
+  palette26: ["palette26"],
+  palette32: ["palette32"],
+  palette33: ["palette33"],
+  palette34: ["palette34"],
+  palette35: ["palette35"],
+  palette27: ["palette27"],
+  palette36: ["palette36"],
+  palette37: ["palette37"],
+  palette38: ["palette38"],
+  details55: ["details55"],
+  details56: ["details56"],
+  details57: ["details57"],
+  palette28: ["palette28"],
+  palette47: ["palette47"],
+  palette40: ["palette40"],
+  palette41: ["palette41"],
+  palette42: ["palette42"],
+  palette48: ["palette48"],
+  palette30: ["palette30"],
+  palette31: ["palette31"],
+  palette39: ["palette39"],
+  palette43: ["palette43"],
+  palette49: ["palette49"],
+  details68: ["details68"],
+  details60: ["details60"],
+  details59: ["details59"],
+  details61: ["details61"],
+  details62: ["details62"],
+  details63: ["details63"],
+  details64: ["details64"],
+  details65: ["details65"],
+  details66: ["details66"],
+  details67: ["details67"],
+  details44: ["details44"],
+  details45: ["details45"],
+  details46: ["details46"],
+  details47: ["details47"],
+  details48: ["details48"],
+  details49: ["details49"],
+  siteHeader: ["siteHeader"],
+  siteFooter: ["siteFooter"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -1475,37 +2211,61 @@ export const PlasmicVersy = Object.assign(
     details32: makeNodeComponent("details32"),
     details39: makeNodeComponent("details39"),
     details23: makeNodeComponent("details23"),
-    details30: makeNodeComponent("details30"),
-    details25: makeNodeComponent("details25"),
-    details24: makeNodeComponent("details24"),
-    tilt: makeNodeComponent("tilt"),
-    img: makeNodeComponent("img"),
-    details22: makeNodeComponent("details22"),
-    projectDescription5: makeNodeComponent("projectDescription5"),
-    details26: makeNodeComponent("details26"),
+    glasscard2: makeNodeComponent("glasscard2"),
+    details34: makeNodeComponent("details34"),
     details27: makeNodeComponent("details27"),
-    projectDescription6: makeNodeComponent("projectDescription6"),
-    details33: makeNodeComponent("details33"),
     details28: makeNodeComponent("details28"),
     details35: makeNodeComponent("details35"),
-    palette: makeNodeComponent("palette"),
-    palette2: makeNodeComponent("palette2"),
-    palette3: makeNodeComponent("palette3"),
-    palette4: makeNodeComponent("palette4"),
-    palette5: makeNodeComponent("palette5"),
-    palette6: makeNodeComponent("palette6"),
-    palette7: makeNodeComponent("palette7"),
-    palette8: makeNodeComponent("palette8"),
-    palette9: makeNodeComponent("palette9"),
-    palette10: makeNodeComponent("palette10"),
-    palette11: makeNodeComponent("palette11"),
-    palette12: makeNodeComponent("palette12"),
-    details36: makeNodeComponent("details36"),
-    details37: makeNodeComponent("details37"),
-    details38: makeNodeComponent("details38"),
-    details40: makeNodeComponent("details40"),
-    details41: makeNodeComponent("details41"),
-    details34: makeNodeComponent("details34"),
+    projectDescription7: makeNodeComponent("projectDescription7"),
+    details42: makeNodeComponent("details42"),
+    details31: makeNodeComponent("details31"),
+    details43: makeNodeComponent("details43"),
+    details50: makeNodeComponent("details50"),
+    details51: makeNodeComponent("details51"),
+    details52: makeNodeComponent("details52"),
+    details53: makeNodeComponent("details53"),
+    details54: makeNodeComponent("details54"),
+    palette26: makeNodeComponent("palette26"),
+    palette32: makeNodeComponent("palette32"),
+    palette33: makeNodeComponent("palette33"),
+    palette34: makeNodeComponent("palette34"),
+    palette35: makeNodeComponent("palette35"),
+    palette27: makeNodeComponent("palette27"),
+    palette36: makeNodeComponent("palette36"),
+    palette37: makeNodeComponent("palette37"),
+    palette38: makeNodeComponent("palette38"),
+    details55: makeNodeComponent("details55"),
+    details56: makeNodeComponent("details56"),
+    details57: makeNodeComponent("details57"),
+    palette28: makeNodeComponent("palette28"),
+    palette47: makeNodeComponent("palette47"),
+    palette40: makeNodeComponent("palette40"),
+    palette41: makeNodeComponent("palette41"),
+    palette42: makeNodeComponent("palette42"),
+    palette48: makeNodeComponent("palette48"),
+    palette30: makeNodeComponent("palette30"),
+    palette31: makeNodeComponent("palette31"),
+    palette39: makeNodeComponent("palette39"),
+    palette43: makeNodeComponent("palette43"),
+    palette49: makeNodeComponent("palette49"),
+    details68: makeNodeComponent("details68"),
+    details60: makeNodeComponent("details60"),
+    details59: makeNodeComponent("details59"),
+    details61: makeNodeComponent("details61"),
+    details62: makeNodeComponent("details62"),
+    details63: makeNodeComponent("details63"),
+    details64: makeNodeComponent("details64"),
+    details65: makeNodeComponent("details65"),
+    details66: makeNodeComponent("details66"),
+    details67: makeNodeComponent("details67"),
+    details44: makeNodeComponent("details44"),
+    details45: makeNodeComponent("details45"),
+    details46: makeNodeComponent("details46"),
+    details47: makeNodeComponent("details47"),
+    details48: makeNodeComponent("details48"),
+    details49: makeNodeComponent("details49"),
+    siteHeader: makeNodeComponent("siteHeader"),
+    siteFooter: makeNodeComponent("siteFooter"),
     // Metadata about props expected for PlasmicVersy
     internalVariantProps: PlasmicVersy__VariantProps,
     internalArgProps: PlasmicVersy__ArgProps,

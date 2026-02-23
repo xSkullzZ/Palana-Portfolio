@@ -18,13 +18,13 @@ import {
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
 import SiteHeader from "../../SiteHeader"; // plasmic-import: N2EmXWwtxdPX/component
-import HeroTopography from "../../HeroTopography"; // plasmic-import: jiWrq2otqjSL/codeComponent
-import ParticleHero from "../../ParticleHero"; // plasmic-import: DaOFkwlQNp2H/codeComponent
-import ImageReveal from "../../ImageReveal"; // plasmic-import: y9GA8gOL7hbN/codeComponent
-import AboutHorizontal2 from "../../AboutHorizontal2"; // plasmic-import: ly7oXzZR4mDW/codeComponent
+import { HeroTopography } from "../../HeroTopography"; // plasmic-import: jiWrq2otqjSL/codeComponent
+import { ParticleHero } from "../../ParticleHero"; // plasmic-import: DaOFkwlQNp2H/codeComponent
+import { ImageReveal } from "../../ImageReveal"; // plasmic-import: y9GA8gOL7hbN/codeComponent
+import { AboutHorizontal2 } from "../../AboutHorizontal2"; // plasmic-import: ly7oXzZR4mDW/codeComponent
 import SkillsSection from "../../SkillsSection"; // plasmic-import: fwQPOdwx7HmF/component
 import AiSys from "../../AiSys"; // plasmic-import: XaX9xed_u-2k/component
-import { CookieConsent } from "@plasmicpkgs/vanilla-cookieconsent";
+import { ContactFormCard } from "../../ContactFormCard"; // plasmic-import: 2LKy0tK2Wju8/codeComponent
 import SiteFooter from "../../SiteFooter"; // plasmic-import: cswDm0qYBFlc/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/styleTokensProvider
@@ -185,7 +185,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 const $steps = {};
                 $steps["goToMyBeppe"] = true
                   ? (() => {
-                      const actionArgs = { destination: `/project/my-beppe` };
+                      const actionArgs = { destination: `/projects/my-beppe` };
                       return (({ destination }) => {
                         if (
                           typeof destination === "string" &&
@@ -288,7 +288,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 const $steps = {};
                 $steps["goToMyBeppe"] = true
                   ? (() => {
-                      const actionArgs = { destination: `/project/my-beppe` };
+                      const actionArgs = { destination: `/projects/my-beppe` };
                       return (({ destination }) => {
                         if (
                           typeof destination === "string" &&
@@ -390,7 +390,6 @@ function PlasmicHomepage__RenderFunc(props) {
             data-plasmic-name={"skillsSection"}
             data-plasmic-override={overrides.skillsSection}
             className={classNames("__wab_instance", sty.skillsSection)}
-            id={"Skills"}
           />
 
           <AiSys
@@ -414,109 +413,14 @@ function PlasmicHomepage__RenderFunc(props) {
             >
               {"CONTACT"}
             </div>
+            <div className={classNames(projectcss.all, sty.freeBox__qIoUx)}>
+              <ContactFormCard
+                data-plasmic-name={"contactFormCard"}
+                data-plasmic-override={overrides.contactFormCard}
+                className={classNames("__wab_instance", sty.contactFormCard)}
+              />
+            </div>
           </section>
-          <CookieConsent
-            data-plasmic-name={"cookieConsent"}
-            data-plasmic-override={overrides.cookieConsent}
-            adsEnabled={false}
-            analyticsAutoClearCookies={"_ga,_gid"}
-            analyticsEnabled={false}
-            autoShow={true}
-            className={classNames("__wab_instance", sty.cookieConsent)}
-            consentModal={{
-              layout: "cloud inline",
-              position: "bottom center",
-              equalWeightButtons: true,
-              title: "We use cookies",
-              description: "Description text for the consent modal",
-              acceptAllBtn: "Accept all",
-              acceptNecessaryBtn: "Reject all",
-              showPreferencesBtn: "Manage Individual Preferences",
-              closeIconLabel: "Close",
-              revisionMessage: "",
-              footer:
-                '<a href="#path-to-impressum.html" target="_blank">Impressum</a><a href="#path-to-privacy-policy.html" target="_blank">Privacy Policy</a>'
-            }}
-            cookieExpiresAfterDays={182}
-            cookieName={"cc_cookie"}
-            cookiePath={"/"}
-            cookieSameSite={"Lax"}
-            cookieSecure={true}
-            cookieUseLocalStorage={false}
-            disablePageInteraction={false}
-            hideFromBots={true}
-            languageDefault={"en"}
-            mode={"opt-in"}
-            necessaryEnabled={true}
-            necessaryReadOnly={true}
-            preferencesModal={{
-              layout: "box",
-              equalWeightButtons: true,
-              flipButtons: false,
-              title: "Manage cookie preferences",
-              acceptAllBtn: "Accept all",
-              acceptNecessaryBtn: "Reject all",
-              savePreferencesBtn: "Accept current selection",
-              closeIconLabel: "Close modal",
-              serviceCounterLabel: "Service|Services"
-            }}
-            revision={0}
-            sections={[
-              {
-                title: "Your Privacy Choices",
-                description:
-                  'In this panel you can express some preferences related to the processing of your personal information. You may review and change expressed choices at any time by resurfacing this panel via the provided link. To deny your consent to the specific processing activities described below, switch the toggles to off or use the "Reject all" button and confirm you want to save your choices.'
-              },
-              {
-                title: "Strictly Necessary",
-                description:
-                  "These cookies are essential for the proper functioning of the website and cannot be disabled.",
-                linkedCategory: "necessary"
-              },
-              {
-                title: "Performance and Analytics",
-                description:
-                  "These cookies collect information about how you use our website. All of the data is anonymized and cannot be used to identify you.",
-                linkedCategory: "analytics",
-                cookieTable: {
-                  caption: "Cookie table",
-                  headers: {
-                    name: "Cookie",
-                    domain: "Domain",
-                    desc: "Description"
-                  },
-                  body: [
-                    {
-                      name: "_ga",
-                      domain: "example.com",
-                      desc: "Description 1"
-                    },
-                    {
-                      name: "_gid",
-                      domain: "example.com",
-                      desc: "Description 2"
-                    }
-                  ]
-                }
-              },
-              {
-                title: "Targeting and Advertising",
-                description:
-                  "These cookies are used to make advertising messages more relevant to you and your interests. The intention is to display ads that are relevant and engaging for the individual user and thereby more valuable for publishers and third party advertisers.",
-                linkedCategory: "ads"
-              },
-              {
-                title: "More information",
-                description:
-                  'For any queries in relation to my policy on cookies and your choices, please <a href="#contact-page">contact us</a>'
-              }
-            ]}
-            services={[
-              { key: "ga", label: "Google Analytics" },
-              { key: "youtube", label: "Youtube Embed" }
-            ]}
-          />
-
           <SiteFooter
             data-plasmic-name={"siteFooter"}
             data-plasmic-override={overrides.siteFooter}
@@ -546,7 +450,7 @@ const PlasmicDescendants = {
     "skillsSection",
     "aiSys",
     "contact",
-    "cookieConsent",
+    "contactFormCard",
     "siteFooter"
   ],
 
@@ -572,8 +476,8 @@ const PlasmicDescendants = {
   aboutHorizontal2: ["aboutHorizontal2"],
   skillsSection: ["skillsSection"],
   aiSys: ["aiSys"],
-  contact: ["contact"],
-  cookieConsent: ["cookieConsent"],
+  contact: ["contact", "contactFormCard"],
+  contactFormCard: ["contactFormCard"],
   siteFooter: ["siteFooter"]
 };
 
@@ -624,7 +528,7 @@ export const PlasmicHomepage = Object.assign(
     skillsSection: makeNodeComponent("skillsSection"),
     aiSys: makeNodeComponent("aiSys"),
     contact: makeNodeComponent("contact"),
-    cookieConsent: makeNodeComponent("cookieConsent"),
+    contactFormCard: makeNodeComponent("contactFormCard"),
     siteFooter: makeNodeComponent("siteFooter"),
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,

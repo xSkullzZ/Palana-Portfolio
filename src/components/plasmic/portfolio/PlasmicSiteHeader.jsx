@@ -23,10 +23,6 @@ import projectcss from "./plasmic.module.css"; // plasmic-import: vZ8YLJfMu4Bkb2
 import sty from "./PlasmicSiteHeader.module.css"; // plasmic-import: N2EmXWwtxdPX/css
 import logoOnDarkSvgWQVtk1Bauie from "./images/logoOnDarkSvg.svg"; // plasmic-import: w-qVtk1bauie/picture
 
-const HOME_BASE = import.meta.env.BASE_URL;
-const HOME_HASH = (hash) => `${HOME_BASE}#${hash}`;
-const CV_PATH = `${HOME_BASE}CV/ClaudioPalana_CV_EN_2026.pdf`;
-
 createPlasmicElementProxy;
 
 export const PlasmicSiteHeader__VariantProps = new Array();
@@ -75,25 +71,32 @@ function PlasmicSiteHeader__RenderFunc(props) {
         data-plasmic-override={overrides.wrapper}
         className={classNames(projectcss.all, sty.wrapper)}
       >
-        <PlasmicImg__
-          data-plasmic-name={"img"}
-          data-plasmic-override={overrides.img}
-          alt={""}
-          className={classNames(sty.img)}
-          displayHeight={"64px"}
-          displayMaxHeight={"none"}
-          displayMaxWidth={"none"}
-          displayMinHeight={"0"}
-          displayMinWidth={"0"}
-          displayWidth={"64px"}
-          src={{
-            src: logoOnDarkSvgWQVtk1Bauie,
-            fullWidth: 320,
-            fullHeight: 241,
-            aspectRatio: undefined
-          }}
-        />
-
+        <PlasmicLink__
+          data-plasmic-name={"homeButton"}
+          data-plasmic-override={overrides.homeButton}
+          className={classNames(projectcss.all, projectcss.a, sty.homeButton)}
+          href={`/`}
+          platform={"react"}
+        >
+          <PlasmicImg__
+            data-plasmic-name={"img"}
+            data-plasmic-override={overrides.img}
+            alt={""}
+            className={classNames(sty.img)}
+            displayHeight={"64px"}
+            displayMaxHeight={"none"}
+            displayMaxWidth={"none"}
+            displayMinHeight={"0"}
+            displayMinWidth={"0"}
+            displayWidth={"64px"}
+            src={{
+              src: logoOnDarkSvgWQVtk1Bauie,
+              fullWidth: 320,
+              fullHeight: 241,
+              aspectRatio: undefined
+            }}
+          />
+        </PlasmicLink__>
         <div
           data-plasmic-name={"links"}
           data-plasmic-override={overrides.links}
@@ -106,7 +109,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link__lzZiw
             )}
-            href={HOME_HASH("Projects")}
+            href={"./#Projects"}
             platform={"react"}
           >
             {"Projects"}
@@ -118,7 +121,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link__hKvHf
             )}
-            href={HOME_HASH("About")}
+            href={"./#About"}
             platform={"react"}
           >
             {"About"}
@@ -130,7 +133,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link__gBktF
             )}
-            href={HOME_HASH("Skills")}
+            href={"./#Skills"}
             platform={"react"}
           >
             {"Skills"}
@@ -142,7 +145,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link___9XW1F
             )}
-            href={CV_PATH}
+            href={"./CV/ClaudioPalana_CV_EN_2026.pdf"}
             platform={"react"}
             target={"_blank"}
           >
@@ -155,7 +158,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
               projectcss.__wab_text,
               sty.link___0HvZq
             )}
-            href={HOME_HASH("Contact")}
+            href={"./#Contact"}
             platform={"react"}
           >
             {"Contact"}
@@ -167,8 +170,9 @@ function PlasmicSiteHeader__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  header: ["header", "wrapper", "img", "links"],
-  wrapper: ["wrapper", "img", "links"],
+  header: ["header", "wrapper", "homeButton", "img", "links"],
+  wrapper: ["wrapper", "homeButton", "img", "links"],
+  homeButton: ["homeButton", "img"],
   img: ["img"],
   links: ["links"]
 };
@@ -206,6 +210,7 @@ export const PlasmicSiteHeader = Object.assign(
   {
     // Helper components rendering sub-elements
     wrapper: makeNodeComponent("wrapper"),
+    homeButton: makeNodeComponent("homeButton"),
     img: makeNodeComponent("img"),
     links: makeNodeComponent("links"),
     // Metadata about props expected for PlasmicSiteHeader

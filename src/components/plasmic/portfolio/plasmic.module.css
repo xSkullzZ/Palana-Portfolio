@@ -755,6 +755,13 @@
   --mixin-anXOwNtZqK5y_white-space: pre-wrap;
 }
 
+.plasmic_mixins {
+  --mixin-x2lWPxStsHVQ_box-shadow: 1px 4px 16px 2px rgba(0, 0, 0, 0.2);
+  --plasmic-mixin-glasscard_box-shadow: var(--mixin-x2lWPxStsHVQ_box-shadow);
+  --mixin-x2lWPxStsHVQ_white-space: pre-wrap;
+  --plasmic-mixin-glasscard_white-space: var(--mixin-x2lWPxStsHVQ_white-space);
+}
+
 :where(.all) {
   display: block;
   white-space: inherit;

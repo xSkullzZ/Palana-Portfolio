@@ -27506,6 +27506,46 @@
           "id": "4j-h85MESA6R",
           "name": "image 13",
           "filePath": "plasmic/portfolio/images/image13.png"
+        },
+        {
+          "id": "_Qs7No6Exfm_",
+          "name": "versybg.webp",
+          "filePath": "plasmic/portfolio/images/versybgWebp.webp"
+        },
+        {
+          "id": "uF0l9BpdFwLL",
+          "name": "versybg2.webp",
+          "filePath": "plasmic/portfolio/images/versybg2Webp.webp"
+        },
+        {
+          "id": "lJjEdINEtqqo",
+          "name": "image 14",
+          "filePath": "plasmic/portfolio/images/image14.webp"
+        },
+        {
+          "id": "DGyvz3V0y9B-",
+          "name": "image 15",
+          "filePath": "plasmic/portfolio/images/image15.png"
+        },
+        {
+          "id": "YJOimtVJnkgq",
+          "name": "image 16",
+          "filePath": "plasmic/portfolio/images/image16.svg"
+        },
+        {
+          "id": "Ncvd-C4s_7Il",
+          "name": "image 17",
+          "filePath": "plasmic/portfolio/images/image17.svg"
+        },
+        {
+          "id": "OLKtNglWbKOB",
+          "name": "image 18",
+          "filePath": "plasmic/portfolio/images/image18.svg"
+        },
+        {
+          "id": "0ppHlZsnyIUO",
+          "name": "metaverse-ai.webp",
+          "filePath": "plasmic/portfolio/images/metaverseAiWebp.webp"
         }
       ],
       "indirect": false,
@@ -27568,6 +27608,36 @@
           "name": "AboutHorizontal2",
           "displayName": "AboutHorizontal2",
           "componentImportPath": "./components/AboutHorizontal2"
+        },
+        {
+          "id": "2hamYNEeRFFN",
+          "name": "SiteHeader",
+          "displayName": "SiteHeader",
+          "componentImportPath": "./components/SiteHeader"
+        },
+        {
+          "id": "4fmJh-QoE7B1",
+          "name": "SkillsSection",
+          "displayName": "SkillsSection",
+          "componentImportPath": "./components/SkillsSection"
+        },
+        {
+          "id": "D0XJTKOpMH-E",
+          "name": "AiSys",
+          "displayName": "AiSys",
+          "componentImportPath": "./components/AiSys"
+        },
+        {
+          "id": "1BdUDrjUy4XI",
+          "name": "SiteFooter",
+          "displayName": "SiteFooter",
+          "componentImportPath": "./components/SiteFooter"
+        },
+        {
+          "id": "2LKy0tK2Wju8",
+          "name": "ContactFormCard",
+          "displayName": "ContactFormCard",
+          "componentImportPath": "./components/ContactFormCard"
         }
       ],
       "customFunctions": []

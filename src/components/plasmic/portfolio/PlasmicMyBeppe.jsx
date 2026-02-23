@@ -17,8 +17,10 @@ import {
   hasVariant
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import SiteHeader from "../../SiteHeader"; // plasmic-import: N2EmXWwtxdPX/component
 import { Reveal } from "@plasmicpkgs/react-awesome-reveal";
 import Tilt from "@plasmicpkgs/react-parallax-tilt";
+import SiteFooter from "../../SiteFooter"; // plasmic-import: cswDm0qYBFlc/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/styleTokensProvider
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -108,6 +110,12 @@ function PlasmicMyBeppe__RenderFunc(props) {
             sty.root
           )}
         >
+          <SiteHeader
+            data-plasmic-name={"siteHeader"}
+            data-plasmic-override={overrides.siteHeader}
+            className={classNames("__wab_instance", sty.siteHeader)}
+          />
+
           <section
             data-plasmic-name={"hero"}
             data-plasmic-override={overrides.hero}
@@ -1537,6 +1545,11 @@ function PlasmicMyBeppe__RenderFunc(props) {
               </div>
             </nav>
           </section>
+          <SiteFooter
+            data-plasmic-name={"siteFooter"}
+            data-plasmic-override={overrides.siteFooter}
+            className={classNames("__wab_instance", sty.siteFooter)}
+          />
         </div>
       </div>
     </React.Fragment>
@@ -1546,6 +1559,7 @@ function PlasmicMyBeppe__RenderFunc(props) {
 const PlasmicDescendants = {
   root: [
     "root",
+    "siteHeader",
     "hero",
     "beppeLogo",
     "details2",
@@ -1602,9 +1616,11 @@ const PlasmicDescendants = {
     "palette10",
     "palette11",
     "palette12",
-    "details34"
+    "details34",
+    "siteFooter"
   ],
 
+  siteHeader: ["siteHeader"],
   hero: [
     "hero",
     "beppeLogo",
@@ -1704,7 +1720,8 @@ const PlasmicDescendants = {
   palette10: ["palette10"],
   palette11: ["palette11"],
   palette12: ["palette12"],
-  details34: ["details34"]
+  details34: ["details34"],
+  siteFooter: ["siteFooter"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -1739,6 +1756,7 @@ export const PlasmicMyBeppe = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    siteHeader: makeNodeComponent("siteHeader"),
     hero: makeNodeComponent("hero"),
     beppeLogo: makeNodeComponent("beppeLogo"),
     details2: makeNodeComponent("details2"),
@@ -1796,6 +1814,7 @@ export const PlasmicMyBeppe = Object.assign(
     palette11: makeNodeComponent("palette11"),
     palette12: makeNodeComponent("palette12"),
     details34: makeNodeComponent("details34"),
+    siteFooter: makeNodeComponent("siteFooter"),
     // Metadata about props expected for PlasmicMyBeppe
     internalVariantProps: PlasmicMyBeppe__VariantProps,
     internalArgProps: PlasmicMyBeppe__ArgProps,

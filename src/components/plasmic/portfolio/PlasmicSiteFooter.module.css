@@ -58,6 +58,17 @@
     min-width: 0;
   }
 }
+.link__vPxya {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  padding: 8px;
+}
 .img {
   animation: none;
   object-fit: contain;

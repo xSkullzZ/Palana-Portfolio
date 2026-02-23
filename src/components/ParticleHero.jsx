@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 /**
  * ParticleHero — HEADER ONLY (Plasmic-friendly)
@@ -52,13 +52,13 @@ const RESPONSIVE_CONFIG = {
         lineHeight: 1.1,
     },
     mobile: {
-        particleSize: 1.1,
+        particleSize: 1.0,
         spacing: 3,
-        baseFontSize: 46,
-        minFontSize: 18,
-        textMaxWidthRatio: 0.9,
-        textMaxHeightRatio: 0.75,
-        lineHeight: 1.2,
+        baseFontSize: 32,
+        minFontSize: 14,
+        textMaxWidthRatio: 0.88,
+        textMaxHeightRatio: 0.65,
+        lineHeight: 1.15,
     },
 };
 
@@ -126,9 +126,16 @@ export function ParticleHero({
                 baseFontSize,
                 minFontSize,
             };
-            const responsive = isMobile
-                ? RESPONSIVE_CONFIG.mobile
-                : RESPONSIVE_CONFIG.desktop;
+            let responsive = isMobile
+                ? { ...RESPONSIVE_CONFIG.mobile }
+                : { ...RESPONSIVE_CONFIG.desktop };
+            
+            if (isMobile && currentWidth < 400) {
+                responsive.baseFontSize = Math.min(responsive.baseFontSize || 32, 26);
+                responsive.minFontSize = Math.min(responsive.minFontSize || 14, 12);
+                responsive.textMaxWidthRatio = Math.min(responsive.textMaxWidthRatio || 0.88, 0.85);
+            }
+            
             const baseSize =
                 typeof responsive.particleSize === "number"
                     ? responsive.particleSize
@@ -243,7 +250,7 @@ export function ParticleHero({
                     0
                 );
                 if (widest <= maxWidth && totalHeight <= maxHeight) break;
-                fontSize -= 2;
+                fontSize -= fontSize > 24 ? 3 : 2;
             }
 
             ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;

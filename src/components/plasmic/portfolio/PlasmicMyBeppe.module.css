@@ -21,6 +21,19 @@
 .root > * {
   grid-column: 4;
 }
+.siteHeader:global(.__wab_instance) {
+  animation: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .siteHeader:global(.__wab_instance) {
+    animation: none;
+  }
+}
 .hero {
   display: grid;
   position: relative;
@@ -2450,5 +2463,21 @@
 @media (min-width: 0px) and (max-width: 768px) {
   .details34 {
     animation: none;
+  }
+}
+.siteFooter:global(.__wab_instance) {
+  animation: none;
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  z-index: 99;
+}
+@media (min-width: 0px) and (max-width: 768px) {
+  .siteFooter:global(.__wab_instance) {
+    animation: none;
+    left: auto;
+    top: auto;
+    right: auto;
   }
 }
