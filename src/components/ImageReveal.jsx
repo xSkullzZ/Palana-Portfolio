@@ -40,9 +40,9 @@ Based on team research, I crafted a new interface system that blends emotional s
       summary: `A brand built for the future of digital experiences.
 I created the entire visual identity and design system, laying the foundation for a product that evolved across trends into a mature, enterprise-ready solution.`,
     logoImage: `${BASE_URL}Versy/VersyTriangleWhite.svg`,
-    cursorImage: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+      cursorImage: `${BASE_URL}Versy/versycover.jpg`,
     backgroundVideo: `${BASE_URL}Versy/versydemo.mp4`,
-    backgroundImage: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=2000&auto=format&fit=crop",
+      backgroundImage: `${BASE_URL}Versy/versydesk.webp`,
     link: "/project/versy",
     animationType: "fade-left",
     overlayColor: "rgba(129, 140, 248, 0.18)",
