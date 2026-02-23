@@ -14,12 +14,34 @@ export default function App() {
     }
 
     const hashId = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
+    const cleanUrl = `${window.location.pathname}${window.location.search}`;
 
-    const scrollToTop = () => window.scrollTo(0, 0);
+    const resetScrollableContainers = () => {
+      const nodes = document.querySelectorAll("*");
+      nodes.forEach((node) => {
+        if (!(node instanceof HTMLElement)) return;
+        if (node.scrollTop <= 0) return;
+        const style = window.getComputedStyle(node);
+        const overflowY = style.overflowY;
+        if (overflowY === "auto" || overflowY === "scroll" || overflowY === "overlay") {
+          node.scrollTop = 0;
+        }
+      });
+    };
+
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      resetScrollableContainers();
+    };
     const scrollToHash = () => {
       if (!hashId) return;
       const target = document.getElementById(hashId);
-      if (target) target.scrollIntoView({ behavior: "auto", block: "start" });
+      if (target) {
+        target.scrollIntoView({ behavior: "auto", block: "start" });
+        window.history.replaceState(null, "", cleanUrl);
+      }
     };
     const tryScrollToHash = () => {
       if (!hashId) return;
@@ -29,6 +51,7 @@ export default function App() {
         const target = document.getElementById(hashId);
         if (target) {
           target.scrollIntoView({ behavior: "auto", block: "start" });
+          window.history.replaceState(null, "", cleanUrl);
           return;
         }
         attempts += 1;
@@ -45,10 +68,21 @@ export default function App() {
       if (hashId) scrollToHash();
       else scrollToTop();
     }, 120);
+    const t3 = window.setTimeout(() => {
+      if (!hashId) scrollToTop();
+    }, 360);
+
+    const onPageShow = () => {
+      if (!window.location.hash) scrollToTop();
+    };
+
+    window.addEventListener("pageshow", onPageShow);
 
     return () => {
+      window.removeEventListener("pageshow", onPageShow);
       window.clearTimeout(t1);
       window.clearTimeout(t2);
+      window.clearTimeout(t3);
     };
   }, []);
 
