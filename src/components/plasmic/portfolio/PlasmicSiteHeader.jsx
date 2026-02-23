@@ -14,9 +14,11 @@ import {
   PlasmicLink as PlasmicLink__,
   classNames,
   createPlasmicElementProxy,
-  deriveRenderOpts
+  deriveRenderOpts,
+  hasVariant
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import { _useGlobalVariants } from "./plasmic"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/styleTokensProvider
 import "@plasmicapp/react-web/lib/plasmic.css";
 import projectcss from "./plasmic.module.css"; // plasmic-import: vZ8YLJfMu4Bkb27adUM6r5/projectcss
@@ -50,6 +52,7 @@ function PlasmicSiteHeader__RenderFunc(props) {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+  const globalVariants = _useGlobalVariants();
   const styleTokensClassNames = _useStyleTokens();
   return (
     <div
@@ -83,12 +86,20 @@ function PlasmicSiteHeader__RenderFunc(props) {
             data-plasmic-override={overrides.img}
             alt={""}
             className={classNames(sty.img)}
-            displayHeight={"64px"}
+            displayHeight={
+              hasVariant(globalVariants, "screen", "mobileOnly")
+                ? "32px"
+                : "64px"
+            }
             displayMaxHeight={"none"}
             displayMaxWidth={"none"}
             displayMinHeight={"0"}
             displayMinWidth={"0"}
-            displayWidth={"64px"}
+            displayWidth={
+              hasVariant(globalVariants, "screen", "mobileOnly")
+                ? "32px"
+                : "64px"
+            }
             src={{
               src: logoOnDarkSvgWQVtk1Bauie,
               fullWidth: 320,

@@ -619,62 +619,6 @@ function PlasmicVersy__RenderFunc(props) {
             >
               {"The Users are"}
             </div>
-            <div className={classNames(projectcss.all, sty.freeBox__xk85I)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__zHf2W
-                )}
-              >
-                {"Autonomy"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__fkR2H
-                )}
-              >
-                {"Speed"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__dF2G
-                )}
-              >
-                {"Clarity"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text___6WLc
-                )}
-              >
-                {"Scalability"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__hlt5Q
-                )}
-              >
-                {"ROI"}
-              </div>
-            </div>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__kFi5V
-              )}
-            >
-              {"And they need"}
-            </div>
             <div className={classNames(projectcss.all, sty.freeBox__w3BaG)}>
               <div
                 data-plasmic-name={"glasscard2"}
@@ -722,6 +666,62 @@ function PlasmicVersy__RenderFunc(props) {
                 )}
               >
                 {"Creators and agencies"}
+              </div>
+            </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__kFi5V
+              )}
+            >
+              {"And they need"}
+            </div>
+            <div className={classNames(projectcss.all, sty.freeBox__xk85I)}>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__zHf2W
+                )}
+              >
+                {"Autonomy"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__fkR2H
+                )}
+              >
+                {"Speed"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__dF2G
+                )}
+              >
+                {"Clarity"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___6WLc
+                )}
+              >
+                {"Scalability"}
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__hlt5Q
+                )}
+              >
+                {"ROI"}
               </div>
             </div>
             <div
