@@ -3,9 +3,10 @@
     "",
     "\\.github",
     "\\.github\\workflows",
-    "\\src\\components\\plasmic",
+    "\\src",
+    "\\src\\components",
     "\\src\\hooks"
   ],
-  "SelectedNode": "\\.github\\workflows\\deploy.yml",
+  "SelectedNode": "\\src\\components\\AboutHorizontal2.jsx",
   "PreviewInSolutionExplorer": false
 }
