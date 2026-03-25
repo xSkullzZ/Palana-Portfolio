@@ -9,6 +9,7 @@
 // Plasmic Project: vZ8YLJfMu4Bkb27adUM6r5
 // Component: N2EmXWwtxdPX
 import * as React from "react";
+const BASE_URL = import.meta.env.BASE_URL;
 import {
   PlasmicImg as PlasmicImg__,
   PlasmicLink as PlasmicLink__,
