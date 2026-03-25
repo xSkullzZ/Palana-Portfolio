@@ -257,7 +257,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link___3Cnv
               )}
-              href={"./project/versy"}
+               href={`${BASE_URL}/project/versy`}
               platform={"react"}
             >
               {"Versy - Design System"}
