@@ -9,6 +9,8 @@
 // Plasmic Project: vZ8YLJfMu4Bkb27adUM6r5
 // Component: cswDm0qYBFlc
 import * as React from "react";
+import { useMeta } from "react-router-dom";
+const BASE_URL = import.meta.env.BASE_URL;
 import {
   PlasmicImg as PlasmicImg__,
   PlasmicLink as PlasmicLink__,
@@ -81,7 +83,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
               projectcss.a,
               sty.link__vPxya
             )}
-            href={"./"}
+            href={`${BASE_URL}`}
             platform={"react"}
           >
             <PlasmicImg__
@@ -163,7 +165,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__xtWsa
               )}
-              href={"./#Projects"}
+              href={`${BASE_URL}/#Projects`}
               platform={"react"}
             >
               {"Projects"}
@@ -175,48 +177,48 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link___2ALg
               )}
-              href={"./#About"}
+              href={`${BASE_URL}/#About`}
               platform={"react"}
             >
               {"About"}
             </PlasmicLink__>
-            <PlasmicLink__
-              className={classNames(
-                projectcss.all,
-                projectcss.a,
-                projectcss.__wab_text,
-                sty.link__t2Iq
-              )}
-              href={"./#Skills"}
-              platform={"react"}
-            >
-              {"Skills"}
-            </PlasmicLink__>
-            <PlasmicLink__
-              className={classNames(
-                projectcss.all,
-                projectcss.a,
-                projectcss.__wab_text,
-                sty.link__p4Ohz
-              )}
-              href={"./CV/ClaudioPalana_CV_EN_2026.pdf"}
-              platform={"react"}
-              target={"_blank"}
-            >
-              {"CV"}
-            </PlasmicLink__>
-            <PlasmicLink__
-              className={classNames(
-                projectcss.all,
-                projectcss.a,
-                projectcss.__wab_text,
-                sty.link___9DfXz
-              )}
-              href={"./#Contact"}
-              platform={"react"}
-            >
-              {"Contact"}
-            </PlasmicLink__>
+             <PlasmicLink__
+               className={classNames(
+                 projectcss.all,
+                 projectcss.a,
+                 projectcss.__wab_text,
+                 sty.link__t2Iq
+               )}
+               href={`${BASE_URL}/#Skills`}
+               platform={"react"}
+             >
+               {"Skills"}
+             </PlasmicLink__>
+             <PlasmicLink__
+               className={classNames(
+                 projectcss.all,
+                 projectcss.a,
+                 projectcss.__wab_text,
+                 sty.link__p4Ohz
+               )}
+               href={`${BASE_URL}/CV/ClaudioPalana_CV_EN_2026.pdf`}
+               platform={"react"}
+               target={"_blank"}
+             >
+               {"CV"}
+             </PlasmicLink__>
+             <PlasmicLink__
+               className={classNames(
+                 projectcss.all,
+                 projectcss.a,
+                 projectcss.__wab_text,
+                 sty.link___9DfXz
+               )}
+               href={`${BASE_URL}/#Contact`}
+               platform={"react"}
+             >
+               {"Contact"}
+             </PlasmicLink__>
           </div>
         </div>
         <div className={classNames(projectcss.all, sty.freeBox__lr3Ou)}>
@@ -244,7 +246,7 @@ function PlasmicSiteFooter__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.link__eoDb8
               )}
-              href={"./project/my-beppe"}
+               href={`${BASE_URL}/project/my-beppe`}
               platform={"react"}
             >
               {"MyBeppe - Mobile App"}

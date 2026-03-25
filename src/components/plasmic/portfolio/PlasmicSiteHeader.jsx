@@ -9,6 +9,7 @@
 // Plasmic Project: vZ8YLJfMu4Bkb27adUM6r5
 // Component: N2EmXWwtxdPX
 import * as React from "react";
+import { useMeta } from "react-router-dom";
 import {
   PlasmicImg as PlasmicImg__,
   PlasmicLink as PlasmicLink__,
@@ -74,12 +75,12 @@ function PlasmicSiteHeader__RenderFunc(props) {
         data-plasmic-override={overrides.wrapper}
         className={classNames(projectcss.all, sty.wrapper)}
       >
-        <PlasmicLink__
-          data-plasmic-name={"homeButton"}
-          data-plasmic-override={overrides.homeButton}
-          className={classNames(projectcss.all, projectcss.a, sty.homeButton)}
-          href={`/`}
-          platform={"react"}
+           <PlasmicLink__
+  data-plasmic-name={"homeButton"}
+  data-plasmic-override={overrides.homeButton}
+  className={classNames(projectcss.all, projectcss.a, sty.homeButton)}
+  href={`${BASE_URL}`}
+  platform={"react"}
         >
           <PlasmicImg__
             data-plasmic-name={"img"}
