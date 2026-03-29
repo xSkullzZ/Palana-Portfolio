@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <script>
+    // Preserve query string and hash when redirecting to index.html
+    var path = window.location.pathname;
+    var search = window.location.search;
+    var hash = window.location.hash;
+    // If the path is not already root, redirect to root (index.html)
+    // but keep the full URL as the hash? Actually we want to show the same UI as if navigated internally.
+    // For client-side routing, we should redirect to index.html and let the router handle the path.
+    // However, we need to ensure that the base is correct.
+    // Since we are using base="/", we can simply redirect to index.html and the router will see the full path.
+    window.location.replace('/index.html' + search + hash);
+  </script>
+</body>
+</html>
